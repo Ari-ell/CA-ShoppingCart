@@ -16,7 +16,7 @@ namespace CA_ShoppingWebsite.Controllers
 
         public IActionResult Index()
         {
-            //Search();
+            Search();
             return View();
         }
         [Route("search")]
@@ -24,7 +24,7 @@ namespace CA_ShoppingWebsite.Controllers
         public User Search()
         {
             User user = new User();
-            MySqlConnection conn = new MySqlConnection(data.connectionString);
+            MySqlConnection conn = new MySqlConnection(data.cloudDB);
 
             try
             {
