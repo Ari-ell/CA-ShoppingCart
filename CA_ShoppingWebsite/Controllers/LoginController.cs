@@ -16,11 +16,30 @@ namespace CA_ShoppingWebsite.Controllers
 
         public IActionResult Index()
         {
+
+            ViewBag.users = mockUsers();
             Search();
             return View();
         }
         [Route("search")]
         // We need to add more stuff here
+
+        public List<User> mockUsers() {
+            List<User> users = new List<User>() { };
+
+            users.Add(new User
+            {
+                Username = "Test",
+                ID = "1",
+                Name = "Feroz",
+                Cart =null,
+                History=null
+
+            });
+
+
+            return users;
+        }
         public User Search()
         {
             User user = new User();
