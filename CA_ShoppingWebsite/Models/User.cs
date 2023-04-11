@@ -6,8 +6,9 @@ namespace CA_ShoppingWebsite.Models
 	
         public string? ID { get; set; }
         public string? Username { get; set; }
-        public List<Products>? Car { get; set; }
-        public List<Products>? History { get; set; }
+        public string? Name { get; set; }
+        public List<Products>? Cart { get; set; }
+        public List<Transaction>? History { get; set; }
   
 	}
 }
