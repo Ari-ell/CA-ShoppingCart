@@ -20,7 +20,7 @@ function add_click_listeners() {
             alert("Ensure you input a value in both fields!");
         }
         else {
-            document.location.href = '/product'
+            document.location.href = '/gallery'
             alert(`This form has a username of ${username.value} and password of ${password.value}`);
             
           
