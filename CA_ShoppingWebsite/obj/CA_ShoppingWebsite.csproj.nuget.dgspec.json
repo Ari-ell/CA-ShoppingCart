@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {}
+    "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {}
   },
   "projects": {
-    "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {
+    "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+        "projectUniqueName": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
         "projectName": "CA_ShoppingWebsite",
-        "projectPath": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+        "projectPath": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
         "packagesPath": "/Users/liujiayi/.nuget/packages/",
-        "outputPath": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA_ShoppingWebsite/obj/",
+        "outputPath": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/liujiayi/.nuget/NuGet/NuGet.Config"
@@ -39,6 +39,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.32.1, )"
+            },
             "bootstrap": {
               "target": "Package",
               "version": "[5.2.3, )"

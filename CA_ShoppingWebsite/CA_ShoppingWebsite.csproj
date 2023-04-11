@@ -8,5 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.2.3" />
+    <PackageReference Include="MySql.Data" Version="8.0.32.1" />
   </ItemGroup>
 </Project>
