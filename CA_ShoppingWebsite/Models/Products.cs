@@ -8,6 +8,7 @@ namespace CA_ShoppingWebsite.Models
         public string? Description { get; set; }
         public string? Img { get; set; }
         public double? Price { get; set; }
+        
 
     }
 }

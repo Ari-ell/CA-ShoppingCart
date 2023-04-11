@@ -20,6 +20,7 @@ public class HomeController : Controller
         return View();
     }
     [Route("search")]
+    // We need to add more stuff here
     public User Search() {
         User user = new User();
         MySqlConnection conn = new MySqlConnection(connectionString);
