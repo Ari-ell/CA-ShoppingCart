@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ILBbGVaYcsuxnRW177pXDRg9JC4iNhIMSLWzrsy0aqwVj3p+L7emfzUr5E6Iyt+ZH3cYlL6oQeVwtzgouFqCMw==",
+  "success": true,
+  "projectFilePath": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+  "expectedPackageFiles": [
+    "/Users/liujiayi/.nuget/packages/bootstrap/5.2.3/bootstrap.5.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
