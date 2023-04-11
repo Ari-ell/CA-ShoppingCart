@@ -22,8 +22,7 @@ public class HomeController : Controller
     [Route("search")]
     public User Search() {
         User user = new User();
-        string connStr = "server=2016110.lfidc.net;user=mysql7402439;database=mysql7402439_db;port=3306;password=soLjM9NJzO;Connect Timeout=60";
-        MySqlConnection conn = new MySqlConnection(connStr);
+        MySqlConnection conn = new MySqlConnection(connectionString);
       
         try
         {
