@@ -185,6 +185,14 @@
       "PackagePath": "staticwebassets/.DS_Store"
     },
     {
+      "Id": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/.DS_Store",
+      "PackagePath": "staticwebassets/assets/.DS_Store"
+    },
+    {
+      "Id": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/icons/search.svg",
+      "PackagePath": "staticwebassets/assets/icons/search.svg"
+    },
+    {
       "Id": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

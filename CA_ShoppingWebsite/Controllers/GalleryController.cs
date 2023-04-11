@@ -26,8 +26,8 @@ namespace CA_ShoppingWebsite.Controllers
             products.Add(new Products
             {
                 Name = "ABC",
-                Title = "This is Product ABC",
-                Price = 12.44,
+         
+                Price = 3,
                 Img = "",
                 Description = " this is the description for product ABC",
 
@@ -36,8 +36,8 @@ namespace CA_ShoppingWebsite.Controllers
             products.Add(new Products
             {
                 Name = "123",
-                Title = "This is Product 123",
-                Price = 12.44,
+   
+                Price = 4.5,
                 Img = "",
                 Description = " this is the description for product 123",
 
@@ -46,13 +46,36 @@ namespace CA_ShoppingWebsite.Controllers
             products.Add(new Products
             {
                 Name = "456",
-                Title = "This is Product 456",
-                Price = 12.44,
+            
+                Price = 5.7,
                 Img = "",
                 Description = " this is the description for product 456",
 
             });
+            products.Add(new Products
+            {
+                Name = "TEST 124",
+                Price = 6.8,
+                Img = "",
+                Description = " this is the description for product 456",
 
+            });
+            products.Add(new Products
+            {
+                Name = "TEST 124",
+                Price = 2.7,
+                Img = "",
+                Description = " this is the description for product 456",
+
+            });
+            products.Add(new Products
+            {
+                Name = "TEST 124",
+                Price = 9.0,
+                Img = "",
+                Description = " this is the description for product 456",
+
+            });
             return products;
 
 

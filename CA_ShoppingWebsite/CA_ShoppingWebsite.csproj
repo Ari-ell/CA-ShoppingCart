@@ -21,5 +21,11 @@
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Gallery\" />
+    <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assets\icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\" />
+    <Content Remove="wwwroot\assets\icons\" />
   </ItemGroup>
 </Project>

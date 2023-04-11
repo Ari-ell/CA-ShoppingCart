@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Mjo5f/nXmbTkpp+svrLfl9+yQN/Jdrn4RdVxT5VmN8k=",
+  "Hash": "GSM9JbgXM026t5q13z8GxLFdFRpXXehjgotalzMZWXo=",
   "Source": "CA_ShoppingWebsite",
   "BasePath": "_content/CA_ShoppingWebsite",
   "Mode": "Default",
@@ -814,6 +814,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/.DS_Store"
+    },
+    {
+      "Identity": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/.DS_Store",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "assets/.DS_Store",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/.DS_Store"
+    },
+    {
+      "Identity": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/icons/search.svg",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "assets/icons/search.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/icons/search.svg"
     },
     {
       "Identity": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/css/site.css",
