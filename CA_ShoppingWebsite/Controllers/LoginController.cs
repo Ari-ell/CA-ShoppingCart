@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using CA_ShoppingWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using MySql.Data.MySqlClient;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,31 +19,32 @@ namespace CA_ShoppingWebsite.Controllers
         public IActionResult Index()
         {
 
-            ViewBag.users = mockUsers();
-            Search();
+            // Search();
             return View();
         }
-        [Route("search")]
-        // We need to add more stuff here
 
-        public List<User> mockUsers() {
-            List<User> users = new List<User>() { };
-
-            users.Add(new User
-            {
-                Username = "Test",
-                ID = "1",
-                Name = "Feroz",
-                Cart =null,
-                History=null
-
-            });
-
-
-            return users;
-        }
-        public User Search()
+        [HttpGet("userlogin")]
+        public ActionResult ExtractFromBasic()
         {
+            Request.Headers.TryGetValue("username",out var usernameObj);
+            Request.Headers.TryGetValue("password", out var passwordObj);
+            string username = usernameObj.ToString();
+            string password = passwordObj.ToString();
+            User user =new Models.User();
+            if (username != null && password != null) {
+                 user = userLogin(username, password);
+
+            }
+            if (user.ID == null) {
+
+                return Unauthorized();
+            }
+            return Json(user);
+        }
+
+        public User userLogin(string username,string password)
+        {
+          
             User user = new User();
             MySqlConnection conn = new MySqlConnection(data.cloudDB);
 
@@ -50,13 +53,19 @@ namespace CA_ShoppingWebsite.Controllers
                 Console.WriteLine("Connecting to MySQL...");
                 conn.Open();
 
-                string sql = "SELECT * FROM wp_users";
+                string sql = "SELECT * FROM user WHERE Username =@username and Password =@password";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
                 MySqlDataReader rdr = cmd.ExecuteReader();
-
                 while (rdr.Read())
                 {
-                    Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+                    user.ID = rdr[0].ToString();
+                    user.Username = rdr[1].ToString();
+                    user.Name = rdr[3].ToString();
+                    user.History = null;
+                    user.Cart = null;
+                  
                 }
                 rdr.Close();
             }

@@ -193,6 +193,14 @@
       "PackagePath": "staticwebassets/assets/icons/search.svg"
     },
     {
+      "Id": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/image/.DS_Store",
+      "PackagePath": "staticwebassets/assets/image/.DS_Store"
+    },
+    {
+      "Id": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/image/iceCream.jpeg",
+      "PackagePath": "staticwebassets/assets/image/iceCream.jpeg"
+    },
+    {
       "Id": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

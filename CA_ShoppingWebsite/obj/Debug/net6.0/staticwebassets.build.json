@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GSM9JbgXM026t5q13z8GxLFdFRpXXehjgotalzMZWXo=",
+  "Hash": "+TXS3YXWSkcA3phatE2j8eQ9Zz1Sr3YsHitk0IdHvfU=",
   "Source": "CA_ShoppingWebsite",
   "BasePath": "_content/CA_ShoppingWebsite",
   "Mode": "Default",
@@ -848,6 +848,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/assets/icons/search.svg"
+    },
+    {
+      "Identity": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/image/.DS_Store",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "assets/image/.DS_Store",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/image/.DS_Store"
+    },
+    {
+      "Identity": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/assets/image/iceCream.jpeg",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "assets/image/iceCream.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/image/iceCream.jpeg"
     },
     {
       "Identity": "/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/wwwroot/css/site.css",
