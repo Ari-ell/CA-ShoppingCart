@@ -23,7 +23,7 @@ public class HomeController : Controller
     // We need to add more stuff here
     public User Search() {
         User user = new User();
-        MySqlConnection conn = new MySqlConnection(connectionString);
+        MySqlConnection conn = new MySqlConnection(data.connectionString);
       
         try
         {
