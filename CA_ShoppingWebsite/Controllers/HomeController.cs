@@ -16,7 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        Search();
+        //Search();
         return View();
     }
     [Route("search")]
