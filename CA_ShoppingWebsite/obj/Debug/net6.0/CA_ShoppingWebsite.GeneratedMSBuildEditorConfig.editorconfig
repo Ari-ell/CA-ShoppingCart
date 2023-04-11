@@ -16,16 +16,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Cart/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FsbGVyeS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Product/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9JbmRleC5jc2h0bWw=
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/PurchaseHistory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHVyY2hhc2VIaXN0b3J5L0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Shared/Error.cshtml]

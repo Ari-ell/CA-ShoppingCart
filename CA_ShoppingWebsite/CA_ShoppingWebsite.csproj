@@ -10,4 +10,16 @@
     <PackageReference Include="bootstrap" Version="5.2.3" />
     <PackageReference Include="MySql.Data" Version="8.0.32.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\PurchaseHistory\" />
+    <None Remove="Views\Login\" />
+    <None Remove="Views\Cart\" />
+    <None Remove="Views\Gallery\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\PurchaseHistory\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Gallery\" />
+  </ItemGroup>
 </Project>
