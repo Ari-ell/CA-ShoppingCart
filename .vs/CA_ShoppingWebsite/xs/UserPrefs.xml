@@ -1,15 +1,23 @@
 ﻿<Properties StartupConfiguration="{F9B5AEAA-8241-4464-A00C-88D2217331F7}|Default">
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml" relfile="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" line="6" column="1" />
-      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml" relfile="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" line="12" column="1" />
+      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Controllers/PurchasesController.cs" relfile="CA_ShoppingWebsite/Controllers/PurchasesController.cs" line="15" column="1" />
+      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Controllers/CartController.cs" relfile="CA_ShoppingWebsite/Controllers/CartController.cs" line="13" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Data/MockData.sql">
+    <Files>
+      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="31" Column="20" />
+      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="15" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Program.cs" Line="24" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="28" Column="43" />
+      <File FileName="CA_ShoppingWebsite/Data/UserData.cs" Line="27" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Data/MockData.sql" Line="27" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
@@ -21,10 +29,10 @@
                 <Node name="MockData.sql" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
-              <Node name="wwwroot" expanded="True">
-                <Node name="assets" expanded="True">
-                  <Node name="image" expanded="True" />
-                </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Cart" expanded="True" />
+                <Node name="Gallery" expanded="True" />
+                <Node name="Purchases" expanded="True" />
               </Node>
             </Node>
           </Node>

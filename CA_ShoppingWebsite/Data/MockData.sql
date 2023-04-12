@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS Product(
     PRIMARY KEY(ProductId)
 );
 
--- Product table
 INSERT INTO Product(ProductId, Name, Description, Img, Price) 
 VALUES (1,'.NET Charts','Brings powerful charting capabilities to your .NET applications','/wwwroot/assets/images/',99),
     (2, '.NET PayPal', 'Integrate your .NET apps with PayPal the easy way!','/wwwroot/assets/images/', 69),
@@ -53,3 +52,27 @@ VALUES(1,1,4),
     (4,3,4),
     (4,2,1);
 
+-- Purchases  Table
+CREATE TABLE IF NOT EXISTS Purchases(
+    Id int AUTO_INCREMENT PRIMARY KEY,
+    UserId int NOT NULL,  
+    ProductId int NOT NULL, 
+    PurchaseDate varchar(30) NOT NULL,
+    ActivationCode varchar(38) Unique -- GUID is 38 characters
+);
+
+INSERT INTO Purchases(UserId, ProductId,PurchaseDate) 
+VALUES(1, 1, '08 April 2019'),
+    (1,1,'08 April 2019'),
+    (1,2,'08 April 2019'),
+    (1,4,'04 September 2019');
+
+--UPDATE Purchases SET ActivationCode=(SELECT uuid());
+
+-- Cart table
+CREATE TABLE IF NOT EXISTS Cart(
+    UserId int NOT NULL,
+    ProductId int NOT NULL,
+    ProductQty int NOT NULL,
+    PRIMARY KEY(UserId, ProductId)
+);
