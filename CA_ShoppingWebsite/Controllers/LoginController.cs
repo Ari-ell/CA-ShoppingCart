@@ -35,9 +35,22 @@ public class LoginController : Controller
         if (username != null && password != null) {
              user = UserData.GetUserLogin(username, password);
         }
-        if (user.UserId == null) {
+        if (user.UserId == null)
+        {
 
             return Unauthorized();
+        }
+        else {
+            Console.WriteLine("Done.");
+
+            string sessionId = System.Guid.NewGuid().ToString();
+            CookieOptions options = new CookieOptions();
+            options.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Append("userID", user.UserId.ToString());
+            Response.Cookies.Append("username", user.Username);
+            Response.Cookies.Append("name", user.Name);
+            Response.Cookies.Append("SessionId", sessionId, options);
+
         }
         return Ok(user);
     }

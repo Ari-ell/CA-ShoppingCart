@@ -12,8 +12,15 @@ namespace CA_ShoppingWebsite.Controllers;
 public class GalleryController : Controller
 {
     // GET: /<controller>/
-    public IActionResult Index()
+    public IActionResult Index(User? user)
     {
+        ViewBag.users = user;
+        string userid = Request.Cookies["userID"];
+        string username = Request.Cookies["username"];
+        string name = Request.Cookies["name"];
+        user.Name = name;
+        user.UserId = Convert.ToInt32( userid);
+        user.Username = username;
         ViewBag.products = getProducts();
         return View();
     }
