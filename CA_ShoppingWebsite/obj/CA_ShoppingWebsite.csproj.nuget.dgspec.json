@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {}
+    "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {}
   },
   "projects": {
-    "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {
+    "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+        "projectUniqueName": "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
         "projectName": "CA_ShoppingWebsite",
-        "projectPath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
-        "packagesPath": "/Users/feroz/.nuget/packages/",
-        "outputPath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/obj/",
+        "projectPath": "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+        "packagesPath": "/Users/A01/.nuget/packages/",
+        "outputPath": "/Users/A01/Projects/CA/CA_ShoppingWebsite/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/feroz/.nuget/NuGet/NuGet.Config"
+          "/Users/A01/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.22.1, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.0.32.1, )"

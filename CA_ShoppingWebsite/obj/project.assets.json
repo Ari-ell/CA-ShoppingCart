@@ -227,7 +227,7 @@
           }
         }
       },
-      "Google.Protobuf/3.21.9": {
+      "Google.Protobuf/3.22.1": {
         "type": "package",
         "compile": {
           "lib/net5.0/Google.Protobuf.dll": {
@@ -780,14 +780,14 @@
         "contentFiles/any/any/wwwroot/js/bootstrap.min.js.map"
       ]
     },
-    "Google.Protobuf/3.21.9": {
-      "sha512": "OTpFujTgkmqMLbg3KT7F/iuKi1rg6s5FCS2M9XcVLDn40zL8wgXm37CY/F6MeOEXKjdcnXGCN/h7oyMkVydVsg==",
+    "Google.Protobuf/3.22.1": {
+      "sha512": "Ul4gVJWLya83Z8/n3+O4QKhD8ukCCwNLDyoWpUdJSnmzxRe8o3pWiuCzzvN2z/LVH60nozlKpTzhJo3ctI+G4Q==",
       "type": "package",
-      "path": "google.protobuf/3.21.9",
+      "path": "google.protobuf/3.22.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.21.9.nupkg.sha512",
+        "google.protobuf.3.22.1.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
@@ -1831,24 +1831,25 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Google.Protobuf >= 3.22.1",
       "MySql.Data >= 8.0.32.1",
       "bootstrap >= 5.2.3"
     ]
   },
   "packageFolders": {
-    "/Users/feroz/.nuget/packages/": {}
+    "/Users/A01/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+      "projectUniqueName": "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
       "projectName": "CA_ShoppingWebsite",
-      "projectPath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
-      "packagesPath": "/Users/feroz/.nuget/packages/",
-      "outputPath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/obj/",
+      "projectPath": "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+      "packagesPath": "/Users/A01/.nuget/packages/",
+      "outputPath": "/Users/A01/Projects/CA/CA_ShoppingWebsite/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/feroz/.nuget/NuGet/NuGet.Config"
+        "/Users/A01/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1872,6 +1873,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Google.Protobuf": {
+            "target": "Package",
+            "version": "[3.22.1, )"
+          },
           "MySql.Data": {
             "target": "Package",
             "version": "[8.0.32.1, )"
