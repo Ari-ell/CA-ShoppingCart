@@ -8,6 +8,7 @@ using CA_ShoppingWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -39,7 +40,7 @@ namespace CA_ShoppingWebsite.Controllers
 
                 return Unauthorized();
             }
-            return Json(user);
+            return Ok(user);
         }
 
         public User userLogin(string username,string password)

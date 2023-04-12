@@ -34,6 +34,7 @@ function add_click_listeners() {
                 contentType: 'application/json; charset=utf-8',
                 success: function (result) {
 
+                    alert("Welcome");
                 },
                 error: function (error) {
                     alert(error.statusText);
@@ -54,10 +55,20 @@ function add_click_listeners() {
 
 $(document).ajaxComplete(function (event, xhr, settings) {
     console.log("ajaxComplete  ")
-    redirect();
+    redirect(xhr);
 })
 
-function redirect() {
-     document.location.href = '/gallery';
+function redirect(xhr) {
+    //获取后台返回的参数
+    var url = "/gallery";
+    var enable = xhr.getResponseHeader("enableRedirect");
+
+    if ((enable == "true") && (url != "")) {
+        var win = window;
+        while (win != win.top) {
+            win = win.top;
+        }
+        win.location.href = url;
+    }
 
 }
