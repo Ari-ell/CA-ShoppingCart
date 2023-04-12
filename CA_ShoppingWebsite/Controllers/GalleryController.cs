@@ -19,11 +19,11 @@ public class GalleryController : Controller
     }
 
 
-    public List<Products> getProducts()
+    public List<Product> getProducts()
     {
 
-        List<Products> products = new List<Products>();
-        products.Add(new Products
+        List<Product> products = new List<Product>();
+        products.Add(new Product
         {
             Name = "ABC",
      
@@ -33,7 +33,7 @@ public class GalleryController : Controller
 
         });
 
-        products.Add(new Products
+        products.Add(new Product
         {
             Name = "123",
 
@@ -43,7 +43,7 @@ public class GalleryController : Controller
 
         });
 
-        products.Add(new Products
+        products.Add(new Product
         {
             Name = "456",
         
@@ -52,7 +52,7 @@ public class GalleryController : Controller
             Description = " this is the description for product 456",
 
         });
-        products.Add(new Products
+        products.Add(new Product
         {
             Name = "TEST 124",
             Price = 6.8,
@@ -60,7 +60,7 @@ public class GalleryController : Controller
             Description = " this is the description for product 456",
 
         });
-        products.Add(new Products
+        products.Add(new Product
         {
             Name = "TEST 124",
             Price = 2.7,
@@ -68,7 +68,7 @@ public class GalleryController : Controller
             Description = " this is the description for product 456",
 
         });
-        products.Add(new Products
+        products.Add(new Product
         {
             Name = "TEST 124",
             Price = 9.0,

@@ -4,11 +4,11 @@ namespace CA_ShoppingWebsite.Models
 	public class Product
 	{
         public int? ProductId { get; set; }
-        public string? ProductName { get; set; }
-        public string? ProductDescription { get; set; }
-        public string? ProductImg { get; set; }
-        public double? ProductPrice { get; set; }
-        public double? ProductReviewRating { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public string? Img { get; set; }
+        public double? Price { get; set; }
+        public double? ReviewRating { get; set; }
     }
 }
 

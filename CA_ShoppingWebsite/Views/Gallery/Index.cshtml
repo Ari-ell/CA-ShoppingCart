@@ -3,7 +3,7 @@
 *@
 @{
 
-    var products = (List<Products>)ViewBag.products;
+    var products = (List<Product>)ViewBag.products;
     var user = (User)ViewBag.users;
 
 }
@@ -57,7 +57,7 @@
 
 <div class="container text-center">
     <div class="row row-cols-3">
-        @foreach (Products product in products) {
+        @foreach (Product product in products) {
             <div class="col">
                 <div class="card" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
                     <img src="..." class="card-img-top" alt="...">

@@ -36,7 +36,7 @@ namespace CA_ShoppingWebsite.Controllers
                  user = userLogin(username, password);
 
             }
-            if (user.ID == null) {
+            if (user.UserId == null) {
 
                 return Unauthorized();
             }
@@ -61,11 +61,9 @@ namespace CA_ShoppingWebsite.Controllers
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    user.ID = rdr[0].ToString();
+                    user.UserId = (int)rdr[0];
                     user.Username = rdr[1].ToString();
                     user.Name = rdr[3].ToString();
-                    user.History = null;
-                    user.Cart = null;
                   
                 }
                 rdr.Close();
