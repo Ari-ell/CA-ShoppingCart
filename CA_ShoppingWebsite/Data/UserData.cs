@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// Use this to query db for user related info
 
-namespace CA_ShoppingWebsite.Data;
+namespace CA_ShoppingWebsite.Models;
 
-public class UserData : Controller
+public class UserData
 {
-    // GET: /<controller>/
-    public IActionResult Index()
+    public static User GetUserInfo(string? username, string? password)
     {
-        return View();
+
+
     }
 }
 

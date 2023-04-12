@@ -9,27 +9,23 @@
   <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Models/Cart.cs">
-    <Files>
-      <File FileName="CA_ShoppingWebsite/Models/Products.cs" Line="6" Column="28" />
-      <File FileName="CA_ShoppingWebsite/Models/User.cs" Line="6" Column="33" />
-      <File FileName="CA_ShoppingWebsite/Models/Review.cs" Line="10" Column="34" />
-      <File FileName="CA_ShoppingWebsite/Models/Cart.cs" Line="8" Column="35" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CA_ShoppingWebsite" expanded="True">
             <Node name="CA_ShoppingWebsite" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
+              <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="Cart.cs" selected="True" />
+              <Node name="Data" expanded="True">
+                <Node name="MockData.sql" selected="True" />
               </Node>
-              <Node name="Views" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="assets" expanded="True">
+                  <Node name="image" expanded="True" />
+                </Node>
+              </Node>
             </Node>
           </Node>
         </State>
