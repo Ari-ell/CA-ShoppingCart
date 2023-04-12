@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CA_ShoppingWebsite.Controllers;
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-public class CartController : Controller
+namespace CA_ShoppingWebsite.Data;
+
+public class UserData : Controller
 {
     // GET: /<controller>/
     public IActionResult Index()

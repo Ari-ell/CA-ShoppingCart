@@ -3,8 +3,8 @@
 *@
 @{
 
-    var products = ViewBag.products;
-    var user = ViewBag.users;
+    var products = (List<Products>)ViewBag.products;
+    var user = (User)ViewBag.users;
 
 }
 <div>
@@ -38,9 +38,6 @@
 
         }
 
-
-
-
     </ul>
 </div>
 <div style="margin:1rem;">
@@ -55,14 +52,12 @@
 
             <button class="btn btn-outline-success" type="submit">Search</button>
         </div>
-     
     </form>
 </div>
 
 <div class="container text-center">
     <div class="row row-cols-3">
-        @foreach (Products product in products)
-        {
+        @foreach (Products product in products) {
             <div class="col">
                 <div class="card" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
                     <img src="..." class="card-img-top" alt="...">
@@ -70,13 +65,10 @@
                         <h5 class="card-title">@product.Name</h5>
                         <p class="card-text">@product.Description</p>
                         <button>@product.Price @Html.Raw("-Add to Cart")</button>
-
                     </div>
                 </div>
-
             </div>
         }
-
     </div>
 </div>
 

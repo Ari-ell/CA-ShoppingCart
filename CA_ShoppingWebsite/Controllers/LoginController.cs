@@ -31,7 +31,7 @@ namespace CA_ShoppingWebsite.Controllers
             Request.Headers.TryGetValue("password", out var passwordObj);
             string username = usernameObj.ToString();
             string password = passwordObj.ToString();
-            User user =new Models.User();
+            User user = new Models.User();
             if (username != null && password != null) {
                  user = userLogin(username, password);
 

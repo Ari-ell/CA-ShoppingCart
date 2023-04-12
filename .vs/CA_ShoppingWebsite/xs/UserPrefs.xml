@@ -1,39 +1,44 @@
 ﻿<Properties StartupConfiguration="{F9B5AEAA-8241-4464-A00C-88D2217331F7}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml" relfile="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" line="6" column="1" />
+      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml" relfile="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" line="12" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Controllers/LoginController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Models/Transaction.cs">
     <Files>
-      <File FileName="CA_ShoppingWebsite/Data/data.cs" Line="5" Column="64" />
-      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Models/Transaction.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Models/User.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/Transaction.cs" Line="21" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/User.cs" Line="9" Column="42" />
       <File FileName="CA_ShoppingWebsite/Models/Products.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="29" Column="73" />
+      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="50" Column="51" />
+      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="23" Column="6" />
+      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="7" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Data/UserData.cs" Line="9" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CA_ShoppingWebsite" expanded="True">
             <Node name="CA_ShoppingWebsite" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="LoginController.cs" selected="True" />
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
               </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
-              <Node name="Models" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Transaction.cs" selected="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Gallery" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="ClassPad">
-        <State name="__root__">
-          <Node name="CA_ShoppingWebsite" expanded="True" />
-        </State>
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>
