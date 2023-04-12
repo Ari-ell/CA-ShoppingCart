@@ -12,7 +12,6 @@ function page_start() {
 // listen to mouse-clicks
 function add_click_listeners() {
 
- 
     let loginBtn = document.getElementsByClassName("loginBtn");
     loginBtn[0].addEventListener('click', function onClick() {
         let username = document.getElementById("username");
@@ -34,10 +33,14 @@ function add_click_listeners() {
                 contentType: 'application/json; charset=utf-8',
                 success: function (result) {
 
-                    alert("Welcome");
+                    window.location.href = '/gallery';
                 },
                 error: function (error) {
-                    alert(error.statusText);
+                    if (error.status != 200) {
+
+                        alert(error.statusText);
+                    }
+                
 
                 }
             });
@@ -51,24 +54,23 @@ function add_click_listeners() {
 
 }
 
+//$(document).ajaxComplete(function (event, xhr, settings) {
+//    console.log("ajaxComplete  ")
+//    redirectHandle(xhr);
+//})
 
+//function redirectHandle(xhr) {
 
-$(document).ajaxComplete(function (event, xhr, settings) {
-    console.log("ajaxComplete  ")
-    redirect(xhr);
-})
+//    //获取后台返回的参数
+//    var url = xhr.getResponseHeader("redirectUrl");
+//    console.log("redirectUrl = " + url);
+//    var enable = xhr.getResponseHeader("enableRedirect");
 
-function redirect(xhr) {
-    //获取后台返回的参数
-    var url = "/gallery";
-    var enable = xhr.getResponseHeader("enableRedirect");
-
-    if ((enable == "true") && (url != "")) {
-        var win = window;
-        while (win != win.top) {
-            win = win.top;
-        }
-        win.location.href = url;
-    }
-
-}
+//    if ((enable == "true") && (url != "")) {
+//        var win = window;
+//        while (win != win.top) {
+//            win = win.top;
+//        }
+//        win.location.href = url;
+//    }
+//}

@@ -12,8 +12,9 @@ namespace CA_ShoppingWebsite.Controllers
     public class GalleryController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(User? user)
         {
+            ViewBag.users = user;
             ViewBag.products = getProducts();
             return View();
         }

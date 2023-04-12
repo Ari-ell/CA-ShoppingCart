@@ -40,7 +40,18 @@ namespace CA_ShoppingWebsite.Controllers
 
                 return Unauthorized();
             }
-            return Ok(user);
+
+
+            string sessionId = System.Guid.NewGuid().ToString();
+
+            CookieOptions options = new CookieOptions();
+            options.Expires = DateTime.Now.AddDays(10);
+           
+            
+            Response.Cookies.Append("SessionId", sessionId, options);
+
+            return RedirectToAction("Index", "Gallery", new { user});
+            //return Ok(user);
         }
 
         public User userLogin(string username,string password)
