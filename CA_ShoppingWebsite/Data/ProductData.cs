@@ -5,14 +5,14 @@ namespace CA_ShoppingWebsite.Models;
 
 public class ProductData
 {
-	public static List<Product> GetAllProducts()
+	public static List<Product>? GetAllProducts()
 	{
-
+		return null;
 	}
 
-	public static Product GetProductToAddToCart()
+	public static Product? GetProductToAddToCart()
 	{
-
+		return null;
 	}
 }
 

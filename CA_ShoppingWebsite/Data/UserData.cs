@@ -11,10 +11,10 @@ namespace CA_ShoppingWebsite.Models;
 
 public class UserData
 {
-    public static User GetUserInfo(string? username, string? password)
+    public static User? GetUserInfo(string? username, string? password)
     {
 
-
+        return null;
     }
 }
 
