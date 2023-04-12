@@ -28,7 +28,7 @@ public class GalleryController : Controller
             Name = "ABC",
      
             Price = 3,
-            Img = "",
+            Img = "iceCream.jpeg",
             Description = " this is the description for product ABC",
 
         });
