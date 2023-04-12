@@ -9,45 +9,45 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CA_ShoppingWebsite
 build_property.RootNamespace = CA_ShoppingWebsite
-build_property.ProjectDir = /Users/feroz/Documents/CA/CA_ShoppingWebsite/
+build_property.ProjectDir = /Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/feroz/Documents/CA/CA_ShoppingWebsite
+build_property.MSBuildProjectDirectory = /Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Cart/Index.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FydC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Gallery/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FsbGVyeS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Login/Index.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/PurchaseHistory/Index.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/PurchaseHistory/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHVyY2hhc2VIaXN0b3J5L0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Shared/Error.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/_ViewImports.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/_ViewStart.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/feroz/Documents/CA/CA_ShoppingWebsite/Views/Shared/_Layout.cshtml]
+[/Users/liujiayi/Projects/CA_ShoppingWebsite/CA/CA_ShoppingWebsite/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-z0ygxo45zy
