@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CA_ShoppingWebsite.Controllers
 {
-    public class PurchaseHistoryController : Controller
+    public class PurchasesController : Controller
     {
-        // GET: /<controller>/
+        
         public IActionResult Index()
         {
             return View();
