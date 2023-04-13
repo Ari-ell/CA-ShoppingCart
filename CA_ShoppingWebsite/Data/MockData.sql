@@ -1,4 +1,7 @@
-﻿-- User table
+﻿-- Below contains the the tables mock data
+-- set-up for the shopping cart project
+
+-- User table
 CREATE TABLE IF NOT EXISTS User(
 	UserId int AUTO_INCREMENT NOT NULL,
 	Username varchar(50) NOT NULL,
@@ -52,22 +55,41 @@ VALUES(1,1,4),
     (4,3,4),
     (4,2,1);
 
--- Purchases  Table
-CREATE TABLE IF NOT EXISTS Purchases(
+-- Purchase Order table
+CREATE TABLE IF NOT EXISTS PurchaseOrder(
     Id int AUTO_INCREMENT PRIMARY KEY,
+    PurchaseId varchar(38), -- GUID
     UserId int NOT NULL,  
-    ProductId int NOT NULL, 
-    PurchaseDate varchar(30) NOT NULL,
-    ActivationCode varchar(38) Unique -- GUID is 38 characters
+    ProductId int NOT NULL,
+    PurchaseQty int NOT NULL,
+    PurchaseDate varchar(30) NOT NULL
 );
 
-INSERT INTO Purchases(UserId, ProductId,PurchaseDate) 
-VALUES(1, 1, '08 April 2019'),
-    (1,1,'08 April 2019'),
-    (1,2,'08 April 2019'),
-    (1,4,'04 September 2019');
+INSERT INTO PurchaseOrder(UserId, ProductId, PurchaseQty, PurchaseDate) 
+VALUES(1, 1, 2, '08 April 2019'),
+    (1, 2, 1, '08 April 2019'),
+    (1, 4, 1, '04 September 2019');
 
---UPDATE Purchases SET ActivationCode=(SELECT uuid());
+UPDATE PurchaseOrder SET PurchaseId=(SELECT uuid());
+
+-- Purchase List table (Itemised list of each purchased item)
+CREATE TABLE IF NOT EXISTS PurchaseList(
+    Id int AUTO_INCREMENT PRIMARY KEY,
+    ProductId int,
+    PurchaseId varchar(38),
+    ActivationCode varchar(38) Unique, -- GUID is 38 characters
+    FOREIGN KEY(PurchaseId) 
+        REFERENCES PurchaseOrder(PurchaseId)
+        ON DELETE CASCADE
+);
+
+INSERT INTO PurchaseList(ProductId, PurchaseId)
+VALUES (1, '80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
+    (1, '80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
+    (2, '80cff639-d9b2-11ed-80a4-5254006b6f85'),
+    (4,'80cff758-d9b2-11ed-80a4-5254006b6f85');
+
+UPDATE PurchaseList SET ActivationCode=(SELECT uuid());
 
 -- Cart table
 CREATE TABLE IF NOT EXISTS Cart(

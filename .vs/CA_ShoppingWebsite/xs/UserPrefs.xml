@@ -11,11 +11,11 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Data/MockData.sql">
     <Files>
-      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="31" Column="20" />
-      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="15" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Program.cs" Line="24" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="28" Column="43" />
-      <File FileName="CA_ShoppingWebsite/Data/UserData.cs" Line="27" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" />
+      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" />
+      <File FileName="CA_ShoppingWebsite/Program.cs" />
+      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" />
+      <File FileName="CA_ShoppingWebsite/Data/UserData.cs" />
       <File FileName="CA_ShoppingWebsite/Data/MockData.sql" Line="27" Column="1" />
     </Files>
     <Pads>
