@@ -14,9 +14,12 @@ function page_start() {
   function add_click_listeners() {
 
     let loginBtn = document.getElementsByClassName("loginBtn");
-      loginBtn[0].addEventListener('click', on_submit_click);   
+      loginBtn[0].addEventListener('click', on_submit_click);
+     
+  }
 
-}
+
+
 
 
 function on_submit_click(event) {

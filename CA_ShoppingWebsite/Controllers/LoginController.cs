@@ -33,7 +33,6 @@ public class LoginController : Controller
         Request.Headers.TryGetValue("password", out var passwordObj);
         string username = usernameObj.ToString();
         string password = passwordObj.ToString();
-        bool status = false;
         //string url = "/gallery";
         User user = new Models.User();
         if (username != null && password != null) {
@@ -63,6 +62,16 @@ public class LoginController : Controller
     public IActionResult Privacy()
     {
         return View();
+    }
+    [Route("logout")]
+    public IActionResult Logout() {
+
+        Response.Cookies.Delete("userID");
+        Response.Cookies.Delete("username");
+        Response.Cookies.Delete("name");
+        Response.Cookies.Delete("SessionId");
+
+        return Ok();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
