@@ -25,7 +25,7 @@ function add_click_listeners() {
     }
     searchBtn[0].addEventListener('click', on_search_click);
     cartBtn[0].addEventListener('click', on_myCart_click);
-    searchInput[0].addEventListener('input', on_input);
+    searchInput[0].addEventListener('keypress', on_input);
 
 }
 
