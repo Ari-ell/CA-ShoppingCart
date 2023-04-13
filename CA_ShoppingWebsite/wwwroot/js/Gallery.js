@@ -24,16 +24,32 @@ function add_click_listeners() {
 
     }
     searchBtn[0].addEventListener('click', on_search_click);
-    cartBtn[0].addEventListener('click', on_myCart_click)
+    cartBtn[0].addEventListener('click', on_myCart_click);
+    searchInput[0].addEventListener('input', on_input);
 
 }
 
+function on_input(event) {
+    if (event.key == 'Enter' || event.keyCode== 13) {
+        redirect(event.target.value);
+    }
+   
+}
 function on_myCart_click(event) {
-    alert("My Cart");
+    console.log(event.target.value);
+ 
 }
 function on_search_click(event) {
-    alert("Search");
+    let inputValue = document.getElementsByClassName("searchInput");
+    let value = inputValue[0].value;
+    redirect(value);
+
+    
+}
+function redirect(value) {
+    window.location.replace('/Gallery/Index?keyword='+value);
 }
 function on_add_click(event) {
+
     alert("add to cart");
 }

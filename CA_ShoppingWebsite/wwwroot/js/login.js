@@ -66,7 +66,7 @@ function redirect() {
         success: function (result) {
             flag = true;
             alert("Welcome back " + result.username);
-            //window.location=result.username;
+            window.location.replace('/Gallery');
 
         },
         error: function (error) {
