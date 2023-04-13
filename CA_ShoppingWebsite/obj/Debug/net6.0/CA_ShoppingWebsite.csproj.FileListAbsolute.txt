@@ -191,3 +191,14 @@
 /Users/A01/Projects/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.csproj.CopyComplete
 /Users/A01/Projects/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.genruntimeconfig.cache
 /Users/A01/Projects/CA/CA_ShoppingWebsite/obj/Debug/net6.0/ref/CA_ShoppingWebsite.dll
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.csproj.AssemblyReference.cache
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.AssemblyInfoInputs.cache
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.AssemblyInfo.cs
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.csproj.CoreCompileInputs.cache
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.MvcApplicationPartsAssemblyInfo.cache
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.RazorAssemblyInfo.cache
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.RazorAssemblyInfo.cs
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.dll
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/refint/CA_ShoppingWebsite.dll
+/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/Debug/net6.0/CA_ShoppingWebsite.pdb

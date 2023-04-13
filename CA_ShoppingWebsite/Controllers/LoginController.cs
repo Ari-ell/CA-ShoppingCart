@@ -51,11 +51,26 @@ public class LoginController : Controller
             Response.Cookies.Append("name", user.Name);
             Response.Cookies.Append("SessionId", sessionId, options);
 
+            // current flow, once user & pw is ok, cookie is passed to client
+            // and client is redirected to home/gallery page
+            //
+            // somewhere bteween cookie and redirection, we check that the user is logged in
+            // if options.UserID != null
+            // then MergeCart()
+
+            // MergeCart()
+            // Foreach (var KeyValuePair in SessionObject) {
+            // INSERT cartID, KeyValuePair.String, KeyValuePair.Key into DB
+            // }
+            // Clear the Prelogin Cart (Session Object)
+            // HttpContext.Session.Clear()
+
         }
         return Ok(user);
     }
 
-    
+
+
     public IActionResult Privacy()
     {
         return View();

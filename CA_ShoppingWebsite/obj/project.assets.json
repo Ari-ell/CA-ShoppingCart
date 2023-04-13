@@ -1837,24 +1837,25 @@
     ]
   },
   "packageFolders": {
-    "/Users/feroz/.nuget/packages/": {}
+    "/Users/jessl_ee/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+      "projectUniqueName": "/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
       "projectName": "CA_ShoppingWebsite",
-      "projectPath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
-      "packagesPath": "/Users/feroz/.nuget/packages/",
-      "outputPath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/obj/",
+      "projectPath": "/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+      "packagesPath": "/Users/jessl_ee/.nuget/packages/",
+      "outputPath": "/Users/jessl_ee/Documents/GitHub/CA/CA_ShoppingWebsite/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/feroz/.nuget/NuGet/NuGet.Config"
+        "/Users/jessl_ee/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1905,7 +1906,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
       }
     }
   }
