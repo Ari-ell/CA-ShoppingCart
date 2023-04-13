@@ -16,7 +16,9 @@ public class ProductData
 		return null;
 	}
 
-	public static List<Models.Product>? GetPurchasedProductDetails(Models.User userId)
+
+    // Get product details to be displayed on MyPurchases view
+	public static List<Models.Product>? GetProductDetails(int userId)
 	{
         var products = new List<Models.Product>();
         using (var conn = new MySqlConnection(data.cloudDB))

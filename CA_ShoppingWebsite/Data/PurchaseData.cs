@@ -16,7 +16,7 @@ public class PurchaseData
 	/// and product with qty and activation code combo box
 	/// </summary>
 
-	public static List<Models.PurchaseOrder> GetPurchaseOrders(string userId)
+	public static List<Models.PurchaseOrder> GetPurchaseOrders(int userId)
 	{
 		var myPurchases = new List<Models.PurchaseOrder>();
 		using (var conn = new MySqlConnection(data.cloudDB))
@@ -42,26 +42,31 @@ public class PurchaseData
 		return myPurchases;
 	}
 
-	public static List<Models.PurchaseList> GetActivationCodes()
+	public static List<Models.PurchaseList> GetActivationCodes(int userId)
 	{
 		var actvCodes = new List<Models.PurchaseList>();
 		using (var conn = new MySqlConnection(data.cloudDB))
 		{
 			conn.Open();
-			string sql = @"";
+			string sql = @"SELECT PurchaseList.PurchaseId, PurchaseList.ActivationCode
+						FROM PurchaseList
+						WHERE PurchaseList.PurchaseId IN
+						(SELECT PurchaseOrder.PurchaseId
+						FROM PurchaseOrder
+						WHERE UserId = " + userId;
 			var cmd = new MySqlCommand(sql, conn);
 			MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-
+				var code = new Models.PurchaseList
+				{
+					PurchaseId = (string)reader["PurchaseId"],
+					ActivationCode = (Guid)reader["ActivationCode"]
+				};
+				actvCodes.Add(code);
 			}
-
-            
-
-
-
+			conn.Close();
         }
-
 		return actvCodes;
     }
 }

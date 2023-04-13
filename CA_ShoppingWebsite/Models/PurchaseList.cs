@@ -7,4 +7,3 @@ public class PurchaseList
 	public string? PurchaseId { get; set; }
 	public Guid? ActivationCode { get; set; }
 }
-
