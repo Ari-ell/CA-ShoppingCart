@@ -8,9 +8,31 @@ public class ProductData
 {
 	public static List<Models.Product>? GetAllProducts()
 	{
-		return null;
-	}
-
+        var products = new List<Models.Product>();
+        using (var conn = new MySqlConnection(data.cloudDB))
+        {
+            conn.Open();
+            string sql = @"SELECT *
+                        FROM Product";
+            var cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                var product = new Models.Product
+                {
+                    Name = (string)reader["Name"],
+                    Description = (string)reader["Description"],
+                    Img = (string)reader["Img"],
+                    Price = (int)reader["Price"]
+                    //ReviewRating = (string)reader["ReviewRating"]
+                };
+                products.Add(product);
+            }
+            conn.Close();
+        }
+        return products;
+    }
+        
 	public static Models.Product? GetProductToAddToCart()
 	{
 		return null;

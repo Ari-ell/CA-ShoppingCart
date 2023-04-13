@@ -201,12 +201,40 @@
       "PackagePath": "staticwebassets/assets/image/iceCream.jpeg"
     },
     {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/assets/image/log.png",
+      "PackagePath": "staticwebassets/assets/image/log.png"
+    },
+    {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/assets/image/machine-learning.png",
+      "PackagePath": "staticwebassets/assets/image/machine-learning.png"
+    },
+    {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/assets/image/maths.png",
+      "PackagePath": "staticwebassets/assets/image/maths.png"
+    },
+    {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/assets/image/paypal.png",
+      "PackagePath": "staticwebassets/assets/image/paypal.png"
+    },
+    {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/assets/image/pie-chart.png",
+      "PackagePath": "staticwebassets/assets/image/pie-chart.png"
+    },
+    {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/assets/image/statistics.png",
+      "PackagePath": "staticwebassets/assets/image/statistics.png"
+    },
+    {
       "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/js/Gallery.js",
+      "PackagePath": "staticwebassets/js/Gallery.js"
     },
     {
       "Id": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/wwwroot/js/login.js",

@@ -27,20 +27,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Logout</a>
             </li>
-
         }
         else
         {
             <li class="nav-item">
                 <a class="nav-link disabled">Hello, guest</a>
             </li>
-
-
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
             </li>
-
-
         }
         <li class="nav-item" style="right: 1.8rem; position: absolute;margin-top:0.5rem">
             <button type="button" class="btn btn-primary btn-sm cartBtn">
@@ -75,7 +70,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
                         <p class="card-text">@product.Description</p>
-                        <button class="btn btn-outline-info addToCartBtn">@product.Price @Html.Raw("-Add to Cart")</button>
+                        <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")</button>
                     </div>
                 </div>
             </div>

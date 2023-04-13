@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "CA_ShoppingWebsite/1.0.0": {
         "dependencies": {
-          "Google.Protobuf": "3.22.1",
+          "Google.Protobuf": "3.22.3",
           "MySql.Data": "8.0.32.1",
           "bootstrap": "5.2.3"
         },
@@ -17,11 +17,11 @@
         }
       },
       "bootstrap/5.2.3": {},
-      "Google.Protobuf/3.22.1": {
+      "Google.Protobuf/3.22.3": {
         "runtime": {
           "lib/net5.0/Google.Protobuf.dll": {
-            "assemblyVersion": "3.22.1.0",
-            "fileVersion": "3.22.1.0"
+            "assemblyVersion": "3.22.3.0",
+            "fileVersion": "3.22.3.0"
           }
         }
       },
@@ -82,7 +82,7 @@
       },
       "MySql.Data/8.0.32.1": {
         "dependencies": {
-          "Google.Protobuf": "3.22.1",
+          "Google.Protobuf": "3.22.3",
           "K4os.Compression.LZ4.Streams": "1.2.6",
           "Portable.BouncyCastle": "1.9.0",
           "System.Buffers": "4.5.1",
@@ -300,12 +300,12 @@
       "path": "bootstrap/5.2.3",
       "hashPath": "bootstrap.5.2.3.nupkg.sha512"
     },
-    "Google.Protobuf/3.22.1": {
+    "Google.Protobuf/3.22.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ul4gVJWLya83Z8/n3+O4QKhD8ukCCwNLDyoWpUdJSnmzxRe8o3pWiuCzzvN2z/LVH60nozlKpTzhJo3ctI+G4Q==",
-      "path": "google.protobuf/3.22.1",
-      "hashPath": "google.protobuf.3.22.1.nupkg.sha512"
+      "sha512": "sha512-uyWJZTS0N3gw35jtm/++1jAJNPkFP92QYdxgiC0yv8vQaOi8gaJZ8PhCnjmN6JbobJcCFPBd0cGkmCh6QYOt6Q==",
+      "path": "google.protobuf/3.22.3",
+      "hashPath": "google.protobuf.3.22.3.nupkg.sha512"
     },
     "K4os.Compression.LZ4/1.2.6": {
       "type": "package",
