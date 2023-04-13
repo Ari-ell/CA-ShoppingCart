@@ -45,7 +45,7 @@ public class GalleryController : Controller
             Name = "123",
 
             Price = 4.5,
-            Img = "",
+            Img = "iceCream.jpeg",
             Description = " this is the description for product 123",
 
         });
@@ -55,7 +55,7 @@ public class GalleryController : Controller
             Name = "456",
         
             Price = 5.7,
-            Img = "",
+            Img = "iceCream.jpeg",
             Description = " this is the description for product 456",
 
         });
@@ -63,7 +63,7 @@ public class GalleryController : Controller
         {
             Name = "TEST 124",
             Price = 6.8,
-            Img = "",
+            Img = "iceCream.jpeg",
             Description = " this is the description for product 456",
 
         });
@@ -71,7 +71,7 @@ public class GalleryController : Controller
         {
             Name = "TEST 124",
             Price = 2.7,
-            Img = "",
+            Img = "iceCream.jpeg",
             Description = " this is the description for product 456",
 
         });
@@ -79,7 +79,7 @@ public class GalleryController : Controller
         {
             Name = "TEST 124",
             Price = 9.0,
-            Img = "",
+            Img = "iceCream.jpeg",
             Description = " this is the description for product 456",
 
         });
