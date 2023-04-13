@@ -1,22 +1,19 @@
 ﻿<Properties StartupConfiguration="{F9B5AEAA-8241-4464-A00C-88D2217331F7}|Default">
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Controllers/PurchasesController.cs" relfile="CA_ShoppingWebsite/Controllers/PurchasesController.cs" line="15" column="1" />
-      <Breakpoint file="/Users/feroz/Documents/CA/CA_ShoppingWebsite/Controllers/CartController.cs" relfile="CA_ShoppingWebsite/Controllers/CartController.cs" line="13" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Data/MockData.sql">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Views/Gallery/Index.cshtml">
     <Files>
-      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" />
-      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" />
-      <File FileName="CA_ShoppingWebsite/Program.cs" />
-      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" />
-      <File FileName="CA_ShoppingWebsite/Data/UserData.cs" />
-      <File FileName="CA_ShoppingWebsite/Data/MockData.sql" Line="27" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/Review.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Controllers/PurchasesController.cs" Line="30" Column="9" />
+      <File FileName="CA_ShoppingWebsite/Data/ReviewData.cs" Line="25" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="74" Column="43" />
+      <File FileName="CA_ShoppingWebsite/Program.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Views/Login/Index.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,14 +22,21 @@
             <Node name="CA_ShoppingWebsite" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True">
-                <Node name="MockData.sql" selected="True" />
-              </Node>
+              <Node name="Data" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Cart" expanded="True" />
-                <Node name="Gallery" expanded="True" />
+                <Node name="Gallery" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+                <Node name="Login" expanded="True" />
                 <Node name="Purchases" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="assets" expanded="True">
+                  <Node name="image" expanded="True" />
+                </Node>
+                <Node name="js" expanded="True" />
               </Node>
             </Node>
           </Node>

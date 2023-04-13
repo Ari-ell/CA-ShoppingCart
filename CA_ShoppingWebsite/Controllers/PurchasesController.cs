@@ -12,6 +12,8 @@ public class PurchasesController : Controller
 {
     public IActionResult Index()
     {
+        // When user accesses the Purchases Controller
+        // Will see all past purchases and be able to set reviews
         string checkUser = Request.Cookies["userId"];
         if (checkUser != null)
         {
@@ -21,14 +23,12 @@ public class PurchasesController : Controller
             var myProducts = Data.ProductData.GetProductDetails(userId);
             var myReviews = Data.ReviewData.GetUserReviews(userId);
 
-
-
             // If user edits or adds a review
             //      SetReviews();
+            return View();
         }
-        // When user accesses the Purchases Controller
-        // Will see all past purchases and be able to set reviews
-        return View();
+        else
+            return RedirectToAction("Index", "Gallery");
     }
 }
 
