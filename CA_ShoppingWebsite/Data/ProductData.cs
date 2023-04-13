@@ -1,16 +1,16 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 
-namespace CA_ShoppingWebsite.Models;
+namespace CA_ShoppingWebsite.Data;
 
 public class ProductData
 {
-	public static List<Product>? GetAllProducts()
+	public static List<Models.Product>? GetAllProducts()
 	{
 		return null;
 	}
 
-	public static Product? GetProductToAddToCart()
+	public static Models.Product? GetProductToAddToCart()
 	{
 		return null;
 	}

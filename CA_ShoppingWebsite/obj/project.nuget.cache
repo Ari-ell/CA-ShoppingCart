@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "1gXMHHUzw7+Ekfz7VIPFqRdUJMlerJ0stJP7UZq9lJQ2lfGq88sKrnlIrb+eJY+yIArcFUcktm02r3Avh2H0WA==",
+  "dgSpecHash": "QhqFo+NRxq0hZm4bPVOdnLWltmKYkg7FY31if9CPOAUmE0Y2pueDhWHP5YMMNTCOr9C9nQVwxAOHDptjRrQQ/A==",
   "success": true,
   "projectFilePath": "/Users/feroz/Documents/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
   "expectedPackageFiles": [
     "/Users/feroz/.nuget/packages/bootstrap/5.2.3/bootstrap.5.2.3.nupkg.sha512",
-    "/Users/feroz/.nuget/packages/google.protobuf/3.22.1/google.protobuf.3.22.1.nupkg.sha512",
+    "/Users/feroz/.nuget/packages/google.protobuf/3.22.3/google.protobuf.3.22.3.nupkg.sha512",
     "/Users/feroz/.nuget/packages/k4os.compression.lz4/1.2.6/k4os.compression.lz4.1.2.6.nupkg.sha512",
     "/Users/feroz/.nuget/packages/k4os.compression.lz4.streams/1.2.6/k4os.compression.lz4.streams.1.2.6.nupkg.sha512",
     "/Users/feroz/.nuget/packages/k4os.hash.xxhash/1.0.6/k4os.hash.xxhash.1.0.6.nupkg.sha512",

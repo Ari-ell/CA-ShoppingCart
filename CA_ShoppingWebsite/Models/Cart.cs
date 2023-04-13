@@ -1,11 +1,10 @@
 ﻿using System;
-namespace CA_ShoppingWebsite.Models
+namespace CA_ShoppingWebsite.Models;
+
+public class Cart
 {
-	public class Cart
-	{
-		public int? UserId { get; set; }
-		public int? ProductId { get; set; }
-		public int? ProductQty { get; set; }
-	}
+	public int? UserId { get; set; }
+	public int? ProductId { get; set; }
+	public int? ProductQty { get; set; }
 }
 

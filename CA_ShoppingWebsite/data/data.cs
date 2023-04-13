@@ -1,4 +1,4 @@
-namespace CA_ShoppingWebsite.Controllers;
+namespace CA_ShoppingWebsite.Data;
 
 public class data {
 

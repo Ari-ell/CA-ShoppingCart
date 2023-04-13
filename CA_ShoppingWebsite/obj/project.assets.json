@@ -227,7 +227,7 @@
           }
         }
       },
-      "Google.Protobuf/3.22.1": {
+      "Google.Protobuf/3.22.3": {
         "type": "package",
         "compile": {
           "lib/net5.0/Google.Protobuf.dll": {
@@ -780,14 +780,14 @@
         "contentFiles/any/any/wwwroot/js/bootstrap.min.js.map"
       ]
     },
-    "Google.Protobuf/3.22.1": {
-      "sha512": "Ul4gVJWLya83Z8/n3+O4QKhD8ukCCwNLDyoWpUdJSnmzxRe8o3pWiuCzzvN2z/LVH60nozlKpTzhJo3ctI+G4Q==",
+    "Google.Protobuf/3.22.3": {
+      "sha512": "uyWJZTS0N3gw35jtm/++1jAJNPkFP92QYdxgiC0yv8vQaOi8gaJZ8PhCnjmN6JbobJcCFPBd0cGkmCh6QYOt6Q==",
       "type": "package",
-      "path": "google.protobuf/3.22.1",
+      "path": "google.protobuf/3.22.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.22.1.nupkg.sha512",
+        "google.protobuf.3.22.3.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
@@ -1831,7 +1831,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Google.Protobuf >= 3.22.1",
+      "Google.Protobuf >= 3.22.3",
       "MySql.Data >= 8.0.32.1",
       "bootstrap >= 5.2.3"
     ]
@@ -1855,7 +1855,6 @@
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1876,7 +1875,7 @@
         "dependencies": {
           "Google.Protobuf": {
             "target": "Package",
-            "version": "[3.22.1, )"
+            "version": "[3.22.3, )"
           },
           "MySql.Data": {
             "target": "Package",
@@ -1906,7 +1905,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
       }
     }
   }

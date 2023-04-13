@@ -8,21 +8,21 @@ using MySql.Data.MySqlClient;
 
 // Use this to query db for user related info
 
-namespace CA_ShoppingWebsite.Models;
+namespace CA_ShoppingWebsite.Data;
 
 public class UserData
 {
-    public static User? GetUserInfo(string? username, string? password)
+    public static Models.User? GetUserInfo(string? username, string? password)
     {
 
         return null;
     }
 
 
-    public static User GetUserLogin(string username, string password)
+    public static Models.User GetUserLogin(string username, string password)
     {
 
-        User user = new User();
+        var user = new Models.User();
         MySqlConnection conn = new MySqlConnection(data.cloudDB);
 
         try
