@@ -38,8 +38,8 @@ public class GalleryController : Controller
         {
             if (product.Name != null)
             {
-                if (product.Name.Contains(keyword,
-                    StringComparison.CurrentCultureIgnoreCase))
+                if (product.Name.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
+                    product.Description.Contains(keyword,StringComparison.CurrentCultureIgnoreCase))
                 {
                     selected.Add(product);
                 }
