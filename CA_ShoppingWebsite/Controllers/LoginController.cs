@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using CA_ShoppingWebsite.Models;
+using CA_ShoppingWebsite.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using MySql.Data.MySqlClient;
@@ -31,6 +33,8 @@ public class LoginController : Controller
         Request.Headers.TryGetValue("password", out var passwordObj);
         string username = usernameObj.ToString();
         string password = passwordObj.ToString();
+        bool status = false;
+        //string url = "/gallery";
         User user = new Models.User();
         if (username != null && password != null) {
              user = UserData.GetUserLogin(username, password);
@@ -50,7 +54,7 @@ public class LoginController : Controller
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
             Response.Cookies.Append("SessionId", sessionId, options);
-
+            
         }
         return Ok(user);
     }
