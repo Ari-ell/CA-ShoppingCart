@@ -1,6 +1,7 @@
 ﻿
 window.onload = function () {
     page_start();
+
 }
 
 function page_start() {
@@ -27,41 +28,64 @@ function on_submit_click(event) {
         alert("Ensure you input a value in both fields!");
     }
     else {
-        $.ajax({
-            url: '/userlogin',
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            headers: {
-                'username': username.value,
-                'password': password.value
-            },
-            success: function (result) {
-                flag = true;
-                alert("Welcome back " + result.username);
-
-            },
-            error: function (error) {
-
-                return alert(error.statusText)
-
-            }
-        });
-
+        redirect();
+   
 
     }
 
-    console.log(flag);
-    if (flag) {
-        
-        //location.href = "https://localhost:7052/gallery";
-        window.location.replace("https://localhost:7052/gallery");
-
-    }
 }
 
 
 function redirect() {
-    location.href = "gallery";
+
+
+    //let xhr = new XMLHttpRequest();
+
+    //xhr.open("GET", "/userlogin", true);
+    //xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //xhr.setRequestHeader('username', username.value);
+    //xhr.setRequestHeader('password', password.value);
+    //xhr.send();
+    //xhr.onload = () => {
+    //    if (xhr.readyState == 4 && xhr.status == 200) {
+    //        alert("Welcome back " + result.username);
+    //        window.location = "/gallery";
+    //    } else {
+    //        console.log(`Error: ${xhr.status}`);
+    //    }
+    //};
+
+    $.ajax({
+        url: '/userlogin',
+        type: 'GET',
+        async: false,
+        headers: {
+            'username': username.value,
+            'password': password.value
+        },
+        success: function (result) {
+            flag = true;
+            alert("Welcome back " + result.username);
+            //window.location=result.username;
+
+        },
+        error: function (error) {
+
+           alert(error.statusText);
+
+        }
+    });
+
+
 
 }
+
+$(document).ajaxComplete(function (event, xhr, settings) {
+        var win = window;
+        while (win != win.top) {
+            win = win.top;
+        }
+        win.location.href = "/gallery";
+  
+});
+

@@ -7,9 +7,14 @@
     var user = (User)ViewBag.users;
 
 }
+@section Scripts
+{
+    <script src="/js/Gallery.js"></script>
+}
 <div>
     <ul class="nav">
-        @if (user.Username !=null)
+
+        @if (user.Username != null)
         {
             <li class="nav-item">
                 <a class="nav-link disabled">Hello, @user.Username</a>
@@ -32,12 +37,19 @@
 
 
             <li class="nav-item">
-               <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/login">Login</a>
             </li>
 
 
         }
+        <li class="nav-item" style="right: 1.8rem; position: absolute;margin-top:0.5rem">
+            <button type="button" class="btn btn-primary btn-sm cartBtn">
+                Cart
+                <span class="badge text-bg-secondary">0</span>
+            </button>
+        </li>
     </ul>
+
 </div>
 <div style="margin:1rem;">
     <form class="d-flex" role="search">
@@ -47,23 +59,24 @@
                     <img src="/assets/icons/search.svg" alt="Bootstrap" width="32" height="32">
                 </span>
             </div>
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2 searchInput" type="search" placeholder="Search" aria-label="Search">
 
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success searchBtn" type="submit">Search</button>
         </div>
     </form>
 </div>
 
 <div class="container text-center">
     <div class="row row-cols-3">
-        @foreach (Product product in products) {
+        @foreach (Product product in products)
+        {
             <div class="col">
                 <div class="card" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
                         <p class="card-text">@product.Description</p>
-                        <button>@product.Price @Html.Raw("-Add to Cart")</button>
+                        <button class="btn btn-outline-info addToCartBtn">@product.Price @Html.Raw("-Add to Cart")</button>
                     </div>
                 </div>
             </div>
