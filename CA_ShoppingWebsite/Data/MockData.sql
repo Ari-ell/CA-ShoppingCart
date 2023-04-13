@@ -29,12 +29,12 @@ CREATE TABLE IF NOT EXISTS Product(
 );
 
 INSERT INTO Product(ProductId, Name, Description, Img, Price) 
-VALUES (1,'.NET Charts','Brings powerful charting capabilities to your .NET applications','/wwwroot/assets/images/',99),
-    (2, '.NET PayPal', 'Integrate your .NET apps with PayPal the easy way!','/wwwroot/assets/images/', 69),
-    (3, '.NET ML','Supercharged machine learning libraries','/wwwroot/assets/images/',299),
-    (4, '.NET Analytics','Perform data mining and analytics easiliy in .NET','/wwwroot/assets/images/',299),
-    (5, '.NET Logger','Logs and aggregates events easily in your .NET apps','/wwwroot/assets/images/',49),
-    (6, '.NET Numerics','Powerful numerical methods for your .NET simulations','/wwwroot/assets/images/',299);
+VALUES (1,'.NET Charts','Brings powerful charting capabilities to your .NET applications','pie-chart',99),
+    (2, '.NET PayPal', 'Integrate your .NET apps with PayPal the easy way!','paypal', 69),
+    (3, '.NET ML','Supercharged machine learning libraries','machine-learning',299),
+    (4, '.NET Analytics','Perform data mining and analytics easiliy in .NET','statistics',299),
+    (5, '.NET Logger','Logs and aggregates events easily in your .NET apps','log',49),
+    (6, '.NET Numerics','Powerful numerical methods for your .NET simulations','maths',299);
 
 
 -- Review table

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using MySql.Data.MySqlClient;
 
 namespace CA_ShoppingWebsite.Data;
@@ -36,14 +37,30 @@ public class PurchaseData
 				};
 				myPurchases.Add(purchase);
 			}
+			conn.Close();
 		}
 		return myPurchases;
 	}
 
-	public static List<Models.PurchaseList>  GetActivationCodes()
+	public static List<Models.PurchaseList> GetActivationCodes()
 	{
 		var actvCodes = new List<Models.PurchaseList>();
+		using (var conn = new MySqlConnection(data.cloudDB))
+		{
+			conn.Open();
+			string sql = @"";
+			var cmd = new MySqlCommand(sql, conn);
+			MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
 
+			}
+
+            
+
+
+
+        }
 
 		return actvCodes;
     }
