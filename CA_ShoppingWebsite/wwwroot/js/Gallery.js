@@ -14,6 +14,11 @@ function page_start() {
 // listen to mouse-clicks
 function add_click_listeners() {
 
+//for logout btn
+    let logoutBtn = document.getElementsByClassName("logoutBtn");
+    logoutBtn[0].addEventListener('click', on_logout_click);
+
+
     let addToCartBtn = document.getElementsByClassName("addToCartBtn");
     let searchBtn = document.getElementsByClassName("searchBtn");
     let searchInput = document.getElementsByClassName("searchInput");
@@ -26,6 +31,20 @@ function add_click_listeners() {
     searchBtn[0].addEventListener('click', on_search_click);
     cartBtn[0].addEventListener('click', on_myCart_click);
     searchInput[0].addEventListener('keypress', on_input);
+
+}
+
+function on_logout_click(event) {
+    $('#myModal').modal('hide');
+    fetch('/logout', {
+        method: 'GET',
+
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+
+    window.location.replace('/login')
 
 }
 
