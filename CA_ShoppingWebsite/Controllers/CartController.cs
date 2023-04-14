@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CA_ShoppingWebsite.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CA_ShoppingWebsite.Controllers;
@@ -76,12 +77,13 @@ public class CartController : Controller
     public IActionResult Checkout()
     {
         // Check if user is logged in
-        var userId = (string)Request.Cookies["userId"];
+        var userId = Request.Cookies["userId"];
         if (userId == null)
             return RedirectToAction("Index", "Login");
         else {
-            //ConvertCartToPO();
-            //AddPOToPurchases();
+            ;
+            Data.MyPurchaseData.ConvertCartToPO(Convert.ToInt32(userId));
+            Data.MyPurchaseData.AddPOToMyPurchases();
             return RedirectToAction("Index", "MyPurchases");
         }
     }

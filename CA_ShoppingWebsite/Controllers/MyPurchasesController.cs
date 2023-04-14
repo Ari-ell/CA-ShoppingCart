@@ -21,11 +21,11 @@ public class MyPurchasesController : Controller
             var userId = Convert.ToInt32(checkUser);
 
             // Gets the user prchase history
-            var myPurchases = Data.PurchaseData.GetPurchaseOrders(userId);
+            var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
             ViewBag.myPurchases = myPurchases;
 
             // Gets the activations codes for each purchaseId
-            var myActivationCodes = Data.PurchaseData.GetActivationCodes(userId);
+            var myActivationCodes = Data.MyPurchaseData.GetActivationCodes(userId);
             ViewBag.myActivationCodes = myActivationCodes;
 
             // Gets product details to be populated onto MyPurchases
