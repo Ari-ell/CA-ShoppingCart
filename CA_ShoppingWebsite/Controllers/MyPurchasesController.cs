@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CA_ShoppingWebsite.Controllers;
 
-public class PurchasesController : Controller
+public class MyPurchasesController : Controller
 {
     public IActionResult Index()
     {
@@ -19,27 +19,30 @@ public class PurchasesController : Controller
         {
             // Returns the userID whose MyPurchases page will be loaded
             var userId = Convert.ToInt32(checkUser);
-            ViewBag.userId = userId;
 
-            //
+            // Gets the user prchase history
             var myPurchases = Data.PurchaseData.GetPurchaseOrders(userId);
             ViewBag.myPurchases = myPurchases;
 
+            // Gets the activations codes for each purchaseId
             var myActivationCodes = Data.PurchaseData.GetActivationCodes(userId);
             ViewBag.myActivationCodes = myActivationCodes;
 
+            // Gets product details to be populated onto MyPurchases
             var myProducts = Data.ProductData.GetProductDetails(userId);
             ViewBag.myProducts = myProducts;
 
             var myReviews = Data.ReviewData.GetUserReviews(userId);
             ViewBag.myReviews = myReviews;
 
-            // If user edits or adds a review
-            //      SetReviews();
             return View();
         }
         else
             return RedirectToAction("Index", "Gallery");
     }
+
+    // Need to add method to update user reviews
+    // This method should also update the overall user reviews
+
 }
 

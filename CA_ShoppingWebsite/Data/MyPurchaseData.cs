@@ -74,12 +74,25 @@ public class PurchaseData
 				}
 				else
 				{
-					actvCodes[PurchaseId].Add(PurchaseId);
+					actvCodes[PurchaseId].Add(ActivationCode);
 				}
 			}
 			conn.Close();
         }
 		return actvCodes;
+    }
+
+	public static List<Models.PurchaseOrder> ConvertCartToPO()
+	{
+		var cartPurchases = new List<Models.PurchaseOrder>();
+
+
+		return cartPurchases;
+    }
+
+	public static void AddPOToMyPurchases()
+    {
+
     }
 }
 

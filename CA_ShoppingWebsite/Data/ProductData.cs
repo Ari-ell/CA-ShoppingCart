@@ -53,11 +53,12 @@ public class ProductData
                         WHERE Product.ProductId IN
                         (SELECT ProductId 
                         FROM PurchaseOrder
-                        WHERE UserId = " + userId;
+                        WHERE UserId = @userId)";
 
             var cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader reader = cmd.ExecuteReader();
+            cmd.Parameters.AddWithValue("@userId",userId);
 
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 var product = new Models.Product
@@ -65,7 +66,7 @@ public class ProductData
                     Name = (string)reader["Name"],
                     Description = (string)reader["Description"],
                     Img = (string)reader["Img"],
-                    Price = (double)reader["Price"],
+                    //Price = (double)reader["Price"],
                 };
                 var productId = (int)reader["ProductId"];
                 if (!products.ContainsKey(productId))
