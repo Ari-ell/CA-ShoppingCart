@@ -62,8 +62,6 @@ function on_search_click(event) {
     let inputValue = document.getElementsByClassName("searchInput");
     let value = inputValue[0].value;
     redirect(value);
-
-    
 }
 function redirect(value) {
     window.location.replace('/Gallery/Index?keyword='+value);

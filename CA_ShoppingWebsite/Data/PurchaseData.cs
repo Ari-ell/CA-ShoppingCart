@@ -23,10 +23,12 @@ public class PurchaseData
 		{
             conn.Open();
             string sql = @"SELECT * from PurchaseOrder
-						WHERE UserId = " + userId;
+						WHERE UserId = @userId";
 
 			var cmd = new MySqlCommand(sql, conn);
+			cmd.Parameters.AddWithValue("@userId", userId);
 			MySqlDataReader reader = cmd.ExecuteReader();
+
 			while (reader.Read())
 			{
 				var purchase = new Models.PurchaseOrder() {
@@ -42,28 +44,38 @@ public class PurchaseData
 		return myPurchases;
 	}
 
-	public static List<Models.PurchaseList> GetActivationCodes(int userId)
+    // Returns a dictionary with key as the purchase Id and
+	// value being a list of activation codes for the key 
+    public static Dictionary<string, List<string>> GetActivationCodes(int userId)
 	{
-		var actvCodes = new List<Models.PurchaseList>();
-		using (var conn = new MySqlConnection(data.cloudDB))
+		var actvCodes = new Dictionary<string, List<string>>();
+
+        using (var conn = new MySqlConnection(data.cloudDB))
 		{
 			conn.Open();
-			string sql = @"SELECT PurchaseList.PurchaseId, PurchaseList.ActivationCode
+			string sql = @"SELECT PurchaseList.ActivationCode
 						FROM PurchaseList
 						WHERE PurchaseList.PurchaseId IN
 						(SELECT PurchaseOrder.PurchaseId
 						FROM PurchaseOrder
-						WHERE UserId = " + userId;
+						WHERE UserId = @userId";
+
 			var cmd = new MySqlCommand(sql, conn);
+			cmd.Parameters.AddWithValue("@userId", userId);
+
 			MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-				var code = new Models.PurchaseList
+				var ActivationCode = (string)reader["ActivationCode"];
+				var PurchaseId = (string)reader["PurchaseId"];
+				if (!actvCodes.ContainsKey(PurchaseId))
 				{
-					PurchaseId = (string)reader["PurchaseId"],
-					ActivationCode = (Guid)reader["ActivationCode"]
-				};
-				actvCodes.Add(code);
+					actvCodes[PurchaseId] = new List<string>();
+				}
+				else
+				{
+					actvCodes[PurchaseId].Add(PurchaseId);
+				}
 			}
 			conn.Close();
         }

@@ -40,20 +40,24 @@ public class ProductData
 
 
     // Get product details to be displayed on MyPurchases view
-	public static List<Models.Product>? GetProductDetails(int userId)
+    // Returns a dictionary of relevant product info
+    // with product as the key to matched against PurchaseOrder
+    public static Dictionary<int, Product>? GetProductDetails(int userId)
 	{
-        var products = new List<Models.Product>();
+        var products = new Dictionary<int,Product>();
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            string sql = @"SELECT Name, Description, Img
+            string sql = @"SELECT DISTINCT ProductId, Name, Description, Img
                         FROM Product, PurchaseOrder
                         WHERE Product.ProductId IN
                         (SELECT ProductId 
                         FROM PurchaseOrder
                         WHERE UserId = " + userId;
+
             var cmd = new MySqlCommand(sql, conn);
             MySqlDataReader reader = cmd.ExecuteReader();
+
             while (reader.Read())
             {
                 var product = new Models.Product
@@ -63,7 +67,9 @@ public class ProductData
                     Img = (string)reader["Img"],
                     Price = (double)reader["Price"],
                 };
-                products.Add(product);
+                var productId = (int)reader["ProductId"];
+                if (!products.ContainsKey(productId))
+                    products[productId] = product;
             }
             conn.Close();
         }

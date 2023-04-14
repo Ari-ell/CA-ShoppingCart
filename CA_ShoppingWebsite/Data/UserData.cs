@@ -27,20 +27,21 @@ public class UserData
 
         try
         {
-            Console.WriteLine("Connecting to MySQL...");
+            //Console.WriteLine("Connecting to MySQL...");
             conn.Open();
 
             string sql = "SELECT * FROM user WHERE Username =@username and Password =@password";
+
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@password", password);
+
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
                 user.UserId = (int)rdr[0];
                 user.Username = rdr[1].ToString();
                 user.Name = rdr[3].ToString();
-
             }
             rdr.Close();
         }
@@ -48,11 +49,9 @@ public class UserData
         {
             Console.WriteLine(ex.ToString());
         }
-
         conn.Close();
-        Console.WriteLine("Done.");
+        //Console.WriteLine("Done.");
         return user;
-
     }
 }
 

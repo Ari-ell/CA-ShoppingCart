@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS User(
 );
 
 INSERT into User
-VALUES(1, 'tes1','test1','test1'),
+VALUES(1, 'test1','test1','test1'),
     (2, 'test2','test2','test2'), 
     (3, 'test3','test3','test3'), 
     (4, 'test4','test4','test4');

@@ -17,11 +17,22 @@ public class PurchasesController : Controller
         string checkUser = Request.Cookies["userId"];
         if (checkUser != null)
         {
+            // Returns the userID whose MyPurchases page will be loaded
             var userId = Convert.ToInt32(checkUser);
+            ViewBag.userId = userId;
+
+            //
             var myPurchases = Data.PurchaseData.GetPurchaseOrders(userId);
+            ViewBag.myPurchases = myPurchases;
+
             var myActivationCodes = Data.PurchaseData.GetActivationCodes(userId);
+            ViewBag.myActivationCodes = myActivationCodes;
+
             var myProducts = Data.ProductData.GetProductDetails(userId);
+            ViewBag.myProducts = myProducts;
+
             var myReviews = Data.ReviewData.GetUserReviews(userId);
+            ViewBag.myReviews = myReviews;
 
             // If user edits or adds a review
             //      SetReviews();
