@@ -32,7 +32,7 @@ public class MyPurchaseData
 			while (reader.Read())
 			{
 				var purchase = new Models.PurchaseOrder() {
-					PurchaseId = (Guid)reader["PurchaseId"],
+					PurchaseId = (string)reader["PurchaseId"],
 					ProductId = (int)reader["ProductId"],
 					PurchaseQty = (int)reader["PurchaseQty"],
 					PurchaseDate = (string)reader["PurchaseDate"]
