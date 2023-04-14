@@ -75,7 +75,6 @@ UPDATE PurchaseOrder SET PurchaseId=(SELECT uuid());
 -- Purchase List table (Itemised list of each purchased item)
 CREATE TABLE IF NOT EXISTS PurchaseList(
     Id int AUTO_INCREMENT PRIMARY KEY,
-    ProductId int,
     PurchaseId varchar(38),
     ActivationCode varchar(38) Unique, -- GUID is 38 characters
     FOREIGN KEY(PurchaseId) 
@@ -84,10 +83,10 @@ CREATE TABLE IF NOT EXISTS PurchaseList(
 );
 
 INSERT INTO PurchaseList(ProductId, PurchaseId)
-VALUES (1, '80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
-    (1, '80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
-    (2, '80cff639-d9b2-11ed-80a4-5254006b6f85'),
-    (4,'80cff758-d9b2-11ed-80a4-5254006b6f85');
+VALUES ('80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
+    ('80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
+    ('80cff639-d9b2-11ed-80a4-5254006b6f85'),
+    ('80cff758-d9b2-11ed-80a4-5254006b6f85');
 
 UPDATE PurchaseList SET ActivationCode=(SELECT uuid());
 
@@ -114,13 +113,13 @@ CREATE TABLE IF NOT EXISTS CartItem(
     Quantity int NOT NULL
 
     PRIMARY KEY (CartItemId)
-    FOREIGN KEY (ProductI, CartId)
+    FOREIGN KEY (ProductId, CartId)
 )
 
 INSERT INTO CartItem(CartItemId, CartId, ProductId, Quantity)
-VALUES (1, 1, 1, 3)
-    (2, 1, 2, 5)
-    (3, 1, 3, 1)
-    (4, 2, 2, 2)
-    (5, 3, 3, 3)
+VALUES (1, 1, 1, 3),
+    (2, 1, 2, 5),
+    (3, 1, 3, 1),
+    (4, 2, 2, 2),
+    (5, 3, 3, 3),
     (6, 4, 4, 4);
