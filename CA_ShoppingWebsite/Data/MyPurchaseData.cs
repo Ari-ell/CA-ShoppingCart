@@ -4,7 +4,7 @@ using MySql.Data.MySqlClient;
 
 namespace CA_ShoppingWebsite.Data;
 
-public class PurchaseData
+public class MyPurchaseData
 {
 	/// <summary>
 	// Once purchases are entered into database
@@ -82,7 +82,7 @@ public class PurchaseData
 		return actvCodes;
     }
 
-	public static List<Models.PurchaseOrder> ConvertCartToPO()
+	public static List<Models.PurchaseOrder> ConvertCartToPO(int userId)
 	{
 		var cartPurchases = new List<Models.PurchaseOrder>();
 

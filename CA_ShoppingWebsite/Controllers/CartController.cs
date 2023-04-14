@@ -68,6 +68,25 @@ public class CartController : Controller
     }
 
 
+    // Checkout adds all products in CartItem table to PurchaseOrder table
+    // If user is logged in, will redirect to myPurchases view
+    // If not logged in, will redirect to login page to log in
+    //      Upon succesfull log in, will re-direct back to Cart
+    // If unsucessful, try catch show exception
+    public IActionResult Checkout()
+    {
+        // Check if user is logged in
+        var userId = (string)Request.Cookies["userId"];
+        if (userId == null)
+            return RedirectToAction("Index", "Login");
+        else {
+            //ConvertCartToPO();
+            //AddPOToPurchases();
+            return RedirectToAction("Index", "MyPurchases");
+        }
+    }
+
+
 
 }
 
