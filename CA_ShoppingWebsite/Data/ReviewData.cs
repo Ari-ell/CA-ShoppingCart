@@ -3,7 +3,7 @@ namespace CA_ShoppingWebsite.Data
 {
 	public class ReviewData
 	{
-		// Get user rviews for individual products
+		// Get user reviews for individual products
 		// Store in a dictionary w key-value pairs of produt-review
 		public static Dictionary<int,int>? GetUserReviews(int userId)
 		{
