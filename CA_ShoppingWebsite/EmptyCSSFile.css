@@ -1,0 +1,19 @@
+﻿<<<<<<< HEAD
+
+// current flow, once user & pw is ok, cookie is passed to client
+// and client is redirected to home/gallery page
+//
+// somewhere bteween cookie and redirection, we check that the user is logged in
+// if options.UserID != null
+// then MergeCart()
+
+// MergeCart()
+// Foreach (var KeyValuePair in SessionObject) {
+    // INSERT cartID, KeyValuePair.String, KeyValuePair.Key into DB //
+}
+
+// Clear the Prelogin Cart (Session Object)
+// HttpContext.Session.Clear()
+
+======= > > > > > > > bb0734dd8a73b730418056d10579d2a7012607e4body {
+}
