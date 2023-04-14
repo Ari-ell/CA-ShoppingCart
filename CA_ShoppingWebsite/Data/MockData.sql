@@ -94,7 +94,33 @@ UPDATE PurchaseList SET ActivationCode=(SELECT uuid());
 -- Cart table
 CREATE TABLE IF NOT EXISTS Cart(
     UserId int NOT NULL,
-    ProductId int NOT NULL,
-    ProductQty int NOT NULL,
-    PRIMARY KEY(UserId, ProductId)
+    CartId AUTO_INCREMENT int NOT NULL, 
+   
+    PRIMARY KEY(CartId)
+    FOREIGN KEY(UserId)
 );
+
+INSERT INTO Cart(UserId, CartId)
+VALUES (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4);
+
+-- CartItem table
+CREATE TABLE IF NOT EXISTS CartItem(
+    CartItemId AUTO_INCREMENT int NOT NULL,
+    CartId int NOT NULL, --
+    ProductId int NOT NULL,
+    Quantity int NOT NULL
+
+    PRIMARY KEY (CartItemId)
+    FOREIGN KEY (ProductI, CartId)
+)
+
+INSERT INTO CartItem(CartItemId, CartId, ProductId, Quantity)
+VALUES (1, 1, 1, 3)
+    (2, 1, 2, 5)
+    (3, 1, 3, 1)
+    (4, 2, 2, 2)
+    (5, 3, 3, 3)
+    (6, 4, 4, 4);

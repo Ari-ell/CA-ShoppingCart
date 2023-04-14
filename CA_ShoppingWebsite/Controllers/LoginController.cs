@@ -57,8 +57,12 @@ public class LoginController : Controller
         return Ok(user);
     }
 
+    // Check if the login userid matches the cookie options
+        if (user.UserId == options.UserId)
+        {
 
 
+<<<<<<< Updated upstream
     public IActionResult Privacy()
     {
         return View();
@@ -73,11 +77,95 @@ public class LoginController : Controller
 
         return Ok();
     }
+=======
+>>>>>>> Stashed changes
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+
+
+        //HttpContext.Session.SetInt32("ProductId", 3);
+
+        // Call the mergecart function
+            MergeCart();
 }
 
+// Define the mergecart function
+public void MergeCart()
+{
+
+    var sessionObjectCartItems = new Dictionary<string, int>
+            { {"A001", 3 },
+                {"A002" ,5} };
+
+    HttpContext.Session.SetDictionary<string, int>("PreloginCartItems", sessionObjectCartItems);
+
+
+    using (var conn = new MySqlConnection(data.cloudDB))
+    {
+
+        conn.Open();
+        // Loop through each key value pair in the session object
+        foreach (var item in sessionObjectCartItems)
+        {
+
+            // open a new connection to the DB
+
+            string checkIfProductExistsSql = $"SELECT * FROM cartItems WHERE cartItems.ProductId = {item.Key}";
+            var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            // if above SQL query returns true, i.e., product exists in cartItems DB
+            if (reader.GetBoolean(0))
+            {
+
+                // Insert the key value pair into the cartitem database
+                string updateQuantitySql = $"UPDATE cartItems SET Quantity = Quantity + {item.Value} WHERE cartItems.ProductId = {item.Key}";
+
+            } else
+            {
+
+                // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
+                string insertProductSql = $"INSERT INTO cartItems (ProductId, Quantity) VALUES ({item.Key},{item.Value}) ";
+
+            }
+        }
+    }
+
+
+    // Save changes to the database <- feroz said it's not needed but idk
+    //_dbContext.SaveChanges();
+
+    // Clear the session object
+    HttpContext.Session.Clear();
+}
+
+
+public IActionResult Privacy()
+{
+    return View();
+}
+
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+public IActionResult Error()
+{
+    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+}
+}
+
+<<<<<<< HEAD
+// current flow, once user & pw is ok, cookie is passed to client
+// and client is redirected to home/gallery page
+//
+// somewhere bteween cookie and redirection, we check that the user is logged in
+// if options.UserID != null
+// then MergeCart()
+
+// MergeCart()
+// Foreach (var KeyValuePair in SessionObject) {
+// INSERT cartID, KeyValuePair.String, KeyValuePair.Key into DB
+// }
+// Clear the Prelogin Cart (Session Object)
+// HttpContext.Session.Clear()
+
+=======
+            
+>>>>>>> bb0734dd8a73b730418056d10579d2a7012607e4
