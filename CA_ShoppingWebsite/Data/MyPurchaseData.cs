@@ -81,18 +81,5 @@ public class MyPurchaseData
         }
 		return actvCodes;
     }
-
-	public static List<Models.PurchaseOrder> ConvertCartToPO(int userId)
-	{
-		var cartPurchases = new List<Models.PurchaseOrder>();
-
-
-		return cartPurchases;
-    }
-
-	public static void AddPOToMyPurchases()
-    {
-
-    }
 }
 

@@ -69,21 +69,33 @@ public class CartController : Controller
     }
 
 
-    // Checkout adds all products in CartItem table to PurchaseOrder table
+    // [Start]
     // If user is logged in, will redirect to myPurchases view
     // If not logged in, will redirect to login page to log in
-    //      Upon succesfull log in, will re-direct back to Cart
-    // If unsucessful, try catch show exception
+    //      Upon succesfull log in, will re-direct back to Cart to checkout
+    // If unsucessful, will catch and show exception msg
+    // [Checkout procedure]
+    // Once checkout is clicked, all CartItem products (for specified user)
+    // will be wrapped in a PurchaseOrder object and
+    // transferred to PurchaseOrder table
+    // Update PurchaseList table with activation codes
+    // After that, CartItem table will be cleared for that specific user
+    // [End]
     public IActionResult Checkout()
     {
         // Check if user is logged in
-        var userId = Request.Cookies["userId"];
-        if (userId == null)
+        var getUserId = Request.Cookies["userId"];
+
+        // Redirect to Login if not logged in
+        // Need to redirect back to cart once logged in?
+        if (getUserId == null)
             return RedirectToAction("Index", "Login");
+
+        // Complete check out procedure and redirect to myPurchases
         else {
-            ;
-            Data.MyPurchaseData.ConvertCartToPO(Convert.ToInt32(userId));
-            Data.MyPurchaseData.AddPOToMyPurchases();
+            var userId = Convert.ToInt32(getUserId);
+            Data.CartData.CheckOutUser(userId);
+
             return RedirectToAction("Index", "MyPurchases");
         }
     }
