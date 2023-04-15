@@ -4,7 +4,7 @@
 -- User table
 CREATE TABLE IF NOT EXISTS User(
 	UserId int AUTO_INCREMENT,
-	Username varchar(50) NOT NULL,
+	Username varchar(50) NOT NULL UNIQUE,
 	Name varchar(50) NOT NULL,
 	Password varchar(300) NOT NULL,
 	PRIMARY KEY (UserId)
@@ -18,7 +18,7 @@ VALUES('test1','test1','test1'),
 
 -- Product table
 CREATE TABLE IF NOT EXISTS Product(
-    ProductId int AUTO_INCREMENT,
+    ProductId int,
     Name varchar(50) NOT NULL,
     Description varchar(250) NOT NULL,
     Img varchar(250) NOT NULL,
@@ -27,13 +27,13 @@ CREATE TABLE IF NOT EXISTS Product(
     PRIMARY KEY(ProductId)
 );
 
-INSERT INTO Product(Name, Description, Img, Price) 
-VALUES ('.NET Charts','Brings powerful charting capabilities to your .NET applications','pie-chart.png',99),
-    ('.NET PayPal', 'Integrate your .NET apps with PayPal the easy way!','paypal.png', 69),
-    ('.NET ML','Supercharged .NET machine learning libraries','machine-learning.png',299),
-    ('.NET Analytics','Perform data mining and analytics easiliy in .NET','statistics.png',299),
-    ('.NET Logger','Logs and aggregates events easily in your .NET apps','log.png',49),
-    ('.NET Numerics','Powerful numerical methods for your .NET simulations','maths.png',299);
+INSERT INTO Product(ProductId, Name, Description, Img, Price) 
+VALUES (1, '.NET Charts','Brings powerful charting capabilities to your .NET applications','pie-chart.png',99),
+    (2, '.NET PayPal', 'Integrate your .NET apps with PayPal the easy way!','paypal.png', 69),
+    (3, '.NET ML','Supercharged .NET machine learning libraries','machine-learning.png',299),
+    (4, '.NET Analytics','Perform data mining and analytics easiliy in .NET','statistics.png',299),
+    (5, '.NET Logger','Logs and aggregates events easily in your .NET apps','log.png',49),
+    (6, '.NET Numerics','Powerful numerical methods for your .NET simulations','maths.png',299);
 
 -- Review table
 CREATE TABLE IF NOT EXISTS Review(
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS Review(
     UserId int,  
     ProductId int, 
     Rating int,
-    PRIMARY KEY (ReviewId),
+    PRIMARY KEY (ReviewId, UserId, ProductId),
     FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE CASCADE,
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
 );
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS PurchaseOrder(
 );
 
 INSERT INTO PurchaseOrder(PurchaseId, UserId, ProductId, PurchaseQty, PurchaseDate) 
-VALUES('80cff2a2-d9b2-11ed-80a4-5254006b6f85', 1, 1, 2, '08 April 2019'),
-    ('80cff639-d9b2-11ed-80a4-5254006b6f85', 1, 2, 1, '08 April 2019'),
-    ('80cff758-d9b2-11ed-80a4-5254006b6f85', 1, 4, 1, '04 September 2019');
+VALUES('80cff2a2-d9b2-11ed-80a4-5254006b6f85', 1, 1, 2, '08 Apr 2019'),
+    ('80cff639-d9b2-11ed-80a4-5254006b6f85', 1, 2, 1, '08 Apr 2019'),
+    ('80cff758-d9b2-11ed-80a4-5254006b6f85', 1, 4, 1, '04 Sep 2019');
 
 -- Purchase List table (Itemised list of each purchased item)
 CREATE TABLE IF NOT EXISTS PurchaseList(
