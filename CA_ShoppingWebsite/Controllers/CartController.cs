@@ -81,6 +81,8 @@ public class CartController : Controller
     // Update PurchaseList table with activation codes
     // After that, CartItem table will be cleared for that specific user
     // [End]
+
+    // What happens if the cart has 0 items and user tries to checkout?
     public IActionResult Checkout()
     {
         // Check if user is logged in

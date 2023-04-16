@@ -23,7 +23,7 @@ public class MyPurchaseData
 		{
             conn.Open();
             string sql = @"SELECT * from PurchaseOrder
-						WHERE UserId = @userId";
+						WHERE UserId = @userId;";
 
 			var cmd = new MySqlCommand(sql, conn);
 			cmd.Parameters.AddWithValue("@userId", userId);
@@ -58,7 +58,7 @@ public class MyPurchaseData
 						WHERE PurchaseList.PurchaseId IN
 						(SELECT PurchaseOrder.PurchaseId
 						FROM PurchaseOrder
-						WHERE UserId = @userId)";
+						WHERE UserId = @userId);";
 
 			var cmd = new MySqlCommand(sql, conn);
 			cmd.Parameters.AddWithValue("@userId", userId);
