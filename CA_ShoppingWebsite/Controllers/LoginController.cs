@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
+using System.Net;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Xml;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,10 +32,15 @@ public class LoginController : Controller
     [HttpGet("userlogin")]
     public ActionResult ExtractFromBasic()
     {
+
+
+
+
         Request.Headers.TryGetValue("username",out var usernameObj);
         Request.Headers.TryGetValue("password", out var passwordObj);
         string username = usernameObj.ToString();
         string password = passwordObj.ToString();
+        bool hasMarged = false;
         //string url = "/gallery";
         User user = new Models.User();
         if (username != null && password != null) {
@@ -53,16 +61,21 @@ public class LoginController : Controller
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
             Response.Cookies.Append("SessionId", sessionId, options);
+            hasMarged= MergeCart(user.UserId.ToString());
         }
-        return Ok(user);
+        if (hasMarged)
+        {
+            return Ok(user);
+
+        }
+        else {
+
+            return BadRequest(user);
+        }
+     
     }
 
-    // Check if the login userid matches the cookie options
-        //if (user.UserId == options.UserId)
-        //{
 
-
-//<<<<<<< Updated upstream
     [Route("logout")]
     public IActionResult Logout() {
 
@@ -73,69 +86,94 @@ public class LoginController : Controller
 
         return Ok();
     }
-//=======
-//>>>>>>> Stashed changes
 
 
 
-        //HttpContext.Session.SetInt32("ProductId", 3);
-
-        // Call the mergecart function
-            //MergeCart();
-
-// Define the mergecart function
-//public void MergeCart()
-//{
-
-//    var sessionObjectCartItems = new Dictionary<string, int>
-//            { {"A001", 3 },
-//                {"A002" ,5} };
-
-//    HttpContext.Session.SetDictionary<string, int>("PreloginCartItems", sessionObjectCartItems);
 
 
-//    using (var conn = new MySqlConnection(data.cloudDB))
-//    {
+    public bool MergeCart(string userId)
+    {
+        int quantity = 0;
+        bool res = true;
+        using (var conn = new MySqlConnection(data.cloudDB))
+        {
 
-//        conn.Open();
-//        // Loop through each key value pair in the session object
-//        foreach (var item in sessionObjectCartItems)
-//        {
+            conn.Open();
+            if (Request.Cookies.Count() > 0) {
 
-//            // open a new connection to the DB
+                foreach (KeyValuePair<string, string> c in Request.Cookies)
+                {
+                    Console.WriteLine(c.Key);
+                    Console.WriteLine(c.Value);
 
-//            string checkIfProductExistsSql = $"SELECT * FROM cartItems WHERE cartItems.ProductId = {item.Key}";
-//            var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
-//            MySqlDataReader reader = cmd.ExecuteReader();
+                    if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
+                    {
 
-//            // if above SQL query returns true, i.e., product exists in cartItems DB
-//            if (reader.GetBoolean(0))
-//            {
+                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = {c.Key} and UserId ={Convert.ToInt32(userId)}";
+                        var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
-//                // Insert the key value pair into the cartitem database
-//                string updateQuantitySql = $"UPDATE cartItems SET Quantity = Quantity + {item.Value} WHERE cartItems.ProductId = {item.Key}";
+                        while (reader.Read())
+                        {
+                            quantity = (int)reader[0];
+                        }
 
-//            }
-//            else
-//            {
+                        string updateQuantitySql = "";
+                        if (reader.HasRows)
+                        {
 
-//                // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
-//                string insertProductSql = $"INSERT INTO cartItems (ProductId, Quantity) VALUES ({item.Key},{item.Value}) ";
+                            // Insert the key value pair into the cartitem database
+                            updateQuantitySql = $"UPDATE cartitem SET Quantity = {quantity} + {Convert.ToInt32(c.Value)} WHERE ProductId = {Convert.ToInt32(c.Key)} and UserId ={Convert.ToInt32(userId)}";
 
-//            }
-//        }
-//    }
+                        }
+                        else
+                        {
 
-
-//    // Save changes to the database <- feroz said it's not needed but idk
-//    //_dbContext.SaveChanges();
-
-//    // Clear the session object
-//    HttpContext.Session.Clear();
-//}
+                            // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
+                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({Convert.ToInt32(userId)},{Convert.ToInt32(c.Key)},{Convert.ToInt32(c.Value)}) ";
 
 
-public IActionResult Privacy()
+                        }
+
+                        reader.Close();
+                        var update = new MySqlCommand(updateQuantitySql, conn);
+                        MySqlDataReader rdr = update.ExecuteReader();
+                        Console.WriteLine(rdr.ToString());
+                        if (rdr.RecordsAffected > 0)
+                        {
+
+                            res = true;
+
+                        }
+                        else
+                        {
+                            res = false;
+                        }
+
+                        rdr.Close();
+
+                        Response.Cookies.Delete(c.Key);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                }
+            }
+
+            conn.Close();
+
+            return res;
+           
+        }
+
+    }
+
+
+    
+
+    public IActionResult Privacy()
 {
     return View();
 }
@@ -147,21 +185,3 @@ public IActionResult Error()
 }
 }
 
-//<<<<<<< HEAD
-// current flow, once user & pw is ok, cookie is passed to client
-// and client is redirected to home/gallery page
-//
-// somewhere bteween cookie and redirection, we check that the user is logged in
-// if options.UserID != null
-// then MergeCart()
-
-// MergeCart()
-// Foreach (var KeyValuePair in SessionObject) {
-// INSERT cartID, KeyValuePair.String, KeyValuePair.Key into DB
-// }
-// Clear the Prelogin Cart (Session Object)
-// HttpContext.Session.Clear()
-
-//=======
-            
-//>>>>>>> bb0734dd8a73b730418056d10579d2a7012607e4
