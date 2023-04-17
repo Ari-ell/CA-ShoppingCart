@@ -1,17 +1,14 @@
 ﻿<Properties StartupConfiguration="{F9B5AEAA-8241-4464-A00C-88D2217331F7}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Controllers/CartController.cs">
     <Files>
       <File FileName="CA_ShoppingWebsite/Models/Review.cs" />
       <File FileName="CA_ShoppingWebsite/Data/ReviewData.cs" />
       <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" />
-      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="50" Column="103" />
+      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="6" Column="44" />
       <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" />
       <File FileName="CA_ShoppingWebsite/Models/CartItem.cs" />
       <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" />
@@ -24,18 +21,33 @@
       <File FileName="CA_ShoppingWebsite/data/UserData.cs" />
       <File FileName="CA_ShoppingWebsite/Program.cs" />
       <File FileName="CA_ShoppingWebsite/data/data.cs" />
-      <File FileName="CA_ShoppingWebsite/Controllers/MyPurchasesController.cs" />
+      <File FileName="CA_ShoppingWebsite/Controllers/MyPurchasesController.cs" Line="17" Column="28" />
+      <File FileName="CA_ShoppingWebsite/Views/Cart/Index.cshtml" />
+      <File FileName="CA_ShoppingWebsite/Data/CartItemData.cs" Line="11" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CA_ShoppingWebsite" expanded="True">
             <Node name="CA_ShoppingWebsite" expanded="True">
-              <Node name="Dependencies" expanded="True" />
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True">
+                <Node name="CartItemData.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Cart" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

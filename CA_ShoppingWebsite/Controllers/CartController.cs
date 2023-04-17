@@ -8,36 +8,23 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
+
 namespace CA_ShoppingWebsite.Controllers;
 
 public class CartController : Controller
 {
     // GET: /<controller>/
-    public IActionResult Index()
-    {
-        // Navbar with "View Cart" and Continue Shopping (Gallery) | Checkout (Purchase History)
-        // Retrieve products from user's cart
-        // Check if user isLoggedIn
-            // if no:
-            // retrieve from Session Object
-                // display in card format on Cart Page
-                // individual price display per product
-                // display quantity of product
-            // if yes:
-            // retrieve from DB
-                // display in card format on Cart Page
-                // individual price display per product
-                // display quantity of product
-        // Total Price display
-            // sum of products (calculate from DB (Query for Price) + Session Object)
-            
-        // Adjust Quantity Dropdown or +-
-        // Check if user isLoggedIn
-            // if no:
-                // Session Object.Add(ProductId), just increment by 1
-            // if yes:
-                // UPDATE Quantity in CartItem Table, increment by 1
+    public IActionResult Index() {
+        Dictionary<Product, int> ProductList = new Dictionary<Product, int>();
 
+        string checkUser = Request.Cookies["userId"];
+        if (checkUser != null) {
+            var userId = Convert.ToInt32(checkUser);
+            ViewBag.userId = userId;
+
+            ProductList = Data.CartItemData.GetProductList(userId);
+            ViewBag.cartItems = ProductList;
+        }
         return View();
     }
 
