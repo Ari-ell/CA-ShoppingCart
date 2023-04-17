@@ -41,13 +41,49 @@ public class CartController : Controller
         return View();
     }
 
+    public int CountCart()
+    {
+        int cartSize;
+
+        // Check if user is logged in
+        User user = new User();
+        string? userid = Request.Cookies["userID"];
+        user.UserId = Convert.ToInt32(userid);
+
+        if (user != null)
+        {
+
+            // CountCart Function
+            // establish connection to DB
+            Console.WriteLine("Connecting to MySQL for Product Data...");
+            MySqlConnection conn = new MySqlConnection(data.cloudDB);
+            conn.Open();
+
+            // check if item exists in cart
+            string userId = user.UserId.ToString()!;
+            string querySql = @"COUNT * FROM cartItem WHERE cartItem.UserId = @userId";
+            MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+            queryCmd.Parameters.AddWithValue("@userId", userId);
+            MySqlDataReader rdr = queryCmd.ExecuteReader();
+
+        } else
+        {
+
+
+
+        }
+
+        return 0;
+    }
+
     // from MouseClick
     // Ajax is calling this method
 
     // something like :
-     //<input type = "button"
-     //value="Go Somewhere Else" <-?
-     //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+    //<input type = "button"
+    //value="Go Somewhere Else" <-?
+    //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+    [Route("addToCart")]
     public IActionResult AddProductToCart(int addProductId)
     {
 
@@ -55,8 +91,9 @@ public class CartController : Controller
         User user = new User();
         string? userid = Request.Cookies["userID"];
         user.UserId = Convert.ToInt32(userid);
+        int cartCounter;
 
-        if (user.UserId != null) {
+        if (userid != null) {
 
             // AddProductToCart Function
             // establish connection to DB
@@ -103,26 +140,28 @@ public class CartController : Controller
             };
 
         } else {
+            string? cookieQuantity = Request.Cookies[addProductId.ToString()];
+            //string cookieQuantity = Request.Cookies[$"{addProductId}"]
 
-            if (Request.Cookies[$"{addProductId}"] != null) {
 
-                Response.Cookies.Append($"{addProductId}", "1");
+            // check if product is present in cookies
+            if (cookieQuantity != null) {
 
-                int? newQuantity = HttpContext.Session.GetInt32(addProductId.ToString());
-                // some weird method to convert int? to int
-                HttpContext.Session.SetInt32(addProductId.ToString(), newQuantity.GetValueOrDefault());
+                int? productQuantity = Convert.ToInt32(cookieQuantity);
+                // if yes, add 1 to value
+                Response.Cookies.Append($"{addProductId}", $"{productQuantity+1}");
 
             } else {
 
                 // add product to Session Object Cart, set quantity to 1
-                HttpContext.Session.SetInt32((addProductId.ToString()), 1);
+                Response.Cookies.Append($"{addProductId}", "1");
 
             }
 
         }
 
         // I don't think it returns a view. partial view?
-        return View();
+        return Ok();
     }
 
     // [Start]

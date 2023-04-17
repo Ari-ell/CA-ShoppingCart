@@ -68,8 +68,16 @@ function redirect(value) {
 }
 function on_add_click(event) {
 
-    var id = document.getElementsByClassName("productId");
-    
+    var ele = event.target;
+    var value = ele["firstElementChild"].innerText;
 
-    alert(id);
+    fetch('addToCart?' + new URLSearchParams({
+        addProductId: value
+    })).then(data => data.text())
+        .then((text) => {
+            console.log('request succeeded with JSON response', text)
+        }).catch(function (error) {
+            console.log('request failed', error)
+        });
+
 }

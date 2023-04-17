@@ -103,7 +103,8 @@
                         <h5 class="card-title">@product.Name</h5>
                         <p hidden class="productId"> @product.ProductId</p>
                         <p class="card-text">@product.Description</p>
-                        <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")</button>
+                        <p>@product.ProductId</p>
+                        <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")<p hidden>@product.ProductId</p></button>
                         @* Need to add in the review bar*@
                     </div>
                 </div>
