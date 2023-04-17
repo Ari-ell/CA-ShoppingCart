@@ -43,17 +43,18 @@ public class CartController : Controller
 
     // from MouseClick
     // Ajax is calling this method
-    public IActionResult AddProductToCart(int newProductId, User user)
+
+    // something like :
+     //<input type = "button"
+     //value="Go Somewhere Else" <-?
+     //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+    public IActionResult AddProductToCart(int addProductId)
     {
 
         // Check if user is logged in
-        ViewBag.users = user;
+        User user = new User();
         string? userid = Request.Cookies["userID"];
-        string? username = Request.Cookies["username"];
-        string? name = Request.Cookies["name"];
-        user.Name = name;
         user.UserId = Convert.ToInt32(userid);
-        user.Username = username;
 
         if (user.UserId != null) {
 
@@ -67,20 +68,32 @@ public class CartController : Controller
                 conn.Open();
 
                 // check if item exists in cart
-                string sql = $"SELECT * FROM products WHERE products.ProductId = {newProductId}";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                string userId = user.UserId.ToString()!;
+                string querySql = @"SELECT * FROM cartItem WHERE cartItem.ProductId = @addProductId AND cartItem.UserId = @userId";
+                MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+                queryCmd.Parameters.AddWithValue("@addProductId", addProductId);
+                queryCmd.Parameters.AddWithValue("@userId", userId);
+                MySqlDataReader rdr = queryCmd.ExecuteReader();
 
                 // if item already exists in cart, first item in DB
-                if (rdr.GetBoolean(0)) {
+                if (rdr.GetValue(0) != null) {
 
-                    string updateSql = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {newProductId}";
-                    MySqlCommand updateCmd = new MySqlCommand(sql, conn);
+                    Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
+                    string updateSql = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId}";
+                    MySqlCommand updateCmd = new MySqlCommand(updateSql, conn);
+
+                    updateCmd.ExecuteNonQuery();
 
                     // if item doesn't exist in cart, create new reccord
                 } else {
 
-                    string createSql = $"INSERT cartitem WHERE productId = {newProductId}";
+                    Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
+                    string insertSql = @"INSERT INTO cartitem VALUES (@userId, @addProductId}, 1)";
+                    MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
+                    insertCmd.Parameters.AddWithValue("@userId", userId);
+                    insertCmd.Parameters.AddWithValue("@addProductId", addProductId);
+
+                    insertCmd.ExecuteNonQuery();
 
                 }
 
@@ -91,32 +104,24 @@ public class CartController : Controller
 
         } else {
 
-            if (HttpContext.Session.Get(newProductId.ToString()) != null) {
+            if (Request.Cookies[$"{addProductId}"] != null) {
 
-                int? newQuantity = HttpContext.Session.GetInt32(newProductId.ToString());
+                Response.Cookies.Append($"{addProductId}", "1");
+
+                int? newQuantity = HttpContext.Session.GetInt32(addProductId.ToString());
                 // some weird method to convert int? to int
-                HttpContext.Session.SetInt32(newProductId.ToString(), newQuantity.GetValueOrDefault());
+                HttpContext.Session.SetInt32(addProductId.ToString(), newQuantity.GetValueOrDefault());
 
             } else {
 
                 // add product to Session Object Cart, set quantity to 1
-                HttpContext.Session.SetInt32((newProductId.ToString()), 1);
+                HttpContext.Session.SetInt32((addProductId.ToString()), 1);
 
             }
-             
+
         }
 
-        // if logged in:
-        // check if Product already exists in CartItem
-        // if no:
-        // INSERT, Quantity = 1
-        // if yes:
-        // UPDATE, Quantity += 1
-
-        // send response to Gallery page
-        // Gallery page updates the cart (somehow, AJAX?)
-
-        // I don't think it returns a view
+        // I don't think it returns a view. partial view?
         return View();
     }
 

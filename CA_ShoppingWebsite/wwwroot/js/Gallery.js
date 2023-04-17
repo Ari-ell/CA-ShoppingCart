@@ -68,5 +68,8 @@ function redirect(value) {
 }
 function on_add_click(event) {
 
-    alert("add to cart");
+    var id = document.getElementsByClassName("productId");
+    
+
+    alert(id);
 }

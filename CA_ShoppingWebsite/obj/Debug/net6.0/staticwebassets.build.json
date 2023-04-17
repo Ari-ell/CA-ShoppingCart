@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1J2gTH0l6TrCEvwVRSPSOAIs56plDN6LJZj6L7Vv87c=",
+  "Hash": "TvehbpP4ni14CVVfBxSLdvalj3p80+BvT8C/CmJJhWA=",
   "Source": "CA_ShoppingWebsite",
   "BasePath": "_content/CA_ShoppingWebsite",
   "Mode": "Default",
@@ -833,6 +833,23 @@
       "OriginalItemSpec": "wwwroot/assets/.DS_Store"
     },
     {
+      "Identity": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/assets/icons/cart-check-fill.svg",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "assets/icons/cart-check-fill.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/icons/cart-check-fill.svg"
+    },
+    {
       "Identity": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/assets/icons/search.svg",
       "SourceId": "CA_ShoppingWebsite",
       "SourceType": "Discovered",
@@ -986,6 +1003,23 @@
       "OriginalItemSpec": "wwwroot/assets/image/statistics.png"
     },
     {
+      "Identity": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/assets/purchaseimages/shampoo.jpg",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "assets/purchaseimages/shampoo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/purchaseimages/shampoo.jpg"
+    },
+    {
       "Identity": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/css/site.css",
       "SourceId": "CA_ShoppingWebsite",
       "SourceType": "Discovered",
@@ -1052,6 +1086,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/login.js"
+    },
+    {
+      "Identity": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/js/purchases.js",
+      "SourceId": "CA_ShoppingWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/",
+      "BasePath": "_content/CA_ShoppingWebsite",
+      "RelativePath": "js/purchases.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/purchases.js"
     },
     {
       "Identity": "/Users/A01/Projects/CA/CA_ShoppingWebsite/wwwroot/js/site.js",

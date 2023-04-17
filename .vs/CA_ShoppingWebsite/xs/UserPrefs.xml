@@ -4,32 +4,30 @@
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Controllers/CartController.cs">
     <Files>
+      <File FileName="CA_ShoppingWebsite/Models/Review.cs" />
+      <File FileName="CA_ShoppingWebsite/Data/ReviewData.cs" Line="25" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="103" Column="66" />
+      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="50" Column="103" />
+      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="58" Column="28" />
+      <File FileName="CA_ShoppingWebsite/Models/CartItem.cs" Line="5" Column="44" />
+      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/ErrorViewModel.cs" />
       <File FileName="CA_ShoppingWebsite/Models/Product.cs" />
-      <File FileName="CA_ShoppingWebsite/Models/Cart.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/data/MockData.sql" Line="112" Column="28" />
-      <File FileName="CA_ShoppingWebsite/data/ProductData.cs" Line="9" Column="38" />
-      <File FileName="CA_ShoppingWebsite/data/UserData.cs" Line="54" Column="21" />
-      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="25" Column="45" />
-      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="97" Column="39" />
-      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="55" Column="47" />
-      <File FileName="CA_ShoppingWebsite/wwwroot/js/site.js" />
-      <File FileName="CA_ShoppingWebsite/wwwroot/js/login.js" />
-      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="85" Column="21" />
-      <File FileName="CA_ShoppingWebsite/data/data.cs" />
-      <File FileName="CA_ShoppingWebsite/wwwroot/js/Gallery.js" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Program.cs" />
-      <File FileName="CA_ShoppingWebsite/Models/PurchaseOrder.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Models/ErrorViewModel.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Models/CartItem.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/data/ProductData.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/PurchaseOrder.cs" />
+      <File FileName="CA_ShoppingWebsite/data/CartData.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/data/MockData.sql" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/data/UserData.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Program.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/data/data.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Controllers/MyPurchasesController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CA_ShoppingWebsite" expanded="True">
             <Node name="CA_ShoppingWebsite" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
+              <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True">
                 <Node name="CartController.cs" selected="True" />
               </Node>
@@ -37,12 +35,6 @@
               <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Gallery" expanded="True" />
-              </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="assets" expanded="True">
-                  <Node name="image" expanded="True" />
-                </Node>
-                <Node name="js" expanded="True" />
               </Node>
             </Node>
           </Node>

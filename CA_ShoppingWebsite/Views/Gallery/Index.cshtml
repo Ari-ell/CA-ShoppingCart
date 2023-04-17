@@ -101,6 +101,7 @@
                     <img src="../assets/image/@product.Img" class="img-fluid mx-auto d-block" alt="..." width="120" preserveAspectRatio="xMidYMid slice" style="margin:0.3rem;">
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
+                        <p hidden class="productId"> @product.ProductId</p>
                         <p class="card-text">@product.Description</p>
                         <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")</button>
                         @* Need to add in the review bar*@
