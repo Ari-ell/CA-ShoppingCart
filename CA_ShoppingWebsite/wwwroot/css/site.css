@@ -16,3 +16,72 @@ html {
 body {
   margin-bottom: 60px;
 }
+/*My Purchases Page*/
+.btn.dl-btn {
+    border: 1px solid;
+    background-color: cadetblue;
+    color: #fff;
+    font-size: 14px;
+}
+
+a.navbar-brand {
+    font-size: 30px;
+}
+
+.container.nav-con {
+    padding: 30px 0px !important;
+    border-bottom: 2px solid #f4f4f4;
+}
+
+div#purchase-card .card-text {
+    color: dimgrey;
+    font-size: 13px;
+}
+
+.card-purchase .card-body div:first-child {
+    margin-bottom: 10px;
+}
+
+div.pagetitle h3 {
+    margin: 50px auto !important;
+    position: relative;
+    display: inline-block;
+}
+
+    div.pagetitle h3:after {
+        position: absolute;
+        content: '';
+        width: 50%;
+        height: 3px;
+        background-color: darkseagreen;
+        top: 120%;
+        left: 50%;
+    }
+
+.navbar-nav {
+    align-items: center;
+}
+
+    .navbar-nav li {
+        padding: 0px 10px !important;
+    }
+
+    .navbar-nav i {
+        font-size: 25px;
+    }
+
+#purchase-card .card-title {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+#purchase-card h4 {
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
+.stars i.bi.bi-star-fill {
+    color: #F7E70C !important;
+}
+/*End of My Purchases Page*/
