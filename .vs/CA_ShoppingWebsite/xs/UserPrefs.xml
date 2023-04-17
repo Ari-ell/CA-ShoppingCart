@@ -1,36 +1,42 @@
 ﻿<Properties StartupConfiguration="{F9B5AEAA-8241-4464-A00C-88D2217331F7}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Views/Gallery/Index.cshtml">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Controllers/CartController.cs">
     <Files>
-      <File FileName="CA_ShoppingWebsite/Models/Review.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Controllers/PurchasesController.cs" Line="30" Column="9" />
-      <File FileName="CA_ShoppingWebsite/Data/ReviewData.cs" Line="25" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="74" Column="43" />
-      <File FileName="CA_ShoppingWebsite/Program.cs" Line="1" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Views/Login/Index.cshtml" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/Product.cs" />
+      <File FileName="CA_ShoppingWebsite/Models/Cart.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/data/MockData.sql" Line="112" Column="28" />
+      <File FileName="CA_ShoppingWebsite/data/ProductData.cs" Line="9" Column="38" />
+      <File FileName="CA_ShoppingWebsite/data/UserData.cs" Line="54" Column="21" />
+      <File FileName="CA_ShoppingWebsite/Controllers/GalleryController.cs" Line="25" Column="45" />
+      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="97" Column="39" />
+      <File FileName="CA_ShoppingWebsite/Controllers/CartController.cs" Line="55" Column="47" />
+      <File FileName="CA_ShoppingWebsite/wwwroot/js/site.js" />
+      <File FileName="CA_ShoppingWebsite/wwwroot/js/login.js" />
+      <File FileName="CA_ShoppingWebsite/Controllers/LoginController.cs" Line="85" Column="21" />
+      <File FileName="CA_ShoppingWebsite/data/data.cs" />
+      <File FileName="CA_ShoppingWebsite/wwwroot/js/Gallery.js" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Program.cs" />
+      <File FileName="CA_ShoppingWebsite/Models/PurchaseOrder.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/ErrorViewModel.cs" Line="1" Column="1" />
+      <File FileName="CA_ShoppingWebsite/Models/CartItem.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CA_ShoppingWebsite" expanded="True">
             <Node name="CA_ShoppingWebsite" expanded="True">
-              <Node name="Dependencies" expanded="True" />
-              <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="Controllers" expanded="True">
+                <Node name="CartController.cs" selected="True" />
+              </Node>
+              <Node name="data" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Cart" expanded="True" />
-                <Node name="Gallery" expanded="True">
-                  <Node name="Index.cshtml" selected="True" />
-                </Node>
-                <Node name="Login" expanded="True" />
-                <Node name="Purchases" expanded="True" />
+                <Node name="Gallery" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True">
                 <Node name="assets" expanded="True">
@@ -44,4 +50,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.CA__ShoppingWebsite PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

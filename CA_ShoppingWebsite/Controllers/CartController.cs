@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CA_ShoppingWebsite.Data;
+using CA_ShoppingWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace CA_ShoppingWebsite.Controllers;
 
@@ -40,26 +43,75 @@ public class CartController : Controller
 
     // from MouseClick
     // Ajax is calling this method
-    public IActionResult AddProductToCart(int newProductId)
+    public IActionResult AddProductToCart(int newProductId, User user)
     {
-        // Check if user is logged in
 
-        // if not logged in:
-        // assuming Session Object is already created
-        // store Product in Session Object
-            // check if Product already exists in Session Object
-            // if no:
-                // HttpContext.Session.SetInt32("ProductId", 1)
-            // if yes:
-                // int Quantity = HttpContext.Session.GetInt("ProductId) + 1;
-                // HttpContext.Session.SetInt32("ProductId", Quantity)
+        // Check if user is logged in
+        ViewBag.users = user;
+        string? userid = Request.Cookies["userID"];
+        string? username = Request.Cookies["username"];
+        string? name = Request.Cookies["name"];
+        user.Name = name;
+        user.UserId = Convert.ToInt32(userid);
+        user.Username = username;
+
+        if (user.UserId != null) {
+
+            // AddProductToCart Function
+            // establish connection to DB
+            MySqlConnection conn = new MySqlConnection(data.cloudDB);
+
+            try {
+
+                Console.WriteLine("Connecting to MySQL for Product Data...");
+                conn.Open();
+
+                // check if item exists in cart
+                string sql = $"SELECT * FROM products WHERE products.ProductId = {newProductId}";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                // if item already exists in cart, first item in DB
+                if (rdr.GetBoolean(0)) {
+
+                    string updateSql = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {newProductId}";
+                    MySqlCommand updateCmd = new MySqlCommand(sql, conn);
+
+                    // if item doesn't exist in cart, create new reccord
+                } else {
+
+                    string createSql = $"INSERT cartitem WHERE productId = {newProductId}";
+
+                }
+
+                rdr.Close();
+            } catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+            };
+
+        } else {
+
+            if (HttpContext.Session.Get(newProductId.ToString()) != null) {
+
+                int? newQuantity = HttpContext.Session.GetInt32(newProductId.ToString());
+                // some weird method to convert int? to int
+                HttpContext.Session.SetInt32(newProductId.ToString(), newQuantity.GetValueOrDefault());
+
+            } else {
+
+                // add product to Session Object Cart, set quantity to 1
+                HttpContext.Session.SetInt32((newProductId.ToString()), 1);
+
+            }
+             
+        }
 
         // if logged in:
         // check if Product already exists in CartItem
-            // if no:
-                // INSERT, Quantity = 1
-            // if yes:
-                // UPDATE, Quantity += 1
+        // if no:
+        // INSERT, Quantity = 1
+        // if yes:
+        // UPDATE, Quantity += 1
 
         // send response to Gallery page
         // Gallery page updates the cart (somehow, AJAX?)
@@ -67,7 +119,6 @@ public class CartController : Controller
         // I don't think it returns a view
         return View();
     }
-
 
     // [Start]
     // If user is logged in, will redirect to myPurchases view
@@ -101,8 +152,6 @@ public class CartController : Controller
             return RedirectToAction("Index", "MyPurchases");
         }
     }
-
-
 
 }
 
