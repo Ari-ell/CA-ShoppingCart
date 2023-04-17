@@ -8,17 +8,16 @@ namespace CA_ShoppingWebsite.Data;
 public class CartData
 {
     // Perform all actions needed to checkout
-    // 1. Convert cart items into a list of PO objects
+    // 1. Convert cart items into list of PO objects
     // 2. Add PO list iteratively to PO records
     // 3. Add into PList records with actvCode
     // 4. Clear cart items
-    // Qn: Need to clear Cart table as well?
     public static void CheckOutUser(int userId)
     {
         Console.WriteLine("Starting checkout..");
 
         // Get list of POs
-        var poList = GetCartIdList(userId);
+        var poList = GetPoList(userId);
         Console.WriteLine("Purchase Order List retrieved..");
 
         using (var conn = new MySqlConnection(data.cloudDB))
@@ -61,10 +60,7 @@ public class CartData
                 // Clear CartItem records
                 Console.WriteLine("Clearing cart items");
                 cmd.CommandText = @"DELETE FROM CartItem
-                                    WHERE CartId IN 
-                                    (SELECT CartId 
-                                    FROM Cart
-                                    WHERE UserId = @userId);";
+                                    WHERE UserId = @userId;";
                 cmd.Parameters.AddWithValue("@userId", userId);
 
                 cmd.ExecuteNonQuery();
@@ -85,7 +81,7 @@ public class CartData
 
     // Get a list of POs based on matching
     // the userId to a cartId
-    public static List<Models.PurchaseOrder> GetCartIdList(int userId)
+    public static List<Models.PurchaseOrder> GetPoList(int userId)
     {
         var poList = new List<Models.PurchaseOrder>();
         var curDate = GetCurrentDate();
@@ -95,10 +91,7 @@ public class CartData
             conn.Open();
             string sql = @"SELECT ProductId, Quantity 
                         FROM CartItem
-                        WHERE CartId IN 
-                        (SELECT CartId 
-                        FROM Cart
-                        WHERE UserId = @userId);";
+                        WHERE UserId = @userId;";
 
             var cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@userId", userId);

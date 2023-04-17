@@ -10,9 +10,8 @@ using CA_ShoppingWebsite.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
 using System.Net;
-using Org.BouncyCastle.Asn1.Ocsp;
+
 using System.Xml;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

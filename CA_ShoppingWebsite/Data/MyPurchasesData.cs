@@ -53,7 +53,7 @@ public class MyPurchaseData
         using (var conn = new MySqlConnection(data.cloudDB))
 		{
 			conn.Open();
-			string sql = @"SELECT ActivationCode
+			string sql = @"SELECT PurchaseId, ActivationCode
 						FROM PurchaseList
 						WHERE PurchaseList.PurchaseId IN
 						(SELECT PurchaseOrder.PurchaseId

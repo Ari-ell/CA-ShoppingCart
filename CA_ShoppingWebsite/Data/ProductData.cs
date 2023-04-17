@@ -48,12 +48,12 @@ public class ProductData
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            string sql = @"SELECT DISTINCT ProductId, Name, Description, Img
+            string sql = @"SELECT DISTINCT Product.ProductId, Product.Name, Product.Description, Product.Img
                         FROM Product, PurchaseOrder
                         WHERE Product.ProductId IN
-                        (SELECT ProductId 
-                        FROM PurchaseOrder
-                        WHERE UserId = @userId)";
+                            (SELECT PurchaseOrder.ProductId
+                            FROM PurchaseOrder
+                            WHERE PurchaseOrder.UserId = 1);";
 
             var cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@userId",userId);

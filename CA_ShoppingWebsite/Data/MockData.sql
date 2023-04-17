@@ -94,32 +94,18 @@ VALUES ('80cff2a2-d9b2-11ed-80a4-5254006b6f85'),
 
 UPDATE PurchaseList SET ActivationCode=(SELECT uuid());;
 
--- Cart table
-CREATE TABLE IF NOT EXISTS Cart(
-    CartId int AUTO_INCREMENT,
-    UserId int NOT NULL,
-    PRIMARY KEY(CartId),
-    FOREIGN KEY(UserId) REFERENCES User(UserId) ON DELETE CASCADE
-);
-
-INSERT INTO Cart(UserId, CartId)
-VALUES (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4);
-
 -- CartItem table
 CREATE TABLE IF NOT EXISTS CartItem(
     CartItemId int AUTO_INCREMENT,
-    CartId int NOT NULL,
+    UserId int NOT NULL,
     ProductId int NOT NULL,
     Quantity int NOT NULL,
     PRIMARY KEY (CartItemId),
-    FOREIGN KEY (CartId) REFERENCES Cart(CartId) ON DELETE CASCADE,
+    FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE CASCADE,
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
 );
 
-INSERT INTO CartItem(CartItemId, CartId, ProductId, Quantity)
+INSERT INTO CartItem(CartItemId, UserId, ProductId, Quantity)
 VALUES (1, 1, 1, 3),
     (2, 1, 2, 5),
     (3, 1, 3, 1),
