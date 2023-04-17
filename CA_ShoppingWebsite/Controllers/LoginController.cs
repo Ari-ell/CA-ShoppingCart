@@ -61,29 +61,27 @@ public class LoginController : Controller
         //if (user.UserId == options.UserId)
         //{
 
-
-//<<<<<<< Updated upstream
     [Route("logout")]
     public IActionResult Logout() {
-
-        Response.Cookies.Delete("userID");
-        Response.Cookies.Delete("username");
-        Response.Cookies.Delete("name");
-        Response.Cookies.Delete("SessionId");
+//    // Check if the login userid matches the cookie options
+//        if (user.UserId == options.UserId)
+//        {
 
         return Ok();
     }
-//=======
-//>>>>>>> Stashed changes
 
 
-
-        //HttpContext.Session.SetInt32("ProductId", 3);
+//        //HttpContext.Session.SetInt32("ProductId", 3);
 
         // Call the mergecart function
             //MergeCart();
 
 // Define the mergecart function
+//        // Call the mergecart function
+//            MergeCart();
+//}
+
+//// Define the mergecart function
 //public void MergeCart()
 //{
 
@@ -115,8 +113,6 @@ public class LoginController : Controller
 //                // Insert the key value pair into the cartitem database
 //                string updateQuantitySql = $"UPDATE cartItems SET Quantity = Quantity + {item.Value} WHERE cartItems.ProductId = {item.Key}";
 
-//            }
-//            else
 //            {
 
 //                // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
@@ -147,7 +143,6 @@ public IActionResult Error()
 }
 }
 
-//<<<<<<< HEAD
 // current flow, once user & pw is ok, cookie is passed to client
 // and client is redirected to home/gallery page
 //
@@ -161,7 +156,3 @@ public IActionResult Error()
 // }
 // Clear the Prelogin Cart (Session Object)
 // HttpContext.Session.Clear()
-
-//=======
-            
-//>>>>>>> bb0734dd8a73b730418056d10579d2a7012607e4
