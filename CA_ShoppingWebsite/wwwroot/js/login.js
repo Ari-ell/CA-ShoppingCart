@@ -11,16 +11,12 @@ function page_start() {
 }
 
 // listen to mouse-clicks
-  function add_click_listeners() {
+function add_click_listeners() {
 
-    let loginBtn = document.getElementsByClassName("loginBtn");
-      loginBtn[0].addEventListener('click', on_submit_click);
+let loginBtn = document.getElementsByClassName("loginBtn");
+    loginBtn[0].addEventListener('click', on_submit_click);
      
-  }
-
-
-
-
+}
 
 function on_submit_click(event) {
 
@@ -32,12 +28,8 @@ function on_submit_click(event) {
     }
     else {
         redirect();
-   
-
     }
-
 }
-
 
 function redirect() {
 
