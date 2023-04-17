@@ -1,6 +1,10 @@
 ﻿@{
 
     ViewData["Title"] = "My Purchases";
+    var myPurchases = (List<PurchaseOrder>)ViewBag.myPurchases;
+    var myProducts = (Dictionary<int, Product>)ViewBag.myProducts;
+    var myActivationCodes = (Dictionary<string, List<string>>)ViewBag.myActivationCodes;
+    var myReviews = (Dictionary<int, int>)ViewBag.myReviews;
 }
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,29 +31,30 @@
 <div class="container pagetitle d-flex justify-content-center">
     <h3 align="center">My Purchases</h3>
 </div>
+
 <div class="card-group card-purchase">
-    @for (int i = 0; i < 6; i++)
+    @foreach(var purchase in myPurchases)
     {
         <div class="container">
             <div class="d-flex flex-row card mb-3" id="purchase-card">
 
                 <div class="card-body p-2">
-                    <img src="~/assets/purchaseimages/shampoo.jpg" class="card-img-top" alt="...">
+                    <img src= "../assets/image/@myProducts[(int)purchase.ProductId].Img" class="card-img-top" alt="...">
+                    @*<p>@myProducts[(int)purchase.ProductId].Img</p>*@
                 </div>
                 <div class="container d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title">Product title @i</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title" id="Product Name">@myProducts[(int)purchase.ProductId].Name</h5>
+                    <p class="card-text" id="Product Description">@myProducts[(int)purchase.ProductId].Description</p>
                     <button type="button" class="btn btn-block dl-btn ">
                         Download here
                         <i class="bi bi-download"></i>
                     </button>
                 </div>
                 <div class="p-2 w-75 d-flex flex-column justify-content-center">
-                    <h4 class="pur-title">Purchase Order Information</h4>
-                    <span class="d-block">Date :  08 / Apr / 2023 </span>
-                    <span class="d-block">Qty : 4</span>
+                    <span class="d-block" id="Date of Purchase">Date: @purchase.PurchaseDate</span>
+                    <span class="d-block" id="PurchaseQty">Qty: @purchase.PurchaseQty</span>
                     <div class="row align-items-center">
-                        <label for="activationCode" class="col-4 pe-0">Activation Code:</label>
+                        <label for="activationCode" class="col-4 pe-0">Activation Code: </label>
                         <div class="col-8">
                             <select class="form-select" aria-label="activationCode">
                                 <option value="">AEFWREW-321-3223-ASDA</option>

@@ -19,20 +19,18 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
+app.UseRouting();
+
 app.Use(async (context, next) =>
 {
     await next();
 
     if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
     {
-        await context.Response.WriteAsync("Login particulars not found in database./n Access denied.");
+        await context.Response.WriteAsync("(Login particulars not found in database. Access denied.");
     }
 });
-
-app.UseRouting();
-
-
-
 
 app.UseAuthorization();
 app.UseSession();
