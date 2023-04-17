@@ -76,6 +76,8 @@ function on_add_click(event) {
     })).then(data => data.text())
         .then((text) => {
             console.log('request succeeded with JSON response', text)
+            window.location.replace("/");
+
         }).catch(function (error) {
             console.log('request failed', error)
         });

@@ -78,15 +78,17 @@ public class CartController : Controller
         User user = new User();
         string? userid = Request.Cookies["userID"];
         user.UserId = Convert.ToInt32(userid);
-        int cartCounter;
+        int cartCounter=0;
 
-        if (userid != null) {
+        if (userid != null)
+        {
 
             // AddProductToCart Function
             // establish connection to DB
             MySqlConnection conn = new MySqlConnection(data.cloudDB);
 
-            try {
+            try
+            {
 
                 Console.WriteLine("Connecting to MySQL for Product Data...");
                 conn.Open();
@@ -98,57 +100,71 @@ public class CartController : Controller
                 queryCmd.Parameters.AddWithValue("@addProductId", addProductId);
                 queryCmd.Parameters.AddWithValue("@userId", userId);
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
-
+                string sqlQuery = "";
                 // if item already exists in cart, first item in DB
-                if (rdr.GetValue(0) != null) {
+                if (rdr.HasRows)
+                {
 
                     Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
-                    string updateSql = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId}";
-                    MySqlCommand updateCmd = new MySqlCommand(updateSql, conn);
+                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId} and UserId = {Convert.ToInt32(userId)}";
+                    //MySqlCommand updateCmd = new MySqlCommand(sqlQuery, conn);
 
-                    updateCmd.ExecuteNonQuery();
+
 
                     // if item doesn't exist in cart, create new reccord
-                } else {
+                }
+                else
+                {
 
                     Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
-                    string insertSql = @"INSERT INTO cartitem VALUES (@userId, @addProductId}, 1)";
-                    MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
-                    insertCmd.Parameters.AddWithValue("@userId", userId);
-                    insertCmd.Parameters.AddWithValue("@addProductId", addProductId);
+                    sqlQuery = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({Convert.ToInt32(userId)}, {Convert.ToInt32(addProductId)}, 1)";
 
-                    insertCmd.ExecuteNonQuery();
+
 
                 }
-
                 rdr.Close();
-            } catch (Exception ex) {
+                MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
+                MySqlDataReader res = insertCmd.ExecuteReader();
+                res.Close();
+            
+                conn.Close();
+
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.ToString());
             };
 
-        } else {
+        }
+        else
+        {
             string? cookieQuantity = Request.Cookies[addProductId.ToString()];
             //string cookieQuantity = Request.Cookies[$"{addProductId}"]
 
 
             // check if product is present in cookies
-            if (cookieQuantity != null) {
+            if (cookieQuantity != null)
+            {
 
                 int? productQuantity = Convert.ToInt32(cookieQuantity);
                 // if yes, add 1 to value
-                Response.Cookies.Append($"{addProductId}", $"{productQuantity+1}");
+                Response.Cookies.Append($"{addProductId}", $"{productQuantity + 1}");
 
-            } else {
+            }
+            else
+            {
 
                 // add product to Session Object Cart, set quantity to 1
                 Response.Cookies.Append($"{addProductId}", "1");
 
             }
 
+            
         }
-
         // I don't think it returns a view. partial view?
+      
         return Ok();
+
     }
 
     // [Start]

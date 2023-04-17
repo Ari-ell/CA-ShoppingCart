@@ -23,8 +23,9 @@ public class ProductData
                     Name = (string)reader["Name"],
                     Description = (string)reader["Description"],
                     Img = (string)reader["Img"],
-                    Price = (int)reader["Price"]
-                    //ReviewRating = (string)reader["ReviewRating"]
+                    Price = (int)reader["Price"],
+                    ReviewRating = (int)reader["ReviewRating"],
+                    ProductId = (int)reader["ProductId"]
                 };
                 products.Add(product);
             }
