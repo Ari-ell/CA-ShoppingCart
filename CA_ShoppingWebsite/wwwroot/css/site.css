@@ -35,7 +35,7 @@ a.navbar-brand {
 
 div#purchase-card .card-text {
     color: dimgrey;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .card-purchase .card-body div:first-child {
@@ -73,9 +73,13 @@ div.pagetitle h3 {
 #purchase-card .card-title {
     margin-top: 10px;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 21px;
 }
-
+#purchase-card img.card-img-top {
+    width: 80%;
+    padding: 18px;
+    height: auto;
+}
 #purchase-card h4 {
     margin-bottom: 15px;
     font-size: 21px;

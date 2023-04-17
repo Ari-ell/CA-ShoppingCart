@@ -1837,19 +1837,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/A01/.nuget/packages/": {}
+    "/Users/hlayaminaye/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+      "projectUniqueName": "/Users/hlayaminaye/Documents/GitHub/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
       "projectName": "CA_ShoppingWebsite",
-      "projectPath": "/Users/A01/Projects/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
-      "packagesPath": "/Users/A01/.nuget/packages/",
-      "outputPath": "/Users/A01/Projects/CA/CA_ShoppingWebsite/obj/",
+      "projectPath": "/Users/hlayaminaye/Documents/GitHub/CA/CA_ShoppingWebsite/CA_ShoppingWebsite.csproj",
+      "packagesPath": "/Users/hlayaminaye/.nuget/packages/",
+      "outputPath": "/Users/hlayaminaye/Documents/GitHub/CA/CA_ShoppingWebsite/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/A01/.nuget/NuGet/NuGet.Config"
+        "/Users/hlayaminaye/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1905,7 +1905,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }
