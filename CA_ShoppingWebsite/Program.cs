@@ -22,15 +22,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.Use(async (context, next) =>
-{
-    await next();
+//app.Use(async (context, next) =>
+//{
+//    await next();
 
-    if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
-    {
-        await context.Response.WriteAsync("(Login particulars not found in database. Access denied.");
-    }
-});
+//    if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+//    {
+//        await context.Response.WriteAsync("(Login particulars not found in database. Access denied.");
+//    }
+//});
 
 app.UseAuthorization();
 app.UseSession();
