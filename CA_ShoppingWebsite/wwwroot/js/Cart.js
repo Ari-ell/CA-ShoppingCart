@@ -13,10 +13,17 @@ function page_start() {
 function add_click_listeners() {
 
     let minus = document.getElementsByClassName("minusBtn");
-    minus[0].addEventListener('click', on_minus_click);
+   
 
     let plus = document.getElementsByClassName("plusBtn");
-    plus[0].addEventListener('click', on_plus_click);
+   
+
+    for (let i = 0; i < minus.length; i++) {
+        minus[i].addEventListener('click', on_minus_click);
+        plus[i].addEventListener('click', on_plus_click);
+
+    }
+
 
 }
 
