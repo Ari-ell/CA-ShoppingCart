@@ -18,49 +18,33 @@ public class CartController : Controller
         Dictionary<Product, int> ProductList = new Dictionary<Product, int>();
 
         string checkUser = Request.Cookies["userId"];
-        if (checkUser != null) {
+        if (checkUser != null)
+        {
             var userId = Convert.ToInt32(checkUser);
             ViewBag.userId = userId;
 
             ProductList = Data.CartItemData.GetProductList(userId);
             ViewBag.cartItems = ProductList;
         }
+        //else {
+
+        //    if (Request.Cookies.Count() > 0)
+        //    {
+
+        //        foreach (KeyValuePair<string, string> c in Request.Cookies)
+        //        {
+        //            Console.WriteLine(c.Key);
+        //            Console.WriteLine(c.Value);
+
+        //            if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
+        //            {
+        //                ProductList.Add()
+
+
+        //            }
+        //        }
+        //    }
         return View();
-    }
-
-    // CountCart Function
-    public int CountCart()
-    {
-        int cartSize;
-
-        // Check if user is logged in
-        User user = new User();
-        string? userid = Request.Cookies["userID"];
-        user.UserId = Convert.ToInt32(userid);
-
-        if (user != null)
-        {
-
-            // establish connection to DB
-            Console.WriteLine("Connecting to MySQL for Product Data...");
-            MySqlConnection conn = new MySqlConnection(data.cloudDB);
-            conn.Open();
-
-            // check if item exists in cart
-            string userId = user.UserId.ToString()!;
-            string querySql = @"COUNT * FROM cartItem WHERE cartItem.UserId = @userId";
-            MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
-            queryCmd.Parameters.AddWithValue("@userId", userId);
-            MySqlDataReader rdr = queryCmd.ExecuteReader();
-
-        } else
-        {
-
-
-
-        }
-
-        return 0;
     }
 
     // from MouseClick
@@ -78,7 +62,7 @@ public class CartController : Controller
         User user = new User();
         string? userid = Request.Cookies["userID"];
         user.UserId = Convert.ToInt32(userid);
-        int cartCounter=0;
+
 
         if (userid != null)
         {

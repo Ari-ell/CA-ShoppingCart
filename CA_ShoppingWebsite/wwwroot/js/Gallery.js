@@ -55,7 +55,8 @@ function on_input(event) {
    
 }
 function on_myCart_click(event) {
-    console.log(event.target.value);
+
+    window.location.replace('/cart');
  
 }
 function on_search_click(event) {
