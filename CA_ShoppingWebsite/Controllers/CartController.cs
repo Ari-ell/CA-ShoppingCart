@@ -23,7 +23,7 @@ public class CartController : Controller
             ViewBag.userId = userId;
 
             ProductList = Data.CartItemData.GetProductList(userId);
-            ViewBag.cartItems = ProductList;
+            ViewBag.cartItem = ProductList;
         }
         //else {
 
