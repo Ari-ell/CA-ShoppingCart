@@ -1,4 +1,102 @@
-﻿@page
+﻿@model CartItem
 @{
+    ViewData["Title"] = "GetUserCart";
+    var products = (List<Product>)ViewBag.products; //
+
+    List<CartItem> cartItem = ViewBag.CartItem;
+
+    Dictionary<Product, CartItem> ProductList = ViewBag.CartItem;
+
+    //List<Cart> cart = ViewBag.Cart;
+
+    double price;
+    double? total = 0;
 }
 
+<div style="width:90%; margin:auto">
+    <ul class="nav">
+
+        <li class="nav-item">
+            <h2><a class="nav-link disabled">View Cart</a></h2>
+        </li>
+
+        <li class="nav-item">
+            <p><a class="nav-link" href="#">Continue Shopping</a><p>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Checkout</a>
+        </li>
+
+        @for (int i = 0; i < cartItem.Count; i++)
+        {
+            // to get productPrice maybe use dictionary to call object instead
+            // use ProductList()
+            // for each productId in cartItem
+            // Product product = ProductList(productId)
+            // int totalPrice = product.Price * cartItem[i].Quantity
+
+            var totalPrice = products[i].Price * cartItem[i].Quantity;
+            //cart[i].Total = totalPrice;
+            total += totalPrice;
+
+            <li class="nav-item">
+                <h2><a class="nav-link disabled" value=@total>Total:$</a></h2> @* calculate total*@
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="container text-center">
+    <div class="row row-cols-1">
+        @if (Model != null && cartItem != null && cartItem.Count > 0)
+        {
+            // change implementation
+            // for each cartiem in cartItem
+            // product = ProductList(cartItem.productId)
+            // product.Img
+            @foreach (var Item in cartItem)
+            {
+                <div class="col">
+                    <div class="card rounded" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
+                        @foreach (KeyValuePair<Product, CartItem> kvp in ProductList)
+                        {
+                            <img src="../assets/image/@kvp.Key.Img" class="img-fluid mx-auto d-block img-thumbnail" alt="..." width="100" style="margin:0.3rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@kvp.Key.Name</h5>
+                                <p class="card-text">@kvp.Key.Description</p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card-body">
+                        @foreach (KeyValuePair<Product, CartItem> kvp in ProductList)
+                        {
+                            <h5 class="card-title">@kvp.Key.Price</h5>
+
+                            <form>
+                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                                <h5>
+                                    <input type="number" id="number" value="0" />@kvp.Value.Quantity/h5>
+                                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                            </form>
+                        }
+                    </div>
+                </div>
+
+
+
+
+
+            }
+        }
+        else
+        {
+            <h3>Cart is empty.</h3>
+        }
+
+    </div>
+</div>

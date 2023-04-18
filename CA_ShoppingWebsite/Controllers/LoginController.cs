@@ -51,15 +51,18 @@ public class LoginController : Controller
             return Unauthorized();
         }
         else {
-            Console.WriteLine("Done.");
+            if (Request.Cookies["SessionId"] == null) {
 
-            string sessionId = System.Guid.NewGuid().ToString();
-            CookieOptions options = new CookieOptions();
-            options.Expires = DateTime.Now.AddDays(1);
+                string sessionId = System.Guid.NewGuid().ToString();
+                CookieOptions options = new CookieOptions();
+                options.Expires = DateTime.Now.AddDays(1);
+                Response.Cookies.Append("SessionId", sessionId, options);
+
+            }
             Response.Cookies.Append("userID", user.UserId.ToString());
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
-            Response.Cookies.Append("SessionId", sessionId, options);
+   
             hasMarged= MergeCart(user.UserId.ToString());
         }
         if (hasMarged)

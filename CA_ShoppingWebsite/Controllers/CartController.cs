@@ -8,46 +8,69 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
+
 namespace CA_ShoppingWebsite.Controllers;
 
 public class CartController : Controller
 {
     // GET: /<controller>/
-    public IActionResult Index()
-    {
-        // Navbar with "View Cart" and Continue Shopping (Gallery) | Checkout (Purchase History)
-        // Retrieve products from user's cart
-        // Check if user isLoggedIn
-            // if no:
-            // retrieve from Session Object
-                // display in card format on Cart Page
-                // individual price display per product
-                // display quantity of product
-            // if yes:
-            // retrieve from DB
-                // display in card format on Cart Page
-                // individual price display per product
-                // display quantity of product
-        // Total Price display
-            // sum of products (calculate from DB (Query for Price) + Session Object)
-            
-        // Adjust Quantity Dropdown or +-
-        // Check if user isLoggedIn
-            // if no:
-                // Session Object.Add(ProductId), just increment by 1
-            // if yes:
-                // UPDATE Quantity in CartItem Table, increment by 1
+    public IActionResult Index() {
+        Dictionary<Product, int> ProductList = new Dictionary<Product, int>();
 
+        string checkUser = Request.Cookies["userId"];
+        if (checkUser != null) {
+            var userId = Convert.ToInt32(checkUser);
+            ViewBag.userId = userId;
+
+            ProductList = Data.CartItemData.GetProductList(userId);
+            ViewBag.cartItems = ProductList;
+        }
         return View();
+    }
+
+    public int CountCart()
+    {
+        int cartSize;
+
+        // Check if user is logged in
+        User user = new User();
+        string? userid = Request.Cookies["userID"];
+        user.UserId = Convert.ToInt32(userid);
+
+        if (user != null)
+        {
+
+            // CountCart Function
+            // establish connection to DB
+            Console.WriteLine("Connecting to MySQL for Product Data...");
+            MySqlConnection conn = new MySqlConnection(data.cloudDB);
+            conn.Open();
+
+            // check if item exists in cart
+            string userId = user.UserId.ToString()!;
+            string querySql = @"COUNT * FROM cartItem WHERE cartItem.UserId = @userId";
+            MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+            queryCmd.Parameters.AddWithValue("@userId", userId);
+            MySqlDataReader rdr = queryCmd.ExecuteReader();
+
+        } else
+        {
+
+
+
+        }
+
+        return 0;
     }
 
     // from MouseClick
     // Ajax is calling this method
 
     // something like :
-     //<input type = "button"
-     //value="Go Somewhere Else" <-?
-     //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+    //<input type = "button"
+    //value="Go Somewhere Else" <-?
+    //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+    [Route("addToCart")]
     public IActionResult AddProductToCart(int addProductId)
     {
 
@@ -55,14 +78,17 @@ public class CartController : Controller
         User user = new User();
         string? userid = Request.Cookies["userID"];
         user.UserId = Convert.ToInt32(userid);
+        int cartCounter=0;
 
-        if (user.UserId != null) {
+        if (userid != null)
+        {
 
             // AddProductToCart Function
             // establish connection to DB
             MySqlConnection conn = new MySqlConnection(data.cloudDB);
 
-            try {
+            try
+            {
 
                 Console.WriteLine("Connecting to MySQL for Product Data...");
                 conn.Open();
@@ -74,55 +100,71 @@ public class CartController : Controller
                 queryCmd.Parameters.AddWithValue("@addProductId", addProductId);
                 queryCmd.Parameters.AddWithValue("@userId", userId);
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
-
+                string sqlQuery = "";
                 // if item already exists in cart, first item in DB
-                if (rdr.GetValue(0) != null) {
+                if (rdr.HasRows)
+                {
 
                     Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
-                    string updateSql = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId}";
-                    MySqlCommand updateCmd = new MySqlCommand(updateSql, conn);
+                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId} and UserId = {Convert.ToInt32(userId)}";
+                    //MySqlCommand updateCmd = new MySqlCommand(sqlQuery, conn);
 
-                    updateCmd.ExecuteNonQuery();
+
 
                     // if item doesn't exist in cart, create new reccord
-                } else {
+                }
+                else
+                {
 
                     Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
-                    string insertSql = @"INSERT INTO cartitem VALUES (@userId, @addProductId}, 1)";
-                    MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
-                    insertCmd.Parameters.AddWithValue("@userId", userId);
-                    insertCmd.Parameters.AddWithValue("@addProductId", addProductId);
+                    sqlQuery = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({Convert.ToInt32(userId)}, {Convert.ToInt32(addProductId)}, 1)";
 
-                    insertCmd.ExecuteNonQuery();
+
 
                 }
-
                 rdr.Close();
-            } catch (Exception ex) {
+                MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
+                MySqlDataReader res = insertCmd.ExecuteReader();
+                res.Close();
+            
+                conn.Close();
+
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.ToString());
             };
 
-        } else {
+        }
+        else
+        {
+            string? cookieQuantity = Request.Cookies[addProductId.ToString()];
+            //string cookieQuantity = Request.Cookies[$"{addProductId}"]
 
-            if (Request.Cookies[$"{addProductId}"] != null) {
 
-                Response.Cookies.Append($"{addProductId}", "1");
+            // check if product is present in cookies
+            if (cookieQuantity != null)
+            {
 
-                int? newQuantity = HttpContext.Session.GetInt32(addProductId.ToString());
-                // some weird method to convert int? to int
-                HttpContext.Session.SetInt32(addProductId.ToString(), newQuantity.GetValueOrDefault());
+                int? productQuantity = Convert.ToInt32(cookieQuantity);
+                // if yes, add 1 to value
+                Response.Cookies.Append($"{addProductId}", $"{productQuantity + 1}");
 
-            } else {
+            }
+            else
+            {
 
                 // add product to Session Object Cart, set quantity to 1
-                HttpContext.Session.SetInt32((addProductId.ToString()), 1);
+                Response.Cookies.Append($"{addProductId}", "1");
 
             }
 
+            
         }
-
         // I don't think it returns a view. partial view?
-        return View();
+      
+        return Ok();
+
     }
 
     // [Start]

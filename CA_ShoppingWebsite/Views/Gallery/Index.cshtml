@@ -5,6 +5,7 @@
 
     var products = (List<Product>)ViewBag.products;
     var user = (User)ViewBag.users;
+    var qty = ViewBag.carQty;
 
 }
 @section Scripts
@@ -45,7 +46,7 @@
             <button type="button" class="btn btn-outline-success btn-sm cartBtn">
                 <img src="/assets/icons/cart-check-fill.svg" alt="Bootstrap" width="22" height="22">
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    1
+                    @qty
                 </span>
             </button>
         </li>
@@ -103,7 +104,8 @@
                         <h5 class="card-title">@product.Name</h5>
                         <p hidden class="productId"> @product.ProductId</p>
                         <p class="card-text">@product.Description</p>
-                        <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")</button>
+                        <p>@product.ProductId</p>
+                        <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")<p hidden>@product.ProductId</p></button>
                         @* Need to add in the review bar*@
                     </div>
                 </div>
