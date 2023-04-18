@@ -20,12 +20,12 @@ public class ProductData
             {
                 var product = new Models.Product
                 {
+                    ProductId = (string)reader["ProductId"],
                     Name = (string)reader["Name"],
                     Description = (string)reader["Description"],
                     Img = (string)reader["Img"],
                     Price = (int)reader["Price"],
-                    ReviewRating = (int)reader["ReviewRating"],
-                    ProductId = (string)reader["ProductId"]
+                    //ReviewRating = (int)reader["ReviewRating"],
                 };
                 products.Add(product);
             }

@@ -97,12 +97,15 @@ public class CartController : Controller
                 {
 
                     Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({user.UserId}, {addProductId}, 1)";
+                    sqlQuery = @"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES (@user.UserId, @addProductId, 1)";
 
                 }
                 rdr.Close();
                 MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
+                insertCmd.Parameters.AddWithValue("@user.UserId", @user.UserId);
+                insertCmd.Parameters.AddWithValue("@addProductId", @addProductId);
                 MySqlDataReader res = insertCmd.ExecuteReader();
+
                 res.Close();
             
                 conn.Close();
