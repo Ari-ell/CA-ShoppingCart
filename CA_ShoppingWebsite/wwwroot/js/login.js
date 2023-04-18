@@ -75,12 +75,12 @@ function redirect() {
 
 }
 
-$(document).ajaxComplete(function (event, xhr, settings) {
-        var win = window;
-        while (win != win.top) {
-            win = win.top;
-        }
-        win.location.href = "/gallery";
+//$(document).ajaxComplete(function (event, xhr, settings) {
+//        var win = window;
+//        while (win != win.top) {
+//            win = win.top;
+//        }
+//        win.location.href = "/gallery";
   
-});
+//});
 
