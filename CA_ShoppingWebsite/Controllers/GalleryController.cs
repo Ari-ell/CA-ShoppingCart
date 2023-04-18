@@ -24,17 +24,17 @@ public class GalleryController : Controller
         options.Expires = DateTime.Now.AddDays(1);
         Response.Cookies.Append("SessionId", sessionId, options);
 
-        string userid = Request.Cookies["userID"];
+        string userId = Request.Cookies["userID"];
         string username = Request.Cookies["username"];
         string name = Request.Cookies["name"];
         user.Name = name;
-        user.UserId = userid;
+        user.UserId = userId;
         user.Username = username;
         var products = Data.ProductData.GetAllProducts();
         
         ViewBag.products = Search(keyword, products!);
        
-        ViewBag.carQty = checkQty(this.Request,userid);
+        ViewBag.carQty = checkQty(this.Request, userId);
 
         return View();
     }

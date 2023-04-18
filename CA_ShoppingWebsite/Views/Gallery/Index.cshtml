@@ -104,19 +104,23 @@
                         <h5 class="card-title">@product.Name</h5>
                         <p hidden class="productId"> @product.ProductId</p>
                         <p class="card-text">@product.Description</p>
-
-                        <div class="rate">
-                            @*for rating*@
-
-                            <span class="fa fa-star @(product.ReviewRating > 0 ? "checked" : "")"></span>
-                            <span class="fa fa-star @(product.ReviewRating > 1 ? "checked" : "")"></span>
-                            <span class="fa fa-star @(product.ReviewRating > 2 ? "checked" : "")"></span>
-                            <span class="fa fa-star @(product.ReviewRating > 3 ? "checked" : "")"></span>
-                            <span class="fa fa-star @(product.ReviewRating > 4 ? "checked" : "")"></span>
-                        </div>
-                 
+                        @if (product.ReviewRating == 0)
+                            {
+                                <div class="text-center">
+                                <p> <small> No reviews yet..</small></p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="rate">
+                                    <span class="fa fa-star @(product.ReviewRating > 0 ? "checked" : "")"></span>
+                                    <span class="fa fa-star @(product.ReviewRating > 1 ? "checked" : "")"></span>
+                                    <span class="fa fa-star @(product.ReviewRating > 2 ? "checked" : "")"></span>
+                                    <span class="fa fa-star @(product.ReviewRating > 3 ? "checked" : "")"></span>
+                                    <span class="fa fa-star @(product.ReviewRating > 4 ? "checked" : "")"></span>
+                                </div>
+                            }
                         <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")<p hidden>@product.ProductId</p></button>
-                        @* Need to add in the review bar*@
                     </div>
                 </div>
             </div>
