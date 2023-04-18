@@ -88,7 +88,7 @@ public class CartController : Controller
                 {
 
                     Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId} and UserId = {user.UserId}";
+                    sqlQuery = @"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = @addProductId and UserId = @user.UserId";
                     //MySqlCommand updateCmd = new MySqlCommand(sqlQuery, conn);
                     // if item doesn't exist in cart, create new reccord
 
