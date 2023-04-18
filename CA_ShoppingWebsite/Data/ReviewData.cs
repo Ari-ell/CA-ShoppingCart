@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 namespace CA_ShoppingWebsite.Data
 {
 	public class ReviewData
@@ -19,6 +20,28 @@ namespace CA_ShoppingWebsite.Data
 		{
 
 		}
-	}
+
+        public static int GetProductRating(string productId)
+        {
+
+            int averageRating = 0;
+            using (var conn = new MySqlConnection(data.cloudDB))
+            {
+
+                conn.Open();
+
+                string sql = @"SELECT AVG(Rating) FROM review WHERE ProductId= @productId;";
+
+                var cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@productId", productId);
+
+                averageRating = Convert.ToInt32((cmd.ExecuteScalar()==DBNull.Value ? null : cmd.ExecuteScalar()));
+
+                conn.Close();
+            }
+
+            return averageRating;
+        }
+    }
 }
 

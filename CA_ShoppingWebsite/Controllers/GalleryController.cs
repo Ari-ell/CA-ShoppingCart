@@ -31,6 +31,7 @@ public class GalleryController : Controller
         user.UserId = userid;
         user.Username = username;
         var products = Data.ProductData.GetAllProducts();
+        
         ViewBag.products = Search(keyword, products!);
        
         ViewBag.carQty = checkQty(this.Request,userid);
