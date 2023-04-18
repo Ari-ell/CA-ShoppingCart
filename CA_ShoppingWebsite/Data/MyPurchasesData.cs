@@ -45,8 +45,8 @@ public class MyPurchaseData
 		return myPurchases;
 	}
 
-    // Returns a dictionary with key as the purchase Id and
-	// value being a list of activation codes for the key 
+    // Returns a dictionary with purchase Id as key and
+    // list of activation codes as value
     public static Dictionary<string, List<string>> GetActivationCodes(string userId)
 	{
 		var actvCodes = new Dictionary<string, List<string>>();

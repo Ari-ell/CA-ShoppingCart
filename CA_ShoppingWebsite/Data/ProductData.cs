@@ -25,7 +25,7 @@ public class ProductData
                     Description = (string)reader["Description"],
                     Img = (string)reader["Img"],
                     Price = (int)reader["Price"],
-                    //ReviewRating = (int)reader["ReviewRating"],
+                    //ReviewRating = (int)reader["ReviewRating"], // can be removed?? --> To check w Channing
                 };
                 products.Add(product);
             }

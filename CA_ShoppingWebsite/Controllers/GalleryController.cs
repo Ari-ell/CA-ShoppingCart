@@ -46,35 +46,27 @@ public class GalleryController : Controller
             //Count Qty
             MySqlConnection conn = new MySqlConnection(data.cloudDB);
             conn.Open();
-            string countQuery = $"SELECT sum(Quantity) FROM cartItem WHERE UserId = @userId;";
+            string countQuery = @"SELECT SUM(Quantity) FROM cartItem WHERE UserId = @userId;";
             MySqlCommand countQty = new MySqlCommand(countQuery, conn);
             countQty.Parameters.AddWithValue("@userid", userId);
             MySqlDataReader resQty = countQty.ExecuteReader();
             resQty.Read();
             cartCounter = Convert.ToInt32(resQty[0]);
             conn.Close();
-
         }
         else {
             if (request.Cookies.Count() > 0)
             {
-
                 foreach (KeyValuePair<string, string> c in request.Cookies)
                 {
                     if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
                     {
                         cartCounter += Convert.ToInt32(c.Value);
                     }
-
                 }
             }
-        
         }
-
-
-
         return cartCounter;
-
     }
 
 

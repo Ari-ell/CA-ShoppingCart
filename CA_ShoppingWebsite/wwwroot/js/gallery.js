@@ -44,8 +44,7 @@ function on_logout_click(event) {
         .then(data => console.log(data))
         .catch(error => console.log(error));
 
-    window.location.replace('/login')
-
+    window.location.replace('/gallery')
 }
 
 function on_input(event) {

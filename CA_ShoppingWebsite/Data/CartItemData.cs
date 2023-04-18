@@ -40,9 +40,7 @@ public class CartItemData {
                 int qty = (int)reader["Quantity"];
 
                 ProductList.Add(product, qty);
-
             }
-
             connection.Close();
         }
         return ProductList;

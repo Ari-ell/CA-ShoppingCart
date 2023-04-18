@@ -72,7 +72,6 @@ public class CartController : Controller
 
             try
             {
-
                 Console.WriteLine("Connecting to MySQL for Product Data...");
                 conn.Open();
 
@@ -83,22 +82,18 @@ public class CartController : Controller
                 queryCmd.Parameters.AddWithValue("@userId", user.UserId);
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
                 string sqlQuery = "";
-                // if item already exists in cart, first item in DB
-                if (rdr.HasRows)
+                
+                if (rdr.HasRows) // if item already exists in cart, update record quantity
                 {
 
                     Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
                     sqlQuery = @"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = @addProductId and UserId = @user.UserId";
-                    //MySqlCommand updateCmd = new MySqlCommand(sqlQuery, conn);
-                    // if item doesn't exist in cart, create new reccord
-
+                    
                 }
-                else
+                else // if item doesn't exist in cart, create new record
                 {
-
                     Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
                     sqlQuery = @"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES (@user.UserId, @addProductId, 1)";
-
                 }
                 rdr.Close();
                 MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
@@ -107,15 +102,12 @@ public class CartController : Controller
                 MySqlDataReader res = insertCmd.ExecuteReader();
 
                 res.Close();
-            
                 conn.Close();
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             };
-
         }
         else
         {
@@ -123,26 +115,18 @@ public class CartController : Controller
             // check if product is present in cookies
             if (cookieQuantity != null)
             {
-
                 int? productQuantity = Convert.ToInt32(cookieQuantity);
                 // if yes, add 1 to value
                 Response.Cookies.Append($"{addProductId}", $"{productQuantity + 1}");
-
             }
             else
             {
-
                 // add product to Session Object Cart, set quantity to 1
                 Response.Cookies.Append($"{addProductId}", "1");
-
             }
-
-            
         }
-
         // Ok response to browser, not View()
         return Ok();
-
     }
 
     // [Start]
