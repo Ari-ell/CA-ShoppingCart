@@ -32,6 +32,7 @@ public class MyPurchaseData
 			while (reader.Read())
 			{
 				var purchase = new Models.PurchaseOrder() {
+					UserId = userId,
 					PurchaseId = (string)reader["PurchaseId"],
 					ProductId = (int)reader["ProductId"],
 					PurchaseQty = (int)reader["PurchaseQty"],
@@ -68,14 +69,15 @@ public class MyPurchaseData
             {
 				var ActivationCode = (string)reader["ActivationCode"];
 				var PurchaseId = (string)reader["PurchaseId"];
-				if (!actvCodes.ContainsKey(PurchaseId))
-				{
-					actvCodes[PurchaseId] = new List<string>();
-				}
-				else
+				if (actvCodes.ContainsKey(PurchaseId))
 				{
 					actvCodes[PurchaseId].Add(ActivationCode);
 				}
+				else
+				{
+					actvCodes[PurchaseId] = new List<string>();
+                    actvCodes[PurchaseId].Add(ActivationCode);
+                }
 			}
 			conn.Close();
         }

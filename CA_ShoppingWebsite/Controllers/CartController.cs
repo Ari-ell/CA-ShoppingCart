@@ -28,6 +28,7 @@ public class CartController : Controller
         return View();
     }
 
+    // CountCart Function
     public int CountCart()
     {
         int cartSize;
@@ -40,7 +41,6 @@ public class CartController : Controller
         if (user != null)
         {
 
-            // CountCart Function
             // establish connection to DB
             Console.WriteLine("Connecting to MySQL for Product Data...");
             MySqlConnection conn = new MySqlConnection(data.cloudDB);
@@ -185,18 +185,18 @@ public class CartController : Controller
     {
         // Check if user is logged in
         var getUserId = Request.Cookies["userId"];
-
-        // Redirect to Login if not logged in
-        // Need to redirect back to cart once logged in?
-        if (getUserId == null)
-            return RedirectToAction("Index", "Login");
+        var userId = Convert.ToInt32(getUserId);
 
         // Complete check out procedure and redirect to myPurchases
-        else {
-            var userId = Convert.ToInt32(getUserId);
+        if (getUserId != null)
+        {
             Data.CartData.CheckOutUser(userId);
-
             return RedirectToAction("Index", "MyPurchases");
+        }
+        // Redirect to Login if not logged in
+        // Need to redirect back to cart once logged in?
+        else {
+            return RedirectToAction("Index", "Login");
         }
     }
 
