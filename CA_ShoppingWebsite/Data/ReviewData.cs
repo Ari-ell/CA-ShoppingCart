@@ -5,7 +5,7 @@ namespace CA_ShoppingWebsite.Data
 	{
 		// Get user reviews for individual products
 		// Store in a dictionary w key-value pairs of produt-review
-		public static Dictionary<int,int>? GetUserReviews(int userId)
+		public static Dictionary<int,int>? GetUserReviews(string userId)
 		{
 			var userReviews = new Dictionary<int, int>();
 

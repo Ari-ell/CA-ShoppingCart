@@ -12,7 +12,7 @@ namespace CA_ShoppingWebsite.Data;
 
 public class CartItemData {
 
-    public static Dictionary<Product, int> GetProductList(int userId) {
+    public static Dictionary<Product, int> GetProductList(string userId) {
         Dictionary<Product, int> ProductList = new Dictionary<Product, int>();
 
         using (var connection = new MySqlConnection(data.cloudDB)) {
@@ -32,7 +32,7 @@ public class CartItemData {
             while (reader.Read()) {
                 Product product = new Product();
 
-                product.ProductId = (int)reader["ProductId"];
+                product.ProductId = (string)reader["ProductId"];
                 product.Img = (string)reader["Img"];
                 product.Name = (string)reader["Name"];
                 product.Description = (string)reader["Description"];

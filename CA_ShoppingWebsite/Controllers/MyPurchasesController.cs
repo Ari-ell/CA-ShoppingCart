@@ -18,7 +18,7 @@ public class MyPurchasesController : Controller
         if (checkUser != null)
         {
             // Returns the userID whose MyPurchases page will be loaded
-            var userId = Convert.ToInt32(checkUser);
+            var userId = checkUser;
 
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);

@@ -12,7 +12,7 @@ public class CartData
     // 2. Add PO list iteratively to PO records
     // 3. Add into PList records with actvCode
     // 4. Clear cart items
-    public static void CheckOutUser(int userId)
+    public static void CheckOutUser(string userId)
     {
         Console.WriteLine("Starting checkout..");
 
@@ -81,7 +81,7 @@ public class CartData
 
     // Get a list of POs based on matching
     // the userId to a cartId
-    public static List<Models.PurchaseOrder> GetPoList(int userId)
+    public static List<Models.PurchaseOrder> GetPoList(string userId)
     {
         var poList = new List<Models.PurchaseOrder>();
         var curDate = GetCurrentDate();
@@ -104,7 +104,7 @@ public class CartData
                 {
                     PurchaseId = purchaseId.ToString(),
                     UserId = userId,
-                    ProductId = (int)reader["ProductId"],
+                    ProductId = (string)reader["ProductId"],
                     PurchaseQty = (int)reader["Quantity"],
                     PurchaseDate = curDate
                 };

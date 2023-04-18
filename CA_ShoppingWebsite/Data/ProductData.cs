@@ -25,7 +25,7 @@ public class ProductData
                     Img = (string)reader["Img"],
                     Price = (int)reader["Price"],
                     ReviewRating = (int)reader["ReviewRating"],
-                    ProductId = (int)reader["ProductId"]
+                    ProductId = (string)reader["ProductId"]
                 };
                 products.Add(product);
             }
@@ -39,13 +39,12 @@ public class ProductData
 		return null;
 	}
 
-
     // Get product details to be displayed on MyPurchases view
     // Returns a dictionary of relevant product info
     // with product as the key to matched against PurchaseOrder
-    public static Dictionary<int, Product>? GetProductDetails(int userId)
+    public static Dictionary<string, Product>? GetProductDetails(string userId)
 	{
-        var products = new Dictionary<int,Product>();
+        var products = new Dictionary<string,Product>();
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
@@ -54,7 +53,7 @@ public class ProductData
                         WHERE Product.ProductId IN
                             (SELECT PurchaseOrder.ProductId
                             FROM PurchaseOrder
-                            WHERE PurchaseOrder.UserId = 1);";
+                            WHERE PurchaseOrder.UserId = @userId);";
 
             var cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@userId",userId);
@@ -69,7 +68,7 @@ public class ProductData
                     Img = (string)reader["Img"],
                     //Price = (double)reader["Price"],
                 };
-                var productId = (int)reader["ProductId"];
+                var productId = (string)reader["ProductId"];
                 if (!products.ContainsKey(productId))
                     products[productId] = product;
             }

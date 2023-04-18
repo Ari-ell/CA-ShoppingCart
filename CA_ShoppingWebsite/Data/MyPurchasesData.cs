@@ -16,7 +16,7 @@ public class MyPurchaseData
 	/// and product with qty and activation code combo box
 	/// </summary>
 
-	public static List<Models.PurchaseOrder> GetPurchaseOrders(int userId)
+	public static List<Models.PurchaseOrder> GetPurchaseOrders(string userId)
 	{
 		var myPurchases = new List<Models.PurchaseOrder>();
 		using (var conn = new MySqlConnection(data.cloudDB))
@@ -34,7 +34,7 @@ public class MyPurchaseData
 				var purchase = new Models.PurchaseOrder() {
 					UserId = userId,
 					PurchaseId = (string)reader["PurchaseId"],
-					ProductId = (int)reader["ProductId"],
+					ProductId = (string)reader["ProductId"],
 					PurchaseQty = (int)reader["PurchaseQty"],
 					PurchaseDate = (string)reader["PurchaseDate"]
 				};
@@ -47,7 +47,7 @@ public class MyPurchaseData
 
     // Returns a dictionary with key as the purchase Id and
 	// value being a list of activation codes for the key 
-    public static Dictionary<string, List<string>> GetActivationCodes(int userId)
+    public static Dictionary<string, List<string>> GetActivationCodes(string userId)
 	{
 		var actvCodes = new Dictionary<string, List<string>>();
 

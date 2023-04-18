@@ -39,7 +39,7 @@ public class UserData
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                user.UserId = (int)rdr[0];
+                user.UserId = (string)rdr[0];
                 user.Username = rdr[1].ToString();
                 user.Name = rdr[3].ToString();
             }

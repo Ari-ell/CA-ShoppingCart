@@ -24,21 +24,21 @@ public class GalleryController : Controller
         options.Expires = DateTime.Now.AddDays(1);
         Response.Cookies.Append("SessionId", sessionId, options);
 
-
         string userid = Request.Cookies["userID"];
         string username = Request.Cookies["username"];
         string name = Request.Cookies["name"];
         user.Name = name;
-        user.UserId = Convert.ToInt32( userid);
+        user.UserId = userid;
         user.Username = username;
         var products = Data.ProductData.GetAllProducts();
-        ViewBag.products = Search(keyword, products);
+        ViewBag.products = Search(keyword, products!);
        
         ViewBag.carQty = checkQty(this.Request,userid);
 
         return View();
     }
 
+    // need to read and understand
     public static int checkQty(HttpRequest request, string userId) {
 
         int cartCounter = 0;
@@ -46,7 +46,7 @@ public class GalleryController : Controller
             //Count Qty
             MySqlConnection conn = new MySqlConnection(data.cloudDB);
             conn.Open();
-            string countQuery = $"SELECT sum(Quantity) FROM cartItem WHERE UserId = {Convert.ToInt32(userId)}";
+            string countQuery = $"SELECT sum(Quantity) FROM cartItem WHERE UserId = {userId}";
             MySqlCommand countQty = new MySqlCommand(countQuery, conn);
             MySqlDataReader resQty = countQty.ExecuteReader();
             resQty.Read();

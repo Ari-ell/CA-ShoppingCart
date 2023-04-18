@@ -55,11 +55,11 @@ public class LoginController : Controller
                 Response.Cookies.Append("SessionId", sessionId, options);
 
             }
-            Response.Cookies.Append("userID", user.UserId.ToString());
+            Response.Cookies.Append("userID", user.UserId);
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
    
-            hasMerged= MergeCart(user.UserId.ToString());
+            hasMerged= MergeCart(user.UserId);
         }
         if (hasMerged)
         {
@@ -103,7 +103,7 @@ public class LoginController : Controller
                     if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
                     {
 
-                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = {c.Key} and UserId ={Convert.ToInt32(userId)}";
+                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = {c.Key} and UserId ={userId}";
                         var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
                         MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -117,14 +117,14 @@ public class LoginController : Controller
                         {
 
                             // Insert the key value pair into the cartitem database
-                            updateQuantitySql = $"UPDATE cartitem SET Quantity = {quantity} + {Convert.ToInt32(c.Value)} WHERE ProductId = {Convert.ToInt32(c.Key)} and UserId ={Convert.ToInt32(userId)}";
+                            updateQuantitySql = $"UPDATE cartitem SET Quantity = {quantity} + {c.Value} WHERE ProductId = {c.Key} and UserId ={userId}";
 
                         }
                         else
                         {
 
                             // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
-                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({Convert.ToInt32(userId)},{Convert.ToInt32(c.Key)},{Convert.ToInt32(c.Value)}) ";
+                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({userId},{c.Key},{c.Value}) ";
 
 
                         }

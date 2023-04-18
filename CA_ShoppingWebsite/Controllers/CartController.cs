@@ -55,17 +55,17 @@ public class CartController : Controller
     //value="Go Somewhere Else" <-?
     //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
     [Route("addToCart")]
-    public IActionResult AddProductToCart(int addProductId)
+    public IActionResult AddProductToCart(string addProductId)
     {
 
         // Check if user is logged in
         User user = new User();
         string? userid = Request.Cookies["userID"];
-        user.UserId = Convert.ToInt32(userid);
-
 
         if (userid != null)
         {
+
+            user.UserId = userid;
 
             // AddProductToCart Function
             // establish connection to DB
@@ -78,11 +78,10 @@ public class CartController : Controller
                 conn.Open();
 
                 // check if item exists in cart
-                string userId = user.UserId.ToString()!;
                 string querySql = @"SELECT * FROM cartItem WHERE cartItem.ProductId = @addProductId AND cartItem.UserId = @userId";
                 MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
                 queryCmd.Parameters.AddWithValue("@addProductId", addProductId);
-                queryCmd.Parameters.AddWithValue("@userId", userId);
+                queryCmd.Parameters.AddWithValue("@userId", user.UserId);
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
                 string sqlQuery = "";
                 // if item already exists in cart, first item in DB
@@ -90,20 +89,16 @@ public class CartController : Controller
                 {
 
                     Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId} and UserId = {Convert.ToInt32(userId)}";
+                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = {addProductId} and UserId = {user.UserId}";
                     //MySqlCommand updateCmd = new MySqlCommand(sqlQuery, conn);
-
-
-
                     // if item doesn't exist in cart, create new reccord
+
                 }
                 else
                 {
 
                     Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({Convert.ToInt32(userId)}, {Convert.ToInt32(addProductId)}, 1)";
-
-
+                    sqlQuery = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({user.UserId}, {addProductId}, 1)";
 
                 }
                 rdr.Close();
@@ -122,10 +117,7 @@ public class CartController : Controller
         }
         else
         {
-            string? cookieQuantity = Request.Cookies[addProductId.ToString()];
-            //string cookieQuantity = Request.Cookies[$"{addProductId}"]
-
-
+            string? cookieQuantity = Request.Cookies[addProductId];
             // check if product is present in cookies
             if (cookieQuantity != null)
             {
@@ -145,8 +137,8 @@ public class CartController : Controller
 
             
         }
-        // I don't think it returns a view. partial view?
-      
+
+        // Ok response to browser, not View()
         return Ok();
 
     }
@@ -154,7 +146,7 @@ public class CartController : Controller
     // [Start]
     // If user is logged in, will redirect to myPurchases view
     // If not logged in, will redirect to login page to log in
-    //      Upon succesfull log in, will re-direct back to Cart to checkout
+    // Upon succesfull log in, will re-direct back to Cart to checkout
     // If unsucessful, will catch and show exception msg
     // [Checkout procedure]
     // Once checkout is clicked, all CartItem products (for specified user)
@@ -169,12 +161,11 @@ public class CartController : Controller
     {
         // Check if user is logged in
         var getUserId = Request.Cookies["userId"];
-        var userId = Convert.ToInt32(getUserId);
 
         // Complete check out procedure and redirect to myPurchases
         if (getUserId != null)
         {
-            Data.CartData.CheckOutUser(userId);
+            Data.CartData.CheckOutUser(getUserId);
             return RedirectToAction("Index", "MyPurchases");
         }
         // Redirect to Login if not logged in
