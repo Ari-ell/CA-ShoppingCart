@@ -2,7 +2,7 @@
 
     ViewData["Title"] = "My Purchases";
     var myPurchases = (List<PurchaseOrder>)ViewBag.myPurchases;
-    var myProducts = (Dictionary<int, Product>)ViewBag.myProducts;
+    var myProducts = (Dictionary<string, Product>)ViewBag.myProducts;
     var myActivationCodes = (Dictionary<string, List<string>>)ViewBag.myActivationCodes;
     var myReviews = (Dictionary<int, int>)ViewBag.myReviews;
 }
@@ -39,11 +39,11 @@
             <div class="d-flex flex-row card mb-3" id="purchase-card">
 
                 <div class="card-body p-2">
-                    <img src= "../assets/image/@myProducts[(int)purchase.ProductId].Img" class="card-img-top" alt="...">
+                    <img src= "../assets/image/@myProducts[(string)purchase.ProductId].Img" class="card-img-top" alt="...">
                 </div>
                 <div class="container d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title" id="Product Name">@myProducts[(int)purchase.ProductId].Name</h5>
-                    <p class="card-text" id="Product Description">@myProducts[(int)purchase.ProductId].Description</p>
+                    <h5 class="card-title" id="Product Name">@myProducts[(string)purchase.ProductId].Name</h5>
+                    <p class="card-text" id="Product Description">@myProducts[(string)purchase.ProductId].Description</p>
                     <button type="button" class="btn btn-block dl-btn ">
                         Download here
                         <i class="bi bi-download"></i>

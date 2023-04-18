@@ -17,10 +17,9 @@ public class CartController : Controller
     public IActionResult Index() {
         Dictionary<Product, int> ProductList = new Dictionary<Product, int>();
 
-        string checkUser = Request.Cookies["userId"];
-        if (checkUser != null)
+        string userId = Request.Cookies["userId"];
+        if (userId != null)
         {
-            var userId = Convert.ToInt32(checkUser);
             ViewBag.userId = userId;
 
             ProductList = Data.CartItemData.GetProductList(userId);
