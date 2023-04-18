@@ -73,8 +73,7 @@ function on_add_click(event) {
 
     fetch('addToCart?' + new URLSearchParams({
         addProductId: value
-    })).then(data => data.text())
-        .then((text) => {
+    })).then((text) => {
             console.log('request succeeded with JSON response', text)
             window.location.replace("/");
 

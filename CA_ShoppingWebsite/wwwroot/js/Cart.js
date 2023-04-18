@@ -1,71 +1,61 @@
-$('.btn-number').click(function (e) {
-    e.preventDefault();
+window.onload = function () {
+    page_start();
 
-    fieldName = $(this).attr('data-field');
-    type = $(this).attr('data-type');
-    var input = $("input[name='" + fieldName + "']");
-    var currentVal = parseInt(input.val());
-    if (!isNaN(currentVal)) {
-        if (type == 'minus') {
+}
 
-            if (currentVal > input.attr('min')) {
-                input.val(currentVal - 1).change();
-            }
-            if (parseInt(input.val()) == input.attr('min')) {
-                $(this).attr('disabled', true);
-            }
+function page_start() {
 
-        } else if (type == 'plus') {
+    add_click_listeners();
 
-            if (currentVal < input.attr('max')) {
-                input.val(currentVal + 1).change();
-            }
-            if (parseInt(input.val()) == input.attr('max')) {
-                $(this).attr('disabled', true);
-            }
+}
 
-        }
-    } else {
-        input.val(0);
+// listen to mouse-clicks
+function add_click_listeners() {
+
+    let minus = document.getElementsByClassName("minusBtn");
+    minus[0].addEventListener('click', on_minus_click);
+
+    let plus = document.getElementsByClassName("plusBtn");
+    plus[0].addEventListener('click', on_plus_click);
+
+}
+
+function on_plus_click(event) {
+    let ele = event.currentTarget.parentNode;
+    let qty = 0;
+    qty = parseInt(ele.children[1].defaultValue) + 1;
+
+    var productID = ele.children[2].innerText;
+    fetchController(qty, productID);
+    //int qty, string userID, string productID
+
+
+}
+function on_minus_click(event) {
+    let ele = event.currentTarget.parentNode;
+    let qty = 0;
+    qty = parseInt(ele.children[1].defaultValue) - 1;
+    var productID = ele.children[2].innerText;
+    fetchController(qty, productID);
+
+}
+async function fetchController(qty, productID) {
+    if (qty >0) {
+
+        await fetch('editQty?' + new URLSearchParams({
+            qty: qty,
+            productID: productID
+
+        })).then((text) => {
+            console.log('request succeeded with JSON response', text)
+
+
+        }).catch(function (error) {
+            console.log('request failed', error)
+        });
+
     }
-});
-$('.input-number').focusin(function () {
-    $(this).data('oldValue', $(this).val());
-});
-$('.input-number').change(function () {
-
-    minValue = parseInt($(this).attr('min'));
-    maxValue = parseInt($(this).attr('max'));
-    valueCurrent = parseInt($(this).val());
-
-    name = $(this).attr('name');
-    if (valueCurrent >= minValue) {
-        $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the minimum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-    if (valueCurrent <= maxValue) {
-        $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the maximum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
 
 
-});
-$(".input-number").keydown(function (e) {
-    // Allow: backspace, delete, tab, escape, enter and .
-    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-        // Allow: Ctrl+A
-        (e.keyCode == 65 && e.ctrlKey === true) ||
-        // Allow: home, end, left, right
-        (e.keyCode >= 35 && e.keyCode <= 39)) {
-        // let it happen, don't do anything
-        return;
-    }
-    // Ensure that it is a number and stop the keypress
-    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-        e.preventDefault();
-    }
-});
+    window.location.replace("/cart");
+}

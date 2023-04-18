@@ -23,7 +23,7 @@
         </li>
 
         <li class="nav-item">
-            <p><a class="nav-link" href="#">Home</a><p>
+            <p><a class="nav-link" href="/">Home</a><p>
 
         </li>
 		
@@ -31,7 +31,7 @@
             <p><a class="nav-link" href="/Gallery/Index">Continue Shopping</a><p>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">Checkout</a>
+            <a class="nav-link" href="/MyPurchases">Checkout</a>
         </li>
         @foreach (KeyValuePair<Product, int> i in cartItem)
         {
@@ -54,45 +54,6 @@
 <div class="container text-center">
         @if (cartItem != null && cartItem.Count > 0)
         {
-             <div>
-                @foreach (KeyValuePair<Product, int> kvp in cartItem)
-                {
-                    <div class="row">
-                        <div class="col card rounded" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
-                            <img src="../assets/image/@kvp.Key.Img" class="img-fluid mx-auto d-block img-thumbnail" alt="..." width="100" style="margin:0.3rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">@kvp.Key.Name</h5>
-                                <p class="card-text">@kvp.Key.Description</p>
-                            </div>
-
-                        </div>
-
-                        <div class="col">
-                            <div class="card-body d-flex align-items-start flex-column">
-                            
-                                <h5 class="card-title">Price : @kvp.Key.Price</h5>
-                                <div class="d-flex flex-wrap justify-conten-start">
-                                    <h5>Quantity :</h5>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                                            <i class="fa fa-minus" aria-hidden="true"></i>              
-                                        </button>
-                                    </span>
-
-                                    <input type="text" style="width:15%" name=" quant[2]" class="form-control input-number" value="10" min="1" max="100">
-
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                        </button>
-                                    </span>
-                                </div>                           
-                            </div>
-                       </div>
-
-                    </div>
-                }
-                </div>
 
            @foreach (KeyValuePair<Product, int> kvp in cartItem)
                {
@@ -120,19 +81,20 @@
                                     <p>Price: $@price</p>
                                 </div>
              
-                                 <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </button>
-                                        </span>
-                                        <input type="text" name="quant[2]" class="form-control input-number" value=@kvp.Value>
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                        </span>
-                                    </div>
+                                <div class="input-group">
+
+                                    <button type="button" class="btn btn-danger btn-number minusBtn">
+
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+
+                                    <input type="text" name="quant[2]" class="form-control input-number" value=@kvp.Value>
+                                    <p hidden>@kvp.Key.ProductId</p>
+                                    <button type="button" class="btn btn-success btn-number plusBtn" data-type="plus" data-field="quant[2]">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+
+                                </div>
                                  
                                 </div>
                             </div>

@@ -25,26 +25,86 @@ public class CartController : Controller
             ProductList = Data.CartItemData.GetProductList(userId);
             ViewBag.cartItem = ProductList;
         }
-        //else {
+        else
+        {
 
-        //    if (Request.Cookies.Count() > 0)
-        //    {
+            if (Request.Cookies.Count() > 0)
+            {
+                List<Product> products = Data.CartItemData.products();
 
-        //        foreach (KeyValuePair<string, string> c in Request.Cookies)
-        //        {
-        //            Console.WriteLine(c.Key);
-        //            Console.WriteLine(c.Value);
+                foreach (KeyValuePair<string, string> c in Request.Cookies)
+                {
+                    Console.WriteLine(c.Key);
+                    Console.WriteLine(c.Value);
 
-        //            if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
-        //            {
-        //                ProductList.Add()
+                    if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
+                    {
+                        foreach (var product in products)
+                        {
 
-
-        //            }
-        //        }
-        //    }
+                            if (product.ProductId == c.Key)
+                            {
+                                ProductList.Add(product, Convert.ToInt32(c.Value));
+                            }
+                        }
+                    }
+                }
+                ViewBag.cartItem = ProductList;
+            }
+        }
+      
         return View();
     }
+
+    [Route("editQty")]
+    public IActionResult editQty(int? qty, string? productID)
+    {
+        string userID = Request.Cookies["userID"];
+        if (userID != null)
+        {
+            MySqlConnection conn = new MySqlConnection(data.cloudDB);
+            try
+            {
+                conn.Open();
+
+                // check if item exists in cart
+                string querySql = $"UPDATE cartitem SET quantity = {qty} WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+                MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+                MySqlDataReader rdr = queryCmd.ExecuteReader();
+                conn.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+
+            }
+
+
+        }
+        else
+        {
+            string? cookieQuantity = Request.Cookies[productID];
+            // check if product is present in cookies
+            if (cookieQuantity != null)
+            {
+                int? productQuantity = Convert.ToInt32(cookieQuantity);
+                // if yes, add 1 to value
+                Response.Cookies.Append($"{productID}", $"{qty}");
+            }
+            else
+            {
+                // add product to Session Object Cart, set quantity to 1
+                Response.Cookies.Append($"{productID}", "1");
+            }
+
+        }
+
+
+        return Ok();
+    }
+
 
     // from MouseClick
     // Ajax is calling this method

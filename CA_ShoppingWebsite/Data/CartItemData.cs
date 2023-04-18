@@ -44,5 +44,34 @@ public class CartItemData {
         return ProductList;
     }
 
-}
+
+    public static List<Product> products()
+    {
+        List<Product> ProductList = new List<Product>();
+        using (var connection = new MySqlConnection(data.cloudDB))
+        {
+            connection.Open();
+
+            string sql = $"SELECT p.ProductId, p.Img, p.Name, p.Description, p.Price FROM product p ";
+
+            var cmd = new MySqlCommand(sql, connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Product product = new Product();
+
+                product.ProductId = (string)reader["ProductId"];
+                product.Img = (string)reader["Img"];
+                product.Name = (string)reader["Name"];
+                product.Description = (string)reader["Description"];
+                product.Price = (int)reader["Price"];
+
+                ProductList.Add(product);
+            }
+            connection.Close();
+        }
+        return ProductList;
+    }
+    }
 
