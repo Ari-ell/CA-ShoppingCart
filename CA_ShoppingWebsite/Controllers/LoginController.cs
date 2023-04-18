@@ -32,14 +32,11 @@ public class LoginController : Controller
     public ActionResult ExtractFromBasic()
     {
 
-
-
-
         Request.Headers.TryGetValue("username",out var usernameObj);
         Request.Headers.TryGetValue("password", out var passwordObj);
         string username = usernameObj.ToString();
         string password = passwordObj.ToString();
-        bool hasMarged = false;
+        bool hasMerged = false;
         //string url = "/gallery";
         User user = new Models.User();
         if (username != null && password != null) {
@@ -47,7 +44,6 @@ public class LoginController : Controller
         }
         if (user.UserId == null)
         {
-
             return Unauthorized();
         }
         else {
@@ -63,9 +59,9 @@ public class LoginController : Controller
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
    
-            hasMarged= MergeCart(user.UserId.ToString());
+            hasMerged= MergeCart(user.UserId.ToString());
         }
-        if (hasMarged)
+        if (hasMerged)
         {
             return Ok(user);
 
@@ -88,10 +84,6 @@ public class LoginController : Controller
 
         return Ok();
     }
-
-
-
-
 
     public bool MergeCart(string userId)
     {

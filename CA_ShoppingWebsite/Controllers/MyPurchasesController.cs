@@ -20,7 +20,7 @@ public class MyPurchasesController : Controller
             // Returns the userID whose MyPurchases page will be loaded
             var userId = Convert.ToInt32(checkUser);
 
-            // Gets the user prchase history
+            // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
             ViewBag.myPurchases = myPurchases;
 
