@@ -4,7 +4,6 @@
 
     Dictionary<Product, int> cartItem = ViewBag.cartItem;
 
-
     double? total = 0;
 }
 
@@ -13,15 +12,17 @@
     <script src="/js/Cart.js"></script>
     }
 
-<div style="width:90%; margin:auto">
+<div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-md">
     <ul class="nav">
 
         <li class="nav-item">
-            <h2><a class="nav-link disabled">View Cart</a></h2>
+            <h5><a class="nav-link disabled">View Cart</a></h5>
         </li>
 
         <li class="nav-item">
-            <p><a class="nav-link" href="#">Continue Shopping</a><p>
+            <p><a class="nav-link" href="/Gallery/Index">Continue Shopping</a><p>
         </li>
 
         <li class="nav-item">
@@ -29,21 +30,17 @@
         </li>
         @foreach (KeyValuePair<Product, int> i in cartItem)
         {
-            // to get productPrice maybe use dictionary to call object instead
-            // use ProductList()
-            // for each productId in cartItem
-            // Product product = ProductList(productId)
-            // int totalPrice = product.Price * cartItem[i].Quantity
 
             var totalPrice = i.Key.Price * i.Value;
-            //cart[i].Total = totalPrice;
             total += totalPrice;
         }
-            <li class="nav-item">
-                <h2><a class="nav-link disabled">Total:$ @total</a></h2> @* calculate total*@
-            </li>
+                <li class="nav-item" style="padding-left: 250px">
+            <h5><a class="nav-link disabled">Total:$ @total</a></h5> @* calculate total*@
+        </li>
         
     </ul>
+    </div>
+</nav>
 </div>
 
 
@@ -51,17 +48,11 @@
     <div class="row row-cols-1">
         @if (cartItem != null && cartItem.Count > 0)
         {
-            // change implementation
-            // for each cartiem in cartItem
-            // product = ProductList(cartItem.productId)
-            // product.Img
-
-            <div>
+             <div>
                 @foreach (KeyValuePair<Product, int> kvp in cartItem)
                 {
                     <div class="row">
-                        <div class="col">
-                            <p>@kvp.Key.Img</p>
+                        <div class="col card rounded" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
                             <img src="../assets/image/@kvp.Key.Img" class="img-fluid mx-auto d-block img-thumbnail" alt="..." width="100" style="margin:0.3rem;">
                             <div class="card-body">
                                 <h5 class="card-title">@kvp.Key.Name</h5>
@@ -69,74 +60,33 @@
                             </div>
 
                         </div>
-                        <div class="center">
-                            <p>
-                            </p><div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                                <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-                                        <i class="fa fa-minus" aria-hidden="true"></i>
 
-                                    </button>
-                                </span>
-                            </div>
-                            <p></p>
-                            <p>
-                            </p><div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                                <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <p></p>
-                        </div>
+                        <div class="col">
+                            <div class="card-body d-flex align-items-start flex-column">
+                            
+                                <h5 class="card-title">Price : @kvp.Key.Price</h5>
+                                <div class="d-flex flex-wrap justify-conten-start">
+                                    <h5>Quantity :</h5>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>              
+                                        </button>
+                                    </span>
 
+                                    <input type="text" style="width:15%" name=" quant[2]" class="form-control input-number" value="10" min="1" max="100">
+
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>                           
+                            </div>
+                       </div>
 
                     </div>
-
-
                 }
                 </div>
-
-
-           @*
-                <div class="col">
-                    <div class="card rounded" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
-                        @foreach (KeyValuePair<Product, int> kvp in cartItem)
-                        {
-                            <img src="../assets/image/@kvp.Key.Img" class="img-fluid mx-auto d-block img-thumbnail" alt="..." width="100" style="margin:0.3rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">@kvp.Key.Name</h5>
-                                <p class="card-text">@kvp.Key.Description</p>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">@kvp.Key.Price</h5>
-
-                                <form>
-                                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                    <h5>
-                                        <input type="number" id="number" value="0" />@kvp.Value
-                                    </h5>
-                                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                                </form>
-                            </div>
-
-                        }
-
-                    </div>
-                </div>*@
         }
         else
         {
