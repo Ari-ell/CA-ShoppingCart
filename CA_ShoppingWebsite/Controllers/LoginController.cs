@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using MySql.Data.MySqlClient;
 using System.Net;
-
 using System.Xml;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,10 +19,8 @@ namespace CA_ShoppingWebsite.Controllers;
 
 public class LoginController : Controller
 {
-
     public IActionResult Index()
     {
-
         // Search();
         return View();
     }
@@ -31,7 +28,6 @@ public class LoginController : Controller
     [HttpGet("userlogin")]
     public ActionResult ExtractFromBasic()
     {
-
         Request.Headers.TryGetValue("username",out var usernameObj);
         Request.Headers.TryGetValue("password", out var passwordObj);
         string username = usernameObj.ToString();
@@ -39,6 +35,7 @@ public class LoginController : Controller
         bool hasMerged = false;
         //string url = "/gallery";
         User user = new Models.User();
+
         if (username != null && password != null) {
              user = UserData.GetUserLogin(username, password);
         }
@@ -53,7 +50,6 @@ public class LoginController : Controller
                 CookieOptions options = new CookieOptions();
                 options.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Append("SessionId", sessionId, options);
-
             }
             Response.Cookies.Append("userID", user.UserId);
             Response.Cookies.Append("username", user.Username);
@@ -64,13 +60,10 @@ public class LoginController : Controller
         if (hasMerged)
         {
             return Ok(user);
-
         }
         else {
-
             return BadRequest(user);
         }
-     
     }
 
 
@@ -102,8 +95,7 @@ public class LoginController : Controller
 
                     if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
                     {
-
-                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = {c.Key} and UserId ={userId}";
+                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = \"{c.Key}\" and UserId =\"{userId}\"";
                         var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
                         MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -115,18 +107,13 @@ public class LoginController : Controller
                         string updateQuantitySql = "";
                         if (reader.HasRows)
                         {
-
                             // Insert the key value pair into the cartitem database
-                            updateQuantitySql = $"UPDATE cartitem SET Quantity = {quantity} + {c.Value} WHERE ProductId = {c.Key} and UserId ={userId}";
-
+                            updateQuantitySql = $"UPDATE cartitem SET Quantity = \"{quantity}\" + \"{c.Value}\" WHERE ProductId = \"{c.Key}\" and UserId = \"{userId}\"";
                         }
                         else
                         {
-
                             // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
-                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES ({userId},{c.Key},{c.Value}) ";
-
-
+                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES (\"{userId}\",\"{c.Key}\",{c.Value}) ";
                         }
 
                         reader.Close();
@@ -135,39 +122,27 @@ public class LoginController : Controller
                         Console.WriteLine(rdr.ToString());
                         if (rdr.RecordsAffected > 0)
                         {
-
                             res = true;
-
                         }
                         else
                         {
                             res = false;
                         }
-
                         rdr.Close();
-
                         Response.Cookies.Delete(c.Key);
                     }
                     else
                     {
                         continue;
                     }
-
                 }
             }
-
             conn.Close();
-
-            return res;
-           
+            return res;       
         }
-
     }
 
-
-    
-
-    public IActionResult Privacy()
+public IActionResult Privacy()
 {
     return View();
 }

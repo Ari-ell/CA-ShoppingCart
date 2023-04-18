@@ -30,11 +30,11 @@ public class UserData
             //Console.WriteLine("Connecting to MySQL...");
             conn.Open();
 
-            string sql = "SELECT * FROM user WHERE Username =@username and Password =@password";
+            string sql = $"SELECT * FROM user WHERE Username =\"{username}\" and Password =\"{password}\"";
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", password);
+            //cmd.Parameters.AddWithValue("@username", username);
+            //cmd.Parameters.AddWithValue("@password", password);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())

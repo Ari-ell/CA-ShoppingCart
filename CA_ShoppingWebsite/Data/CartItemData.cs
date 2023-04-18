@@ -18,10 +18,8 @@ public class CartItemData {
         using (var connection = new MySqlConnection(data.cloudDB)) {
             connection.Open();
 
-            string sql = @"SELECT p.ProductId, p.Img, p.Name, p.Description, p.Price, c.Quantity FROM cartitem c, product p
-                           WHERE c.ProductId = p.ProductId
-                           AND UserId = @userId";
-
+            string sql = $"SELECT p.ProductId, p.Img, p.Name, p.Description, p.Price, c.Quantity FROM cartitem c, product p " +
+                            $"WHERE c.ProductId = p.ProductId AND UserId = \"{userId}\"";
 
             var cmd = new MySqlCommand(sql, connection);
 

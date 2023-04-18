@@ -32,13 +32,8 @@ public class CartData
                 {
                     Console.WriteLine("Adding record into PO table");
                     // Add PO list into PurchaseOrder table as records
-                    cmd.CommandText = @"INSERT INTO PurchaseOrder
-                                        VALUES (@PurchaseId, @UserId, @ProductId, @PurchaseQty, @PurchaseDate);";
-                    cmd.Parameters.AddWithValue("@PurchaseId", po.PurchaseId);
-                    cmd.Parameters.AddWithValue("@UserId", userId);
-                    cmd.Parameters.AddWithValue("@ProductId", po.ProductId);
-                    cmd.Parameters.AddWithValue("@PurchaseQty", po.PurchaseQty);
-                    cmd.Parameters.AddWithValue("@PurchaseDate", po.PurchaseQty);
+                    cmd.CommandText = $"INSERT INTO PurchaseOrder " +
+                                    $"VALUES (\"{po.PurchaseId}\", \"{userId}\", \"{po.ProductId}\", \"{po.PurchaseQty}\", \"{po.PurchaseDate}\");";
 
                     cmd.ExecuteNonQuery();
 
@@ -48,10 +43,7 @@ public class CartData
                     for (int i = 0; i < po.PurchaseQty; i++)
                     {
                         var actvCode = new Guid();
-                        cmd.CommandText = @"INSERT INTO PurchaseList
-                                            VALUES(@Purchase, @ActivationCode);";
-                        cmd.Parameters.AddWithValue("@PurchaseId",po.PurchaseId);
-                        cmd.Parameters.AddWithValue("@ActivationCode", actvCode);
+                        cmd.CommandText = $"INSERT INTO PurchaseList VALUES(\"{po.PurchaseId}\", \"{actvCode}\");";
 
                         cmd.ExecuteNonQuery();
                     }
@@ -59,9 +51,8 @@ public class CartData
                 }
                 // Clear CartItem records
                 Console.WriteLine("Clearing cart items");
-                cmd.CommandText = @"DELETE FROM CartItem
-                                    WHERE UserId = @userId;";
-                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.CommandText = $"DELETE FROM CartItem WHERE UserId = \"{userId}\";";
+                //cmd.Parameters.AddWithValue("@userId", userId);
 
                 cmd.ExecuteNonQuery();
 
@@ -89,12 +80,8 @@ public class CartData
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            string sql = @"SELECT ProductId, Quantity 
-                        FROM CartItem
-                        WHERE UserId = @userId;";
-
+            string sql = $"SELECT ProductId, Quantity FROM CartItem WHERE UserId = \"{userId}\";";
             var cmd = new MySqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@userId", userId);
 
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())

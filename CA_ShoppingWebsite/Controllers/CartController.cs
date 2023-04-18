@@ -76,29 +76,25 @@ public class CartController : Controller
                 conn.Open();
 
                 // check if item exists in cart
-                string querySql = @"SELECT * FROM cartItem WHERE cartItem.ProductId = @addProductId AND cartItem.UserId = @userId";
+                string querySql = $"SELECT * FROM cartItem WHERE cartItem.ProductId = \"{addProductId}\" AND cartItem.UserId = \"{user.UserId}\"";
                 MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
-                queryCmd.Parameters.AddWithValue("@addProductId", addProductId);
-                queryCmd.Parameters.AddWithValue("@userId", user.UserId);
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
                 string sqlQuery = "";
-                
+
                 if (rdr.HasRows) // if item already exists in cart, update record quantity
                 {
 
                     Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = @"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = @addProductId and UserId = @user.UserId";
-                    
+                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = \"{addProductId}\" and UserId = \"{user.UserId}\"";
+
                 }
                 else // if item doesn't exist in cart, create new record
                 {
                     Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = @"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES (@user.UserId, @addProductId, 1)";
+                    sqlQuery = $"INSERT INTO cartitem (UserId, ProductId, Quantity) VALUES (\"{user.UserId}\", \"{addProductId}\", 1)";
                 }
                 rdr.Close();
                 MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
-                insertCmd.Parameters.AddWithValue("@user.UserId", @user.UserId);
-                insertCmd.Parameters.AddWithValue("@addProductId", @addProductId);
                 MySqlDataReader res = insertCmd.ExecuteReader();
 
                 res.Close();
