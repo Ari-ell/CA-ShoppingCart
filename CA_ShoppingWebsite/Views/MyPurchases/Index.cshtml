@@ -56,9 +56,16 @@
                     <div class="row align-items-center">
                         <label for="activationCode" class="col-4 pe-0">Activation Code: </label>
                         <div class="col-8">
+                            <div>test</div>
+                            <div>@myActivationCodes[purchase.PurchaseId].Count</div>
                             <select class="form-select" aria-label="activationCode">
-                                <option value="">AEFWREW-321-3223-ASDA</option>
-                                <option value="">AEFWREW-321-3223-ASDA</option>
+
+                                @*@for (int i = 0; i < @myActivationCodes[purchase.PurchaseId].Count; i++)
+                                {
+                                    <option value="">@myActivationCodes[purchase.PurchaseId][i]</option>*@
+                                    @*<option value="">AEFWREW-321-3223-ASDA</option>
+                <option value="">AEFWREW-321-3223-ASDA</option>*@
+                                }
                             </select>
                         </div>
                     </div>
