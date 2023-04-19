@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using CA_ShoppingWebsite.Models;
 using Org.BouncyCastle.Asn1.Ocsp;
-using MySql.Data.MySqlClient;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CA_ShoppingWebsite.Data;
@@ -160,6 +159,8 @@ public class CartData
         }
         return ProductList;
     }
+
+    
 
 }
 

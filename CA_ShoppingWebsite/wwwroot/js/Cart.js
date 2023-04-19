@@ -14,17 +14,13 @@ function add_click_listeners() {
 
     let minus = document.getElementsByClassName("minusBtn");
    
-
     let plus = document.getElementsByClassName("plusBtn");
    
-
     for (let i = 0; i < minus.length; i++) {
         minus[i].addEventListener('click', on_minus_click);
         plus[i].addEventListener('click', on_plus_click);
 
     }
-
-
 }
 
 function on_plus_click(event) {

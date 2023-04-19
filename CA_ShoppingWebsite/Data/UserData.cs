@@ -14,7 +14,6 @@ public class UserData
 {
     public static Models.User? GetUserInfo(string? username, string? password)
     {
-
         return null;
     }
 
@@ -40,8 +39,8 @@ public class UserData
             while (rdr.Read())
             {
                 user.UserId = (string)rdr[0];
-                user.Username = rdr[1].ToString();
-                user.Name = rdr[3].ToString();
+                user.Username = (string)rdr[1];
+                user.Name = (string)rdr[2];
             }
             rdr.Close();
         }
