@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CA_ShoppingWebsite.Data;
 using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -32,8 +34,10 @@ public class MyPurchasesController : Controller
             var myProducts = Data.ProductData.GetProductDetails(userId);
             ViewBag.myProducts = myProducts;
 
-            var myReviews = Data.ReviewData.GetUserReviews(userId);
+            var myReviews = Data.ReviewData.GetRating(userId);
             ViewBag.myReviews = myReviews;
+
+            
 
             return View();
         }
@@ -41,8 +45,18 @@ public class MyPurchasesController : Controller
             return RedirectToAction("Index", "Gallery");
     }
 
-    // Need to add method to update user reviews
-    // This method should also update the overall user reviews
+
+    //This IActionResult is to handle Ajax query when a star review is set by the user
+    public IActionResult SetUserRating(string productId, int rating)
+    {
+
+        string userId = Request.Cookies["userId"];
+
+        ReviewData.SetRating(userId, productId, rating);
+
+
+        return Json(new { success = true });
+    }
 
 }
 

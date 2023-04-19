@@ -4,9 +4,15 @@
     var myPurchases = (List<PurchaseOrder>)ViewBag.myPurchases;
     var myProducts = (Dictionary<string, Product>)ViewBag.myProducts;
     var myActivationCodes = (Dictionary<string, List<string>>)ViewBag.myActivationCodes;
-    var myReviews = (Dictionary<int, int>)ViewBag.myReviews;
+    var myReviews = (Dictionary<string, int>)ViewBag.myReviews;
 }
 
+@section Scripts{
+        <script src="/js/rating.js"></script>
+}
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container nav-con">
         <a class="navbar-brand" href="#">Team 1</a>
@@ -64,14 +70,30 @@
                         </div>
                     </div>
                     <h4 class="rate-title">Ratings</h4>
-                    <div class="stars" style="text-align: start;">
-                        @for (int j = 0; j < 5; j++)
-                        {
-                            <i class="bi bi-star-fill"></i>
-                        }
+                    <div id="@purchase.ProductId">
+                    <form action="">
+                        <fieldset class="stars">
+                            <input class="star star-5" value="5" id="star-5" type="radio" name="stars-5" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==5? "checked":"") />
+                                <label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" value="4" id="star-4" type="radio" name="stars-4" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==4? "checked":"") />
+                                <label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" value="3" id="star-3" type="radio" name="stars-3" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==3? "checked":"") />
+                                <label class="star star-3" for="star"></label>
+                            <input class="star star-2" value="2" id="star-2" type="radio" name="stars-2" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==2? "checked":"") />
+                                <label class="star star-2" for="star"></label>
+                            <input class="star star-1" value="1" id="star-1" type="radio" name="stars-1" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==1? "checked":"") />
+                                <label class="star star-1" for="star"></label>
+                        </fieldset>
+                    </form>
                     </div>
+
                 </div>
+                
+                    
+                
+                
             </div>
         </div>
     }
 </div>
+
