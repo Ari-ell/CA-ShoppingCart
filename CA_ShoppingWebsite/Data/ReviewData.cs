@@ -8,6 +8,8 @@ namespace CA_ShoppingWebsite.Data
         //Set new records for new products and set initial rating to null
         public static void SetInitialRating(string userId)
         {
+
+
             using (var conn = new MySqlConnection(data.cloudDB))
             {
                 conn.Open();
@@ -18,14 +20,25 @@ namespace CA_ShoppingWebsite.Data
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
+
+                                
+                List<string>productId = new List<string>();
                 while (reader.Read())
                 {
-                    cmd.CommandText = $"INSERT INTO Review VALUES (@userId, @productId, @rating)";
+                    productId.Add((string)reader["ProductId"]);
+                }
+                reader.Close();
+
+                cmd.CommandText = $"INSERT INTO Review VALUES (@userId, @productId, @rating)";
+                foreach (string id in productId)
+                {
+                    cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@userId", userId);
-                    cmd.Parameters.AddWithValue("productId", (string)reader["ProductId"]);
+                    cmd.Parameters.AddWithValue("productId", id);
                     cmd.Parameters.AddWithValue("@rating", null);
                     cmd.ExecuteNonQuery();
                 }
+
                 conn.Close();
             }
         }

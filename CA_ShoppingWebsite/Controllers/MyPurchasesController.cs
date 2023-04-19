@@ -22,6 +22,8 @@ public class MyPurchasesController : Controller
             // Update PurchaseOrder and ActvCode table
             Data.MyPurchaseData.CheckOutUser(userId);
 
+            Data.ReviewData.SetInitialRating(userId);
+
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
             ViewBag.myPurchases = myPurchases;
