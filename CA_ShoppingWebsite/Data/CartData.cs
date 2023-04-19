@@ -8,7 +8,7 @@ namespace CA_ShoppingWebsite.Data;
 
 public class CartData
 {
-    // Perform all actions needed to checkout
+    // Perform all actions needed to checkout user
     // 1. Convert cart items into list of PO objects
     // 2. Add PO list iteratively to PO records
     // 3. Add into PList records with actvCode

@@ -15,31 +15,38 @@ namespace CA_ShoppingWebsite.Controllers;
 public class GalleryController : Controller
 {
     // GET: /<controller>/
-    public IActionResult Index(User? user,string? keyword,int? carQty)
+    public IActionResult Index(User? user, string? keyword, int? cartQty)
     {
+        // Get user info if available
         ViewBag.users = user;
 
+        // Create a new session and add into cookies
         string sessionId = System.Guid.NewGuid().ToString();
         CookieOptions options = new CookieOptions();
         options.Expires = DateTime.Now.AddDays(1);
         Response.Cookies.Append("SessionId", sessionId, options);
 
+        // Get user details from cookies
         string userId = Request.Cookies["userID"];
         string username = Request.Cookies["username"];
         string name = Request.Cookies["name"];
         user.Name = name;
         user.UserId = userId;
         user.Username = username;
+
+        // Get product details to display in gallery
         var products = Data.ProductData.GetAllProducts();
         
-        ViewBag.products = Search(keyword, products!);
-       
-        ViewBag.carQty = checkQty(this.Request, userId);
+
+        ViewBag.products = Data.GalleryData.Search(keyword, products!);
+        ViewBag.cartQty = checkQty(this.Request, userId);
 
         return View();
     }
 
-    // need to read and understand
+    // Check qunatity of items in carts
+    // Based on whtehre it is read from eithe cookies
+    // Or from CartItem table
     public static int checkQty(HttpRequest request, string userId) {
 
         int cartCounter = 0;
@@ -67,28 +74,6 @@ public class GalleryController : Controller
             }
         }
         return cartCounter;
-    }
-
-
-    public List<Product> Search(string keyword, List<Product> products)
-    {
-        if (keyword == "" || keyword == null) {
-            return products;
-        }
-        List<Product> selected = new List<Product>();
-
-        foreach (Product product in products)
-        {
-            if (product.Name != null)
-            {
-                if (product.Name.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
-                    product.Description.Contains(keyword,StringComparison.CurrentCultureIgnoreCase))
-                {
-                    selected.Add(product);
-                }
-            }
-        }
-        return selected;
     }
 }
 
