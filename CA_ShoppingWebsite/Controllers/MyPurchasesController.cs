@@ -16,11 +16,11 @@ public class MyPurchasesController : Controller
     {
         // When user accesses the Purchases Controller
         // Will see all past purchases and be able to set reviews
-        string checkUser = Request.Cookies["userId"];
-        if (checkUser != null)
+        string userId = Request.Cookies["userId"];
+        if (userId != null)
         {
-            // Returns the userID whose MyPurchases page will be loaded
-            var userId = checkUser;
+            // Update PurchaseOrder and ActvCode table
+            Data.CartData.CheckOutUser(userId);
 
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
@@ -41,10 +41,10 @@ public class MyPurchasesController : Controller
 
             return View();
         }
+        // if not logged in, will be redirected to login screen
         else
-            return RedirectToAction("Index", "Gallery");
+            return RedirectToAction("Index", "Login");
     }
-
 
     //This IActionResult is to handle Ajax query when a star review is set by the user
     public IActionResult SetUserRating(string productId, int rating)
@@ -57,6 +57,5 @@ public class MyPurchasesController : Controller
 
         return Json(new { success = true });
     }
-
 }
 

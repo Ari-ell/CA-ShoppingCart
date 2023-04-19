@@ -22,37 +22,93 @@ public class CartController : Controller
         {
             ViewBag.userId = userId;
 
-            ProductList = Data.CartItemData.GetProductList(userId);
-            ViewBag.cartItems = ProductList;
+            ProductList = Data.CartData.GetProductList(userId);
+            ViewBag.cartItem = ProductList;
         }
-        //else {
+        else
+        {
+            if (Request.Cookies.Count() > 0)
+            {
+                List<Product> products = Data.CartData.products();
 
-        //    if (Request.Cookies.Count() > 0)
-        //    {
+                foreach (KeyValuePair<string, string> c in Request.Cookies)
+                {
+                    Console.WriteLine(c.Key);
+                    Console.WriteLine(c.Value);
 
-        //        foreach (KeyValuePair<string, string> c in Request.Cookies)
-        //        {
-        //            Console.WriteLine(c.Key);
-        //            Console.WriteLine(c.Value);
+                    if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
+                    {
+                        foreach (var product in products)
+                        {
 
-        //            if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
-        //            {
-        //                ProductList.Add()
-
-
-        //            }
-        //        }
-        //    }
+                            if (product.ProductId == c.Key)
+                            {
+                                ProductList.Add(product, Convert.ToInt32(c.Value));
+                            }
+                        }
+                    }
+                }
+                ViewBag.cartItem = ProductList;
+            }
+        }
+      
         return View();
     }
 
-    // from MouseClick
-    // Ajax is calling this method
+    [Route("editQty")]
+    public IActionResult editQty(int? qty, string? productID)
+    {
+        string userID = Request.Cookies["userID"];
+        if (userID != null)
+        {
+            MySqlConnection conn = new MySqlConnection(data.cloudDB);
+            try
+            {
+                conn.Open();
 
-    // something like :
-    //<input type = "button"
-    //value="Go Somewhere Else" <-?
-    //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+                // check if item exists in cart
+                string querySql = "";
+                if (qty > 0)
+                {
+                     querySql = $"UPDATE cartitem SET quantity = {qty} WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+
+                }
+                else {
+                    querySql = $"delete from cartitem WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+
+                }
+                MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+                MySqlDataReader rdr = queryCmd.ExecuteReader();
+                conn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        else
+        {
+            string? cookieQuantity = Request.Cookies[productID];
+
+            if (qty > 0)
+            {
+                int? productQuantity = Convert.ToInt32(cookieQuantity);
+
+                Response.Cookies.Append($"{productID}", $"{qty}");
+            }
+            else {
+                Response.Cookies.Delete($"{productID}");
+            }
+      
+        }
+        return Ok();
+    }
+
+
+    // JSON pass the cart info to this method
+    // to update product and qty for user
+    // based on either cookie or db
     [Route("addToCart")]
     public IActionResult AddProductToCart(string addProductId)
     {
@@ -63,7 +119,6 @@ public class CartController : Controller
 
         if (userid != null)
         {
-
             user.UserId = userid;
 
             // AddProductToCart Function
@@ -72,9 +127,9 @@ public class CartController : Controller
 
             try
             {
-                Console.WriteLine("Connecting to MySQL for Product Data...");
+                //Console.WriteLine("Connecting to MySQL for Product Data...");
                 conn.Open();
-
+                
                 // check if item exists in cart
                 string querySql = $"SELECT * FROM cartItem WHERE cartItem.ProductId = \"{addProductId}\" AND cartItem.UserId = \"{user.UserId}\"";
                 MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
@@ -123,39 +178,6 @@ public class CartController : Controller
         }
         // Ok response to browser, not View()
         return Ok();
-    }
-
-    // [Start]
-    // If user is logged in, will redirect to myPurchases view
-    // If not logged in, will redirect to login page to log in
-    // Upon succesfull log in, will re-direct back to Cart to checkout
-    // If unsucessful, will catch and show exception msg
-    // [Checkout procedure]
-    // Once checkout is clicked, all CartItem products (for specified user)
-    // will be wrapped in a PurchaseOrder object and
-    // transferred to PurchaseOrder table
-    // Update PurchaseList table with activation codes
-    // After that, CartItem table will be cleared for that specific user
-    // [End]
-
-    // What happens if the cart has 0 items and user tries to checkout?
-    public IActionResult Checkout()
-    {
-        // Check if user is logged in
-        var getUserId = Request.Cookies["userId"];
-
-        // Complete check out procedure and redirect to myPurchases
-        if (getUserId != null)
-        {
-            Data.CartData.CheckOutUser(getUserId);
-            return RedirectToAction("Index", "MyPurchases");
-        }
-        // Redirect to Login if not logged in
-        // Need to redirect back to cart once logged in?
-        else {
-            return RedirectToAction("Index", "Login");
-        }
-    }
-
+    } 
 }
 

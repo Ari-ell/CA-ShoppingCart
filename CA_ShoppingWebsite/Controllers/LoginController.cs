@@ -28,17 +28,21 @@ public class LoginController : Controller
     [HttpGet("userlogin")]
     public ActionResult ExtractFromBasic()
     {
+        // Convert JSON data
         Request.Headers.TryGetValue("username",out var usernameObj);
         Request.Headers.TryGetValue("password", out var passwordObj);
         string username = usernameObj.ToString();
         string password = passwordObj.ToString();
+
         bool hasMerged = false;
-        //string url = "/gallery";
+
         User user = new Models.User();
 
+        // Try to match the login input to users db
         if (username != null && password != null) {
              user = UserData.GetUserLogin(username, password);
         }
+
         if (user.UserId == null)
         {
             return Unauthorized();
@@ -51,11 +55,12 @@ public class LoginController : Controller
                 options.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Append("SessionId", sessionId, options);
             }
+
             Response.Cookies.Append("userID", user.UserId);
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
-   
-            hasMerged= MergeCart(user.UserId);
+    
+            hasMerged= MergeCart(user.UserId); // Need to pass in the Http request
         }
         if (hasMerged)
         {
@@ -66,18 +71,8 @@ public class LoginController : Controller
         }
     }
 
-
-    [Route("logout")]
-    public IActionResult Logout() {
-
-        Response.Cookies.Delete("userID");
-        Response.Cookies.Delete("username");
-        Response.Cookies.Delete("name");
-        Response.Cookies.Delete("SessionId");
-
-        return Ok();
-    }
-
+    // Need to move this to cartData.
+    // but need to be able to pass in the HttpRequest
     public bool MergeCart(string userId)
     {
         int quantity = 0;
@@ -86,7 +81,8 @@ public class LoginController : Controller
         {
 
             conn.Open();
-            if (Request.Cookies.Count() > 0) {
+            if (Request.Cookies.Count() > 0)
+            {
 
                 foreach (KeyValuePair<string, string> c in Request.Cookies)
                 {
@@ -138,10 +134,23 @@ public class LoginController : Controller
                 }
             }
             conn.Close();
-            return res;       
+            return res;
         }
     }
 
+
+    [Route("logout")]
+    public IActionResult Logout() {
+
+        Response.Cookies.Delete("userID");
+        Response.Cookies.Delete("username");
+        Response.Cookies.Delete("name");
+        Response.Cookies.Delete("SessionId");
+
+        return Ok();
+    }
+
+    
 public IActionResult Privacy()
 {
     return View();

@@ -2,65 +2,54 @@
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using CA_ShoppingWebsite.Models;
+using Org.BouncyCastle.Asn1.Ocsp;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CA_ShoppingWebsite.Data;
 
 public class CartData
 {
-    // Perform all actions needed to checkout
+    // Perform all actions needed to checkout user
     // 1. Convert cart items into list of PO objects
     // 2. Add PO list iteratively to PO records
     // 3. Add into PList records with actvCode
     // 4. Clear cart items
     public static void CheckOutUser(string userId)
     {
-        Console.WriteLine("Starting checkout..");
-
-        // Get list of POs
         var poList = GetPoList(userId);
-        Console.WriteLine("Purchase Order List retrieved..");
 
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            Console.WriteLine("Connecting to cloudDB..");
             MySqlTransaction trans = conn.BeginTransaction();
             MySqlCommand cmd = new MySqlCommand("", conn, trans);
+
             try
             {
+                // Add each PO into PurchaseOrder table as record
                 foreach (var po in poList)
-                {
-                    Console.WriteLine("Adding record into PO table");
-                    // Add PO list into PurchaseOrder table as records
-                    cmd.CommandText = $"INSERT INTO PurchaseOrder " +
-                                    $"VALUES (\"{po.PurchaseId}\", \"{userId}\", \"{po.ProductId}\", \"{po.PurchaseQty}\", \"{po.PurchaseDate}\");";
-
+                {   
+                    cmd.CommandText = $"INSERT INTO PurchaseOrder(PurchaseId, UserId, ProductId, PurchaseQty, PurchaseDate) " +
+                                    $"VALUES (\"{po.PurchaseId}\", \"{userId}\", " +
+                                    $"\"{po.ProductId}\", \"{po.PurchaseQty}\", \"{po.PurchaseDate}\")";
                     cmd.ExecuteNonQuery();
 
-                    // Insert into PurchaseList based on PurchaseId and qty
-                    // with ActvCodes based on qty
-                    Console.WriteLine("Adding record into PList table");
+                    // Insert PurchaseId and ActvCode based on qty
                     for (int i = 0; i < po.PurchaseQty; i++)
                     {
-                        var actvCode = new Guid();
-                        cmd.CommandText = $"INSERT INTO PurchaseList VALUES(\"{po.PurchaseId}\", \"{actvCode}\");";
-
+                        var actvCode = Guid.NewGuid();
+                        cmd.CommandText = $"INSERT INTO PurchaseList(PurchaseId, ActivationCode) VALUES(\"{po.PurchaseId}\", \"{actvCode.ToString()}\");";
                         cmd.ExecuteNonQuery();
                     }
-                    Console.WriteLine("Adding Purchase records into table - COMPLETE");
                 }
-                // Clear CartItem records
-                Console.WriteLine("Clearing cart items");
+                // Clear CartItem records based on the userId
                 cmd.CommandText = $"DELETE FROM CartItem WHERE UserId = \"{userId}\";";
-                //cmd.Parameters.AddWithValue("@userId", userId);
-
                 cmd.ExecuteNonQuery();
-
-                Console.WriteLine("User cart emptied. Checkout completed");
 
                 trans.Commit();
             }
-            // Roll back the execution if encounnter exception
+            // Rollback execution if there is an exception
             catch (Exception ex)
             {
                 Debug.WriteLine("Somes error with DB: ", ex.Message);
@@ -69,9 +58,7 @@ public class CartData
         }
     }
 
-
-    // Get a list of POs based on matching
-    // the userId to a cartId
+    // Get a list of POs based on matching userId
     public static List<Models.PurchaseOrder> GetPoList(string userId)
     {
         var poList = new List<Models.PurchaseOrder>();
@@ -80,13 +67,13 @@ public class CartData
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            string sql = $"SELECT ProductId, Quantity FROM CartItem WHERE UserId = \"{userId}\";";
+            string sql = $"SELECT ProductId, Quantity FROM CartItem WHERE UserId = \"{userId}\"";
             var cmd = new MySqlCommand(sql, conn);
 
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                var purchaseId = new Guid();
+                var purchaseId = Guid.NewGuid();
                 var po = new Models.PurchaseOrder
                 {
                     PurchaseId = purchaseId.ToString(),
@@ -109,5 +96,71 @@ public class CartData
         return curDate.ToString("dd MMM yyyy");
     }
 
-}    
+    public static Dictionary<Product, int> GetProductList(string userId)
+    {
+
+        Dictionary<Product, int> ProductList = new Dictionary<Product, int>();
+
+        using (var connection = new MySqlConnection(data.cloudDB))
+        {
+            connection.Open();
+
+            string sql = $"SELECT p.ProductId, p.Img, p.Name, p.Description, p.Price, c.Quantity FROM cartitem c, product p " +
+                            $"WHERE c.ProductId = p.ProductId AND UserId = \"{userId}\"";
+
+            var cmd = new MySqlCommand(sql, connection);
+
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Product product = new Product();
+                product.ProductId = (string)reader["ProductId"];
+                product.Img = (string)reader["Img"];
+                product.Name = (string)reader["Name"];
+                product.Description = (string)reader["Description"];
+                product.Price = (int)reader["Price"];
+                int ProductQty = (int)reader["Quantity"];
+
+                ProductList.Add(product, ProductQty);
+            }
+            connection.Close();
+        }
+        return ProductList;
+    }
+
+    public static List<Product> products()
+    {
+        List<Product> ProductList = new List<Product>();
+        using (var connection = new MySqlConnection(data.cloudDB))
+        {
+            connection.Open();
+
+            string sql = $"SELECT p.ProductId, p.Img, p.Name, p.Description, p.Price FROM product p";
+
+            var cmd = new MySqlCommand(sql, connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Product product = new Product();
+
+                product.ProductId = (string)reader["ProductId"];
+                product.Img = (string)reader["Img"];
+                product.Name = (string)reader["Name"];
+                product.Description = (string)reader["Description"];
+                product.Price = (int)reader["Price"];
+
+                ProductList.Add(product);
+            }
+            connection.Close();
+        }
+        return ProductList;
+    }
+
+    
+
+}
 
