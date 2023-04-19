@@ -35,7 +35,7 @@ function add_click_listeners() {
 }
 
 async function on_logout_click(event) {
-    //$('#myModal').modal('hide');
+    $('#exampleModal').modal('hide');
     await fetch('/logout', {
         method: 'GET',
 

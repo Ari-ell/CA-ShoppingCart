@@ -15,13 +15,15 @@ function add_click_listeners() {
     let minus = document.getElementsByClassName("minusBtn");
    
     let plus = document.getElementsByClassName("plusBtn");
-   
+
     for (let i = 0; i < minus.length; i++) {
         minus[i].addEventListener('click', on_minus_click);
         plus[i].addEventListener('click', on_plus_click);
 
-    }
+    };
 }
+
+
 
 function on_plus_click(event) {
     let ele = event.currentTarget.parentNode;
@@ -43,7 +45,7 @@ function on_minus_click(event) {
 
 }
 async function fetchController(qty, productID) {
-    if (qty >0) {
+
 
         await fetch('editQty?' + new URLSearchParams({
             qty: qty,
@@ -57,8 +59,6 @@ async function fetchController(qty, productID) {
             console.log('request failed', error)
         });
 
-    }
 
-
-    window.location.replace("/cart");
+   window.location.replace("/cart");
 }

@@ -68,7 +68,16 @@ public class CartController : Controller
                 conn.Open();
 
                 // check if item exists in cart
-                string querySql = $"UPDATE cartitem SET quantity = {qty} WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+                string querySql = "";
+                if (qty > 0)
+                {
+                     querySql = $"UPDATE cartitem SET quantity = {qty} WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+
+                }
+                else {
+                    querySql = $"delete from cartitem WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+
+                }
                 MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
                 conn.Close();
@@ -82,18 +91,17 @@ public class CartController : Controller
         else
         {
             string? cookieQuantity = Request.Cookies[productID];
-            // check if product is present in cookies
-            if (cookieQuantity != null)
+
+            if (qty > 0)
             {
                 int? productQuantity = Convert.ToInt32(cookieQuantity);
-                // if yes, add 1 to value
+
                 Response.Cookies.Append($"{productID}", $"{qty}");
             }
-            else
-            {
-                // add product to Session Object Cart, set quantity to 1
-                Response.Cookies.Append($"{productID}", "1");
+            else {
+                Response.Cookies.Delete($"{productID}");
             }
+      
         }
         return Ok();
     }
