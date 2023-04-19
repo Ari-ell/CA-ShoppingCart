@@ -10,77 +10,72 @@
 @section Scripts
     {
     <script src="/js/Cart.js"></script>
-    }
+}
 
-<div>
-
+@*MyPurchases-style nav bar implementation*@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-md">
-    <ul class="nav">
+    <div class="container nav-con">
+        <a class="navbar-brand" href="#"><strong>View Cart</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
 
-        <li class="nav-item">
-            <p style="font-size:18px;font-weight:600"><a class="nav-link disabled bold">View Cart</a></p>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/Gallery/Index">Continue Shopping</a>
+                </li>
 
-        <li class="nav-item">
-            <p><a class="nav-link" href="/">Home</a><p>
+                <li class="nav-item">
+                    <a class="nav-link" href="/MyPurchases/Index">Check Out</a>
+                </li>
 
-        </li>
-		
-		 <li class="nav-item">
-            <p><a class="nav-link" href="/Gallery/Index">Continue Shopping</a><p>
+                @foreach (KeyValuePair<Product, int> i in cartItem)
+                {
+                    var totalPrice = i.Key.Price * i.Value;
+                    total += totalPrice;
+                }
 
-        <li class="nav-item">
-            <a class="nav-link" href="/MyPurchases">Checkout</a>
-        </li>
-        @foreach (KeyValuePair<Product, int> i in cartItem)
-        {
+                <li class="nav-item">
+                    <p style="margin-bottom:inherit;"><a class="nav-link disabled">Total:$ @total</a></p> @* calculate total*@
+                </li>
 
-            var totalPrice = i.Key.Price * i.Value;
-            total += totalPrice;
-        }
-
-            <li class="nav-item"style="right:6rem; position: absolute;">
-                <p><a class="nav-link disabled">Total:$ @total</a></p> @* calculate total*@
-            </li>
-
-        
-    </ul>
+            </ul>
+        </div>
     </div>
 </nav>
-</div>
 
-
+@*Cart items display*@
 <div class="container text-center">
-        @if (cartItem != null && cartItem.Count > 0)
+    @if (cartItem != null && cartItem.Count > 0)
+    {
+
+        @foreach (KeyValuePair<Product, int> kvp in cartItem)
         {
+            <div class="row">
+                <div class="card rounded">
+                    <div class="card-body">
 
-           @foreach (KeyValuePair<Product, int> kvp in cartItem)
-               {
-                <div class="row">
-                    <div class="card rounded">
-                        <div class="card-body">
+                        <div class="row row-cols-2" style="margin-left:12rem">
 
-                            <div class="row row-cols-2" style="margin-left:12rem">
-
-                                <div class="col">
-                                    <div class="card rounded">
+                            <div class="col">
+                                <div class="card rounded">
+                                    <div class="card-body">
+                                        <img src="../assets/image/@kvp.Key.Img" class="img-fluid mx-auto d-block img-thumbnail" alt="..." width="100" style="margin:0.3rem;">
                                         <div class="card-body">
-                                            <img src="../assets/image/@kvp.Key.Img" class="img-fluid mx-auto d-block img-thumbnail" alt="..." width="100" style="margin:0.3rem;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">@kvp.Key.Name</h5>
-                                                <p class="card-text">@kvp.Key.Description</p>
-                                            </div>
+                                            <h5 class="card-title">@kvp.Key.Name</h5>
+                                            <p class="card-text">@kvp.Key.Description</p>
                                         </div>
-
                                     </div>
+
                                 </div>
-                                <div class="col text-left"style="width:12rem;margin-top:5rem;">
+                            </div>
+                            <div class="col text-left" style="width:12rem;margin-top:5rem;">
                                 <div>
                                     @{var price = kvp.Key.Price;}
                                     <p>Price: $@price</p>
                                 </div>
-             
+
                                 <div class="input-group">
 
                                     <button type="button" class="btn btn-danger btn-number minusBtn">
@@ -95,24 +90,24 @@
                                     </button>
 
                                 </div>
-                                 
-                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-     
 
+                    </div>
                 </div>
 
 
-            }
+            </div>
+
 
         }
-        else
-        {
-            <h3>Cart is empty.</h3>
-        }
 
-   
+    }
+    else
+    {
+        <h3>Cart is empty.</h3>
+    }
+
+
 </div>

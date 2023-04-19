@@ -37,8 +37,9 @@ public class MyPurchasesController : Controller
 
             return View();
         }
+        // if not logged in, will be redirected to login screen
         else
-            return RedirectToAction("Index", "Gallery");
+            return RedirectToAction("Index", "Login");
     }
 
     // Need to add method to update user reviews
