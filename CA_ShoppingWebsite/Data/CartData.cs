@@ -30,7 +30,7 @@ public class CartData
                 // Add each PO into PurchaseOrder table as record
                 foreach (var po in poList)
                 {   
-                    cmd.CommandText = $"INSERT INTO PurchaseOrder " +
+                    cmd.CommandText = $"INSERT INTO PurchaseOrder(PurchaseId, UserId, ProductId, PurchaseQty, PurchaseDate) " +
                                     $"VALUES (\"{po.PurchaseId}\", \"{userId}\", " +
                                     $"\"{po.ProductId}\", \"{po.PurchaseQty}\", \"{po.PurchaseDate}\")";
                     cmd.ExecuteNonQuery();
@@ -38,8 +38,8 @@ public class CartData
                     // Insert PurchaseId and ActvCode based on qty
                     for (int i = 0; i < po.PurchaseQty; i++)
                     {
-                        var actvCode = new Guid();
-                        cmd.CommandText = $"INSERT INTO PurchaseList VALUES(\"{po.PurchaseId}\", \"{actvCode}\");";
+                        var actvCode = Guid.NewGuid();
+                        cmd.CommandText = $"INSERT INTO PurchaseList(PurchaseId, ActivationCode) VALUES(\"{po.PurchaseId}\", \"{actvCode.ToString()}\");";
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -73,7 +73,7 @@ public class CartData
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                var purchaseId = new Guid();
+                var purchaseId = Guid.NewGuid();
                 var po = new Models.PurchaseOrder
                 {
                     PurchaseId = purchaseId.ToString(),

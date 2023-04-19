@@ -57,7 +57,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Comfirmation</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -80,32 +80,34 @@
                 <img src="/assets/icons/search.svg" alt="Bootstrap" width="32" height="32">
             </span>
         </div>
-
-
         <input class="form-control me-0 searchInput" type="search" placeholder="Search" aria-label="Search">
-
         <button class="btn btn-outline-success searchBtn" type="submit">Search</button>
-
-
     </div>
-
 </div>
 
-<div class="container text-center">
-    <div class="row row-cols-3">
-        @foreach (Product product in products)
-        {
-            <div class="col">
-                <div class="card rounded" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
-                    <img src="../assets/image/@product.Img" class="img-fluid mx-auto d-block" alt="..." width="120" preserveAspectRatio="xMidYMid slice" style="margin:0.3rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
-                        <p hidden class="productId"> @product.ProductId</p>
-                        <p class="card-text">@product.Description</p>
-                        @if (product.ReviewRating == 0)
+@if (products.Count == 0)
+{
+    <h3>
+        <small class="text-muted">Sorry, We don't have the product you're searching for</small>
+    </h3>
+}
+else
+{
+    <div class="container text-center">
+        <div class="row row-cols-3">
+            @foreach (Product product in products)
+            {
+                <div class="col">
+                    <div class="card rounded" style="width: 22rem;margin-bottom:1rem;margin-top:1rem;">
+                        <img src="../assets/image/@product.Img" class="img-fluid mx-auto d-block" alt="..." width="120" preserveAspectRatio="xMidYMid slice" style="margin:0.3rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p hidden class="productId"> @product.ProductId</p>
+                            <p class="card-text">@product.Description</p>
+                            @if (product.ReviewRating == 0)
                             {
                                 <div class="text-center">
-                                <p> <small> No reviews yet..</small></p>
+                                    <p> <small> No reviews yet..</small></p>
                                 </div>
                             }
                             else
@@ -118,12 +120,13 @@
                                     <span class="fa fa-star @(product.ReviewRating > 4 ? "checked" : "")"></span>
                                 </div>
                             }
-                        <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")<p hidden>@product.ProductId</p></button>
+                            <button class="btn btn-outline-info addToCartBtn">@Html.Raw("$")@product.Price @Html.Raw("- Add to Cart")<p hidden>@product.ProductId</p></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+}
 
 

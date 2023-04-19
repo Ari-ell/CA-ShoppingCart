@@ -1,5 +1,4 @@
 ﻿@{
-
     ViewData["Title"] = "My Purchases";
     var myPurchases = (List<PurchaseOrder>)ViewBag.myPurchases;
     var myProducts = (Dictionary<string, Product>)ViewBag.myProducts;
@@ -61,7 +60,7 @@ else
                         <h5 class="card-title" id="Product Name">@myProducts[(string)purchase.ProductId].Name</h5>
                         <p class="card-text" id="Product Description">@myProducts[(string)purchase.ProductId].Description</p>
                         <button type="button" class="btn btn-block dl-btn ">
-                            Download here
+                            Download
                             <i class="bi bi-download"></i>
                         </button>
                     </div>

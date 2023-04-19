@@ -14,11 +14,11 @@ public class MyPurchasesController : Controller
     {
         // When user accesses the Purchases Controller
         // Will see all past purchases and be able to set reviews
-        string checkUser = Request.Cookies["userId"];
-        if (checkUser != null)
+        string userId = Request.Cookies["userId"];
+        if (userId != null)
         {
-            // Returns the userID whose MyPurchases page will be loaded
-            var userId = checkUser;
+            // Update PurchaseOrder and ActvCode table
+            Data.CartData.CheckOutUser(userId);
 
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
@@ -41,9 +41,5 @@ public class MyPurchasesController : Controller
         else
             return RedirectToAction("Index", "Login");
     }
-
-    // Need to add method to update user reviews
-    // This method should also update the overall user reviews
-
 }
 
