@@ -1,6 +1,20 @@
 ﻿
 
 $(document).ready(function () {
+    //$('.logoutBtn').on('click', function () {
+    //    $('#exampleModal').modal('hide');
+    //    await fetch('/logout', {
+    //        method: 'GET',
+
+    //    })
+    //        .then(response => response.json())
+    //        .then(data => console.log(data))
+    //        .catch(error => console.log(error));
+
+    //    window.location.replace('/gallery');
+    //});
+
+
     $('.star').on('click', function () {
         var rating = $(this).data('rating');
         var productId = $(this).closest('.star-rating').data('product-id');
