@@ -5,6 +5,7 @@ using System.Diagnostics;
 using CA_ShoppingWebsite.Models;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace CA_ShoppingWebsite.Data;
 
@@ -15,85 +16,137 @@ public class CartData
     // 2. Add PO list iteratively to PO records
     // 3. Add into PList records with actvCode
     // 4. Clear cart items
-    public static void CheckOutUser(string userId)
-    {
-        var poList = GetPoList(userId);
 
-        using (var conn = new MySqlConnection(data.cloudDB))
+
+    // Edit qty of product in db 
+    public static void EditCartQty(string? userID, string? productID, int? qty)
+    {
+        MySqlConnection conn = new MySqlConnection(data.cloudDB);
+        try
         {
             conn.Open();
-            MySqlTransaction trans = conn.BeginTransaction();
-            MySqlCommand cmd = new MySqlCommand("", conn, trans);
 
-            try
+            // check if item exists in cart
+            string querySql = "";
+            if (qty > 0)
             {
-                // Add each PO into PurchaseOrder table as record
-                foreach (var po in poList)
-                {   
-                    cmd.CommandText = $"INSERT INTO PurchaseOrder(PurchaseId, UserId, ProductId, PurchaseQty, PurchaseDate) " +
-                                    $"VALUES (\"{po.PurchaseId}\", \"{userId}\", " +
-                                    $"\"{po.ProductId}\", \"{po.PurchaseQty}\", \"{po.PurchaseDate}\")";
-                    cmd.ExecuteNonQuery();
+                querySql = $"UPDATE cartitem SET quantity = {qty} WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
 
-                    // Insert PurchaseId and ActvCode based on qty
-                    for (int i = 0; i < po.PurchaseQty; i++)
-                    {
-                        var actvCode = Guid.NewGuid();
-                        cmd.CommandText = $"INSERT INTO PurchaseList(PurchaseId, ActivationCode) VALUES(\"{po.PurchaseId}\", \"{actvCode.ToString()}\");";
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                // Clear CartItem records based on the userId
-                cmd.CommandText = $"DELETE FROM CartItem WHERE UserId = \"{userId}\";";
-                cmd.ExecuteNonQuery();
-
-                trans.Commit();
             }
-            // Rollback execution if there is an exception
-            catch (Exception ex)
+            else
             {
-                Debug.WriteLine("Somes error with DB: ", ex.Message);
-                trans.Rollback();
+                querySql = $"DELETE from cartitem WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
+
             }
-        }
-    }
-
-    // Get a list of POs based on matching userId
-    public static List<Models.PurchaseOrder> GetPoList(string userId)
-    {
-        var poList = new List<Models.PurchaseOrder>();
-        var curDate = GetCurrentDate();
-
-        using (var conn = new MySqlConnection(data.cloudDB))
-        {
-            conn.Open();
-            string sql = $"SELECT ProductId, Quantity FROM CartItem WHERE UserId = \"{userId}\"";
-            var cmd = new MySqlCommand(sql, conn);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                var purchaseId = Guid.NewGuid();
-                var po = new Models.PurchaseOrder
-                {
-                    PurchaseId = purchaseId.ToString(),
-                    UserId = userId,
-                    ProductId = (string)reader["ProductId"],
-                    PurchaseQty = (int)reader["Quantity"],
-                    PurchaseDate = curDate
-                };
-                poList.Add(po);
-            }
+            MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+            queryCmd.ExecuteNonQuery();
             conn.Close();
         }
-        return poList;
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
     }
 
-    // Gets current date in day-month-year format
-    public static string GetCurrentDate()
+    public static void AddProductToCart(User user, string addProductId)
     {
-        DateTime curDate = DateTime.Now;
-        return curDate.ToString("dd MMM yyyy");
+        // establish connection to DB
+        MySqlConnection conn = new MySqlConnection(data.cloudDB);
+
+        try
+        {
+            conn.Open();
+
+            // check if item exists in cart
+            string querySql = $"SELECT * FROM cartItem WHERE cartItem.ProductId = \"{addProductId}\" AND cartItem.UserId = \"{user.UserId}\"";
+            MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
+            MySqlDataReader rdr = queryCmd.ExecuteReader();
+            string sqlQuery = "";
+
+            // if item already exists in cart, update record quantity
+            if (rdr.HasRows) 
+            {
+                sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = \"{addProductId}\" and UserId = \"{user.UserId}\"";
+            }
+            else // if item doesn't exist in cart, create new record
+            {
+                sqlQuery = $"INSERT INTO cartitem (UserId, ProductId, Quantity) VALUES (\"{user.UserId}\", \"{addProductId}\", 1)";
+            }
+            rdr.Close();
+            MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
+            insertCmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        };
+    }
+
+    public static bool MergeCart(HttpResponse Response, HttpRequest http, string userId)
+    {
+        int quantity = 0;
+        bool res = true;
+        using (var conn = new MySqlConnection(data.cloudDB))
+        {
+
+            conn.Open();
+            if (http.Cookies.Count() > 0)
+            {
+
+                foreach (KeyValuePair<string, string> c in http.Cookies)
+                {
+                    Console.WriteLine(c.Key);
+                    Console.WriteLine(c.Value);
+
+                    if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
+                    {
+                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = \"{c.Key}\" and UserId =\"{userId}\"";
+                        var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
+                        MySqlDataReader reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            quantity = (int)reader[0];
+                        }
+
+                        string updateQuantitySql = "";
+                        if (reader.HasRows)
+                        {
+                            // Insert the key value pair into the cartitem database
+                            updateQuantitySql = $"UPDATE cartitem SET Quantity = \"{quantity}\" + \"{c.Value}\" WHERE ProductId = \"{c.Key}\" and UserId = \"{userId}\"";
+                        }
+                        else
+                        {
+                            // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
+                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES (\"{userId}\",\"{c.Key}\",{c.Value}) ";
+                        }
+
+                        reader.Close();
+                        var update = new MySqlCommand(updateQuantitySql, conn);
+                        MySqlDataReader rdr = update.ExecuteReader();
+                        Console.WriteLine(rdr.ToString());
+                        if (rdr.RecordsAffected > 0)
+                        {
+                            res = true;
+                        }
+                        else
+                        {
+                            res = false;
+                        }
+                        rdr.Close();
+                        Response.Cookies.Delete(c.Key);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            conn.Close();
+            return res;
+        }
     }
 
     public static Dictionary<Product, int> GetProductList(string userId)
@@ -130,37 +183,5 @@ public class CartData
         }
         return ProductList;
     }
-
-    public static List<Product> products()
-    {
-        List<Product> ProductList = new List<Product>();
-        using (var connection = new MySqlConnection(data.cloudDB))
-        {
-            connection.Open();
-
-            string sql = $"SELECT p.ProductId, p.Img, p.Name, p.Description, p.Price FROM product p";
-
-            var cmd = new MySqlCommand(sql, connection);
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Product product = new Product();
-
-                product.ProductId = (string)reader["ProductId"];
-                product.Img = (string)reader["Img"];
-                product.Name = (string)reader["Name"];
-                product.Description = (string)reader["Description"];
-                product.Price = (int)reader["Price"];
-
-                ProductList.Add(product);
-            }
-            connection.Close();
-        }
-        return ProductList;
-    }
-
-    
-
 }
 

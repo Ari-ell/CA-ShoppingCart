@@ -29,7 +29,7 @@ public class CartController : Controller
         {
             if (Request.Cookies.Count() > 0)
             {
-                List<Product> products = Data.CartData.products();
+                List<Product> products = Data.ProductData.GetAllProducts();
 
                 foreach (KeyValuePair<string, string> c in Request.Cookies)
                 {
@@ -61,31 +61,7 @@ public class CartController : Controller
         string userID = Request.Cookies["userID"];
         if (userID != null)
         {
-            MySqlConnection conn = new MySqlConnection(data.cloudDB);
-            try
-            {
-                conn.Open();
-
-                // check if item exists in cart
-                string querySql = "";
-                if (qty > 0)
-                {
-                     querySql = $"UPDATE cartitem SET quantity = {qty} WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
-
-                }
-                else {
-                    querySql = $"delete from cartitem WHERE productId = \"{productID}\" and UserId = \"{userID}\"";
-
-                }
-                MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
-                MySqlDataReader rdr = queryCmd.ExecuteReader();
-                conn.Close();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            Data.CartData.EditCartQty(userID, productID, qty);
         }
         else
         {
@@ -122,43 +98,7 @@ public class CartController : Controller
             user.UserId = userid;
 
             // AddProductToCart Function
-            // establish connection to DB
-            MySqlConnection conn = new MySqlConnection(data.cloudDB);
-
-            try
-            {
-                //Console.WriteLine("Connecting to MySQL for Product Data...");
-                conn.Open();
-                
-                // check if item exists in cart
-                string querySql = $"SELECT * FROM cartItem WHERE cartItem.ProductId = \"{addProductId}\" AND cartItem.UserId = \"{user.UserId}\"";
-                MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
-                MySqlDataReader rdr = queryCmd.ExecuteReader();
-                string sqlQuery = "";
-
-                if (rdr.HasRows) // if item already exists in cart, update record quantity
-                {
-
-                    Console.WriteLine("User is logged in. Product currently exists in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = $"UPDATE cartitem SET quantity = quantity + 1 WHERE productId = \"{addProductId}\" and UserId = \"{user.UserId}\"";
-
-                }
-                else // if item doesn't exist in cart, create new record
-                {
-                    Console.WriteLine("User is logged in. Product doesn't exist in Cart. Connecting to MySQL to write Product Data...");
-                    sqlQuery = $"INSERT INTO cartitem (UserId, ProductId, Quantity) VALUES (\"{user.UserId}\", \"{addProductId}\", 1)";
-                }
-                rdr.Close();
-                MySqlCommand insertCmd = new MySqlCommand(sqlQuery, conn);
-                MySqlDataReader res = insertCmd.ExecuteReader();
-
-                res.Close();
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            };
+            Data.CartData.AddProductToCart(user, addProductId);
         }
         else
         {

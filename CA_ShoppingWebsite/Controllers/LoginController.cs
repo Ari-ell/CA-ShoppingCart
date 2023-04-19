@@ -60,7 +60,8 @@ public class LoginController : Controller
             Response.Cookies.Append("username", user.Username);
             Response.Cookies.Append("name", user.Name);
     
-            hasMerged= MergeCart(user.UserId); // Need to pass in the Http request
+    
+            hasMerged = Data.CartData.MergeCart(Response, this.Request, user.UserId); // Need to pass in the Http request
         }
         if (hasMerged)
         {
@@ -71,77 +72,9 @@ public class LoginController : Controller
         }
     }
 
-    // Need to move this to cartData.
-    // but need to be able to pass in the HttpRequest
-    public bool MergeCart(string userId)
-    {
-        int quantity = 0;
-        bool res = true;
-        using (var conn = new MySqlConnection(data.cloudDB))
-        {
-
-            conn.Open();
-            if (Request.Cookies.Count() > 0)
-            {
-
-                foreach (KeyValuePair<string, string> c in Request.Cookies)
-                {
-                    Console.WriteLine(c.Key);
-                    Console.WriteLine(c.Value);
-
-                    if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
-                    {
-                        string checkIfProductExistsSql = $"SELECT Quantity FROM cartitem WHERE ProductId = \"{c.Key}\" and UserId =\"{userId}\"";
-                        var cmd = new MySqlCommand(checkIfProductExistsSql, conn);
-                        MySqlDataReader reader = cmd.ExecuteReader();
-
-                        while (reader.Read())
-                        {
-                            quantity = (int)reader[0];
-                        }
-
-                        string updateQuantitySql = "";
-                        if (reader.HasRows)
-                        {
-                            // Insert the key value pair into the cartitem database
-                            updateQuantitySql = $"UPDATE cartitem SET Quantity = \"{quantity}\" + \"{c.Value}\" WHERE ProductId = \"{c.Key}\" and UserId = \"{userId}\"";
-                        }
-                        else
-                        {
-                            // insert a new record into the table, where ProductId = {item.Key}, Quantity = {item.Value}
-                            updateQuantitySql = $"INSERT INTO cartitem (UserId,ProductId, Quantity) VALUES (\"{userId}\",\"{c.Key}\",{c.Value}) ";
-                        }
-
-                        reader.Close();
-                        var update = new MySqlCommand(updateQuantitySql, conn);
-                        MySqlDataReader rdr = update.ExecuteReader();
-                        Console.WriteLine(rdr.ToString());
-                        if (rdr.RecordsAffected > 0)
-                        {
-                            res = true;
-                        }
-                        else
-                        {
-                            res = false;
-                        }
-                        rdr.Close();
-                        Response.Cookies.Delete(c.Key);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-            conn.Close();
-            return res;
-        }
-    }
-
-
     [Route("logout")]
     public IActionResult Logout() {
-
+        
         Response.Cookies.Delete("userID");
         Response.Cookies.Delete("username");
         Response.Cookies.Delete("name");

@@ -18,7 +18,7 @@ public class MyPurchasesController : Controller
         if (userId != null)
         {
             // Update PurchaseOrder and ActvCode table
-            Data.CartData.CheckOutUser(userId);
+            Data.MyPurchaseData.CheckOutUser(userId);
 
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
