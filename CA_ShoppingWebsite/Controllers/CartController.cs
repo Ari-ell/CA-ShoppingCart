@@ -118,6 +118,18 @@ public class CartController : Controller
         }
         // Ok response to browser, not View()
         return Ok();
-    } 
+    }
+
+    [Route("checkout")]
+    public IActionResult Checkout(string userId)
+    {
+        // Update PurchaseOrder and ActvCode table
+        Data.MyPurchaseData.CheckOutUser(userId);
+
+        // Set intial rating of product by user to null
+        Data.ReviewData.SetInitialRating(userId);
+
+        return RedirectToAction("Index", "MyPurchases");
+    }
 }
 

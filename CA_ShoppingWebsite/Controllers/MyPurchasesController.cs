@@ -19,10 +19,6 @@ public class MyPurchasesController : Controller
         string userId = Request.Cookies["userId"];
         if (userId != null)
         {
-            // Update PurchaseOrder and ActvCode table
-            Data.MyPurchaseData.CheckOutUser(userId);
-
-            Data.ReviewData.SetInitialRating(userId);
 
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
@@ -38,8 +34,6 @@ public class MyPurchasesController : Controller
 
             var myReviews = Data.ReviewData.GetRating(userId);
             ViewBag.myReviews = myReviews;
-
-            
 
             return View();
         }
