@@ -27,7 +27,6 @@ public class CartController : Controller
         }
         else
         {
-
             if (Request.Cookies.Count() > 0)
             {
                 List<Product> products = Data.CartData.products();
@@ -99,13 +98,9 @@ public class CartController : Controller
     }
 
 
-    // from MouseClick
-    // Ajax is calling this method
-
-    // something like :
-    //<input type = "button"
-    //value="Go Somewhere Else" <-?
-    //onclick="location.href='<%: Url.Action("AddProductToCart(productId)", "CartController") %>'" />
+    // JSON pass the cart info to this method
+    // to update product and qty for user
+    // based on either cookie or db
     [Route("addToCart")]
     public IActionResult AddProductToCart(string addProductId)
     {
@@ -126,7 +121,7 @@ public class CartController : Controller
             {
                 //Console.WriteLine("Connecting to MySQL for Product Data...");
                 conn.Open();
-
+                
                 // check if item exists in cart
                 string querySql = $"SELECT * FROM cartItem WHERE cartItem.ProductId = \"{addProductId}\" AND cartItem.UserId = \"{user.UserId}\"";
                 MySqlCommand queryCmd = new MySqlCommand(querySql, conn);
