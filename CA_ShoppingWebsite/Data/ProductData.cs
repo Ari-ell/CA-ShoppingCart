@@ -12,9 +12,10 @@ public class ProductData
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            string sql = @"SELECT *
-                        FROM Product";
+            string sql = @"SELECT * FROM Product";
+
             var cmd = new MySqlCommand(sql, conn);
+
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -45,29 +46,25 @@ public class ProductData
     public static Dictionary<string, Product>? GetProductDetails(string userId)
 	{
         var products = new Dictionary<string,Product>();
+
         using (var conn = new MySqlConnection(data.cloudDB))
         {
             conn.Open();
-            string sql = @"SELECT DISTINCT Product.ProductId, Product.Name, Product.Description, Product.Img
-                        FROM Product, PurchaseOrder
-                        WHERE Product.ProductId IN
-                            (SELECT PurchaseOrder.ProductId
-                            FROM PurchaseOrder
-                            WHERE PurchaseOrder.UserId = @userId);";
+            string sql = $"SELECT DISTINCT p.ProductId, p.Name, p.Description, p.Img " +
+                        $"FROM Product p, PurchaseOrder po WHERE p.ProductId IN " +
+                        $"(SELECT po.ProductId FROM PurchaseOrder po WHERE po.UserId = \"{userId}\")";
 
             var cmd = new MySqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@userId",userId);
 
             MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
+            while (reader.Read()) {
                 var product = new Models.Product
                 {
                     Name = (string)reader["Name"],
                     Description = (string)reader["Description"],
                     Img = (string)reader["Img"],
-                    //Price = (double)reader["Price"],
                 };
+
                 var productId = (string)reader["ProductId"];
                 if (!products.ContainsKey(productId))
                     products[productId] = product;

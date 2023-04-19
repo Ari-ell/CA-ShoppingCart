@@ -30,7 +30,7 @@ namespace CA_ShoppingWebsite.Data
 
                 conn.Open();
 
-                string sql = @"SELECT AVG(Rating) FROM review WHERE ProductId= @productId;";
+                string sql = @"SELECT AVG(Rating) FROM review WHERE ProductId= @productId";
 
                 var cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@productId", productId);

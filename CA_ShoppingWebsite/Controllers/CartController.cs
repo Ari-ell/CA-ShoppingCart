@@ -22,7 +22,7 @@ public class CartController : Controller
         {
             ViewBag.userId = userId;
 
-            ProductList = Data.CartItemData.GetProductList(userId);
+            ProductList = Data.CartData.GetProductList(userId);
             ViewBag.cartItem = ProductList;
         }
         else
@@ -30,7 +30,7 @@ public class CartController : Controller
 
             if (Request.Cookies.Count() > 0)
             {
-                List<Product> products = Data.CartItemData.products();
+                List<Product> products = Data.CartData.products();
 
                 foreach (KeyValuePair<string, string> c in Request.Cookies)
                 {
@@ -73,15 +73,11 @@ public class CartController : Controller
                 MySqlDataReader rdr = queryCmd.ExecuteReader();
                 conn.Close();
 
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-
             }
-
-
         }
         else
         {
@@ -98,10 +94,7 @@ public class CartController : Controller
                 // add product to Session Object Cart, set quantity to 1
                 Response.Cookies.Append($"{productID}", "1");
             }
-
         }
-
-
         return Ok();
     }
 
@@ -123,7 +116,6 @@ public class CartController : Controller
 
         if (userid != null)
         {
-
             user.UserId = userid;
 
             // AddProductToCart Function
@@ -132,7 +124,7 @@ public class CartController : Controller
 
             try
             {
-                Console.WriteLine("Connecting to MySQL for Product Data...");
+                //Console.WriteLine("Connecting to MySQL for Product Data...");
                 conn.Open();
 
                 // check if item exists in cart

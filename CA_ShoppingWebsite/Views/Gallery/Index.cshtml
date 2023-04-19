@@ -1,11 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 
     var products = (List<Product>)ViewBag.products;
     var user = (User)ViewBag.users;
-    var qty = ViewBag.carQty;
+    var qty = ViewBag.cartQty;
 
 }
 @section Scripts
@@ -25,7 +22,7 @@
         @if (user.Username != null)
         {
             <li class="nav-item">
-                <a class="nav-link disabled">Hello, @user.Username</a>
+                <a class="nav-link disabled">Hello, @user.Name</a>
             </li>
             <li class="nav-item">
                 <p><a class="nav-link" href="/MyPurchases">My Purchases</a><p>

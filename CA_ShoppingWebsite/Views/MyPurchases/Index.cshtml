@@ -28,50 +28,62 @@
         </div>
     </div>
 </nav>
-<div class="container pagetitle d-flex justify-content-center">
-    <h3 align="center">My Purchases</h3>
-</div>
 
-<div class="card-group card-purchase">
-    @foreach(var purchase in myPurchases)
-    {
-        <div class="container">
-            <div class="d-flex flex-row card mb-3" id="purchase-card">
+@if (myPurchases.Count == 0)
+{
+    <div class="text-center">
+        <h3>
+            This page is currently empty.. <br />
+            <small class="text-muted"> Make a purchase to view your purchase history</small>
+        </h3>
+    </div>
+}
+else
+{
+    <div class="container pagetitle d-flex justify-content-center">
+        <h3 align="center">My Purchases</h3>
+    </div>
+    <div class="card-group card-purchase">
+        @foreach (var purchase in myPurchases)
+        {
+            <div class="container">
+                <div class="d-flex flex-row card mb-3" id="purchase-card">
 
-                <div class="card-body p-2">
-                    <img src= "../assets/image/@myProducts[(string)purchase.ProductId].Img" class="card-img-top" alt="...">
-                </div>
-                <div class="container d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title" id="Product Name">@myProducts[(string)purchase.ProductId].Name</h5>
-                    <p class="card-text" id="Product Description">@myProducts[(string)purchase.ProductId].Description</p>
-                    <button type="button" class="btn btn-block dl-btn ">
-                        Download here
-                        <i class="bi bi-download"></i>
-                    </button>
-                </div>
-                <div class="p-2 w-75 d-flex flex-column justify-content-center">
-                    <span class="d-block" id="Date of Purchase">Date: @purchase.PurchaseDate</span>
-                    <span class="d-block" id="PurchaseQty">Qty: @purchase.PurchaseQty</span>
-                    <div class="row align-items-center">
-                        <label for="activationCode" class="col-4 pe-0">Activation Code: </label>
-                        <div class="col-8">
-                            <select class="form-select" aria-label="activationCode">
-                                @for (int i = 0; i < @myActivationCodes[purchase.PurchaseId].Count; i++)
-                                {
-                                    <option value=""> @myActivationCodes[purchase.PurchaseId][i]</option>
-                                }
-                            </select>
-                        </div>
+                    <div class="card-body p-2">
+                        <img src="../assets/image/@myProducts[(string)purchase.ProductId].Img" class="card-img-top" alt="...">
                     </div>
-                    <h4 class="rate-title">Ratings</h4>
-                    <div class="stars" style="text-align: start;">
-                        @for (int j = 0; j < 5; j++)
-                        {
-                            <i class="bi bi-star-fill"></i>
-                        }
+                    <div class="container d-flex flex-column justify-content-center align-items-center">
+                        <h5 class="card-title" id="Product Name">@myProducts[(string)purchase.ProductId].Name</h5>
+                        <p class="card-text" id="Product Description">@myProducts[(string)purchase.ProductId].Description</p>
+                        <button type="button" class="btn btn-block dl-btn ">
+                            Download here
+                            <i class="bi bi-download"></i>
+                        </button>
+                    </div>
+                    <div class="p-2 w-75 d-flex flex-column justify-content-center">
+                        <span class="d-block" id="Date of Purchase">Date: @purchase.PurchaseDate</span>
+                        <span class="d-block" id="PurchaseQty">Qty: @purchase.PurchaseQty</span>
+                        <div class="row align-items-center">
+                            <label for="activationCode" class="col-4 pe-0">Activation Code: </label>
+                            <div class="col-8">
+                                <select class="form-select" aria-label="activationCode">
+                                    @for (int i = 0; i < @myActivationCodes[purchase.PurchaseId].Count; i++)
+                                    {
+                                        <option value=""> @myActivationCodes[purchase.PurchaseId][i]</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <h4 class="rate-title">Ratings</h4>
+                        <div class="stars" style="text-align: start;">
+                            @for (int j = 0; j < 5; j++)
+                            {
+                                <i class="bi bi-star-fill"></i>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}

@@ -8,8 +8,6 @@ using Google.Protobuf.Compiler;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CA_ShoppingWebsite.Controllers;
 
 public class GalleryController : Controller
@@ -39,41 +37,9 @@ public class GalleryController : Controller
         
 
         ViewBag.products = Data.GalleryData.Search(keyword, products!);
-        ViewBag.cartQty = checkQty(this.Request, userId);
+        ViewBag.cartQty = Data.GalleryData.checkQty(this.Request, userId);
 
         return View();
-    }
-
-    // Check qunatity of items in carts
-    // Based on whtehre it is read from eithe cookies
-    // Or from CartItem table
-    public static int checkQty(HttpRequest request, string userId) {
-
-        int cartCounter = 0;
-        if (userId != null) {
-            //Count Qty
-            MySqlConnection conn = new MySqlConnection(data.cloudDB);
-            conn.Open();
-            string countQuery = $"SELECT SUM(Quantity) FROM cartItem WHERE UserId = \"{userId}\"";
-            MySqlCommand countQty = new MySqlCommand(countQuery, conn);
-            MySqlDataReader resQty = countQty.ExecuteReader();
-            resQty.Read();
-            cartCounter = Convert.ToInt32(resQty[0]);
-            conn.Close();
-        }
-        else {
-            if (request.Cookies.Count() > 0)
-            {
-                foreach (KeyValuePair<string, string> c in request.Cookies)
-                {
-                    if (c.Key != "SessionId" && c.Key != "userID" && c.Key != "name" && c.Key != "username")
-                    {
-                        cartCounter += Convert.ToInt32(c.Value);
-                    }
-                }
-            }
-        }
-        return cartCounter;
     }
 }
 
