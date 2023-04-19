@@ -1,39 +1,38 @@
-﻿window.onload = function () {
+﻿
 
-    add_click_listener();
+$(document).ready(function () {
+    $('.star').on('click', function () {
+        var rating = $(this).data('rating');
+        var productId = $(this).closest('.star-rating').data('product-id');
+        submitRating(productId, rating);
+    });
 
-}
+    $('.star').on('mouseenter', function () {
+        var rating = $(this).data('rating');
+        $(this).parent().find('.star').removeClass('checked');
+        $(this).parent().find('.star:lt(' + rating + ')').addClass('checked');
+    });
 
+    $('.star').on('mouseleave', function () {
+        var rating = $(this).closest('.star-rating').find('.star.checked').length;
+        $(this).parent().find('.star').removeClass('checked');
+        $(this).parent().find('.star:lt(' + rating + ')').addClass('checked');
+    });
 
+    function submitRating(productId, rating) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/MyPurchases/SetUserRating");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-function add_click_listener() {
-    // Get all the radio buttons
-    var radioButtons = document.getElementsByName('star');
-    
-    // Loop through all the radio buttons
-    for (var i = 0; i < radioButtons.length; i++) {
-
-        // Add an event listener to each radio button
-        radioButtons[i].addEventListener('click', function () {
-            var productId = this.getAttribute('data-product-id')
-            var ratingValue = this.value;// Get the selected rating value
-            submitRating(productId,ratingValue);
-        })
-    }
-}
-
-function submitRating(productId,ratingValue) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/MyPurchases/SetUserRating");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE) {
-            if (this.status != 200) {
-                return;
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XMLHttpRequest.DONE) {
+                if (this.status != 200) {
+                    return;
+                }
             }
         }
-    }
 
-    xhr.send("productId=" + encodeURIComponent(productId) + "&rating=" + encodeURIComponent(ratingValue));
-}
+        xhr.send("productId=" + encodeURIComponent(productId) + "&rating=" + encodeURIComponent(rating));
+        window.location.replace("/MyPurchases");
+    }
+});

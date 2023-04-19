@@ -62,21 +62,36 @@ else
                         <img src="../assets/image/@myProducts[(string)purchase.ProductId].Img" class="card-img-top" alt="...">
                     </div>
                     <h4 class="rate-title">Ratings</h4>
-                    <div id="@purchase.ProductId">
-                    <form action="">
-                        <fieldset class="stars">
-                            <input class="star star-5" value="5" id="star-5" type="radio" name="stars-5" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==5? "checked":"") />
-                                <label class="star star-5" for="star-5"></label>
-                            <input class="star star-4" value="4" id="star-4" type="radio" name="stars-4" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==4? "checked":"") />
-                                <label class="star star-4" for="star-4"></label>
-                            <input class="star star-3" value="3" id="star-3" type="radio" name="stars-3" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==3? "checked":"") />
-                                <label class="star star-3" for="star"></label>
-                            <input class="star star-2" value="2" id="star-2" type="radio" name="stars-2" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==2? "checked":"") />
-                                <label class="star star-2" for="star"></label>
-                            <input class="star star-1" value="1" id="star-1" type="radio" name="stars-1" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==1? "checked":"") />
-                                <label class="star star-1" for="star"></label>
-                        </fieldset>
-                    </form>
+                    @*<div id="@myProducts[(string)purchase.ProductId].ProductId">
+                        <p>@myProducts[(string)purchase.ProductId].ProductId</p>*@
+                <div>
+                    @*<form action="">
+            <fieldset class="stars @purchase.ProductId">
+                <input class="star star-5" value="5" id="star-5" type="radio" name="stars-5" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==5? "checked":"") />
+                    <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" value="4" id="star-4" type="radio" name="stars-4" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==4? "checked":"") />
+                    <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" value="3" id="star-3" type="radio" name="stars-3" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==3? "checked":"") />
+                    <label class="star star-3" for="star"></label>
+                <input class="star star-2" value="2" id="star-2" type="radio" name="stars-2" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==2? "checked":"") />
+                    <label class="star star-2" for="star"></label>
+                <input class="star star-1" value="1" id="star-1" type="radio" name="stars-1" data-product-id=@purchase.ProductId @(myReviews[(string)purchase.ProductId]==1? "checked":"") />
+                    <label class="star star-1" for="star"></label>
+            </fieldset>
+        </form>*@
+
+                    
+                        <div class="star-rating" data-product-id="@purchase.ProductId">
+                                <span class="star fa fa-star @(myReviews[(string)purchase.ProductId]> 0 ? "checked" : "")" data-rating="0"></span>
+                                <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 1 ? "checked" : "")" data-rating="1"></span>
+                                <span class="star fa fa-star @(myReviews[(string)purchase.ProductId]> 2 ? "checked" : "")" data-rating="2"></span>
+                                <span class="star fa fa-star @(myReviews[(string)purchase.ProductId]> 3 ? "checked" : "")" data-rating="3"></span>
+                                <span class="star fa fa-star @(myReviews[(string)purchase.ProductId]> 4 ? "checked" : "")" data-rating="5"></span>
+                         
+
+                        </div>
+                
+
 
                     <div class="container d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title" id="Product Name">@myProducts[(string)purchase.ProductId].Name</h5>
@@ -112,14 +127,14 @@ else
                         </div>
 
                         @*Rating feature*@
-                        <h4 class="rate-title">Ratings</h4>
-                        <div class="stars" style="text-align: start;">
-                            @for (int j = 0; j < 5; j++)
-                            {
-                                <i class="bi bi-star-fill"></i>
-                            }
-                        </div>
-                    </div>
+                                <h4 class="rate-title">Ratings</h4>
+                                <div class="stars" style="text-align: start;">
+                                    @for (int j = 0; j < 5; j++)
+{
+                                        <i class="bi bi-star-fill"></i>
+}
+                                </div>
+</div>
 
                 </div>
                 
