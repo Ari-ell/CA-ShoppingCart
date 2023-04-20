@@ -19,6 +19,12 @@ public class MyPurchasesController : Controller
         string userId = Request.Cookies["userId"];
         if (userId != null)
         {
+            Data.MyPurchaseData.CheckOutUser(userId);
+
+            // Set intial rating of product by user to null
+            Data.ReviewData.SetInitialRating(userId);
+
+
 
             // Gets user purchase history
             var myPurchases = Data.MyPurchaseData.GetPurchaseOrders(userId);
