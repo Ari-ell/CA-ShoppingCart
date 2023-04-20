@@ -66,19 +66,22 @@ function on_search_click(event) {
 function redirect(value) {
     window.location.replace('/Gallery/Index?keyword='+value);
 }
-function on_add_click(event) {
+async function on_add_click(event) {
 
     var ele = event.target;
     var value = ele["firstElementChild"].innerText;
 
-    fetch('addToCart?' + new URLSearchParams({
+    await fetch('addToCart?' + new URLSearchParams({
         addProductId: value
     })).then((text) => {
             console.log('request succeeded with JSON response', text)
-            window.location.replace("/");
+
 
         }).catch(function (error) {
             console.log('request failed', error)
         });
+
+
+    window.location.replace("/");
 
 }

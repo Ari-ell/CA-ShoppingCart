@@ -121,12 +121,13 @@ else
                                     </div>
                                     <p></p>
                                     <div class="star-rating" data-product-id="@purchase.ProductId">
+                                        <p>@myReviews[(string)purchase.ProductId]</p>
                                         <p>
                                             Your Review:
-                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 0 ? "checked" : "")" data-rating="0"></span>
-                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 1 ? "checked" : "")" data-rating="1"></span>
-                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 2 ? "checked" : "")" data-rating="2"></span>
-                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 3 ? "checked" : "")" data-rating="3"></span>
+                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 0 ? "checked" : "")" data-rating="1"></span>
+                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 1 ? "checked" : "")" data-rating="2"></span>
+                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 2 ? "checked" : "")" data-rating="3"></span>
+                                            <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 3 ? "checked" : "")" data-rating="4"></span>
                                             <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 4 ? "checked" : "")" data-rating="5"></span>
                                         </p>
                                     </div>
