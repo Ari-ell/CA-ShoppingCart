@@ -23,7 +23,7 @@
         @if (user.Username != null)
         {
             <li class="nav-item">
-                <a class="navbar-brand link-disabled"><strong>Hello, @user.Name</strong></a>
+                <a class="navbar-brand nav-link "href="/gallery"><strong>Hello, @user.Name</strong></a>
             </li>
             <li class="nav-item">
                 <p><a class="nav-link" href="/MyPurchases">My Purchases</a><p>
@@ -35,7 +35,7 @@
         else
         {
             <li class="nav-item">
-                <a class="navbar-brand link-disabled"><strong>Hello, guest</strong></a>
+                <a class="navbar-brand nav-link" href="/gallery"><strong>Hello, guest</strong></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
