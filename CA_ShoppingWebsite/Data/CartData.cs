@@ -127,14 +127,7 @@ public class CartData
                         var update = new MySqlCommand(updateQuantitySql, conn);
                         MySqlDataReader rdr = update.ExecuteReader();
                         Console.WriteLine(rdr.ToString());
-                        if (rdr.RecordsAffected > 0)
-                        {
-                            res = true;
-                        }
-                        else
-                        {
-                            res = false;
-                        }
+                        res = rdr.RecordsAffected > 0 ? true : false;
                         rdr.Close();
                         Response.Cookies.Delete(c.Key);
                     }

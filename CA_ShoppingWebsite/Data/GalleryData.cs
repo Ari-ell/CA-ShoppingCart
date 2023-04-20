@@ -45,17 +45,11 @@ public class GalleryData
             string countQuery = $"SELECT SUM(Quantity) FROM cartItem WHERE UserId = \"{userId}\"";
             MySqlCommand countQty = new MySqlCommand(countQuery, conn);
             MySqlDataReader resQty = countQty.ExecuteReader();
-            Console.WriteLine("Out below this statement");
-
-            resQty.Read();
-            Console.WriteLine(resQty[0].ToString());
             
-            if (resQty[0].ToString() == "")
-                cartCounter = 0;
-            else
-            {
-                cartCounter = Convert.ToInt32(resQty[0]);
-            }
+            resQty.Read();
+
+            cartCounter = resQty[0].ToString() == "" ? 0 : Convert.ToInt32(resQty[0]);
+            
             conn.Close();
         }
         // If user is not logged in,

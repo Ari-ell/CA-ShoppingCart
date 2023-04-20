@@ -3,12 +3,9 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Data/GalleryData.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CA_ShoppingWebsite/Data/CartData.cs">
     <Files>
-      <File FileName="CA_ShoppingWebsite/Data/GalleryData.cs" Line="49" Column="27" />
-      <File FileName="CA_ShoppingWebsite/wwwroot/js/cart.js" Line="68" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Views/Cart/Index.cshtml" Line="85" Column="1" />
-      <File FileName="CA_ShoppingWebsite/Views/Gallery/Index.cshtml" Line="96" Column="40" />
+      <File FileName="CA_ShoppingWebsite/Data/CartData.cs" Line="137" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,7 +14,7 @@
             <Node name="CA_ShoppingWebsite" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True">
-                <Node name="GalleryData.cs" selected="True" />
+                <Node name="CartData.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
