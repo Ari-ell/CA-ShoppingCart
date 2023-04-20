@@ -121,7 +121,7 @@ else
                                     </div>
                                     <p></p>
                                     <div class="star-rating" data-product-id="@purchase.ProductId">
-                                        <p>@myReviews[(string)purchase.ProductId]</p>
+                                        @*<p>@myReviews[(string)purchase.ProductId]</p>*@
                                         <p>
                                             Your Review:
                                             <span class="star fa fa-star @(myReviews[(string)purchase.ProductId] > 0 ? "checked" : "")" data-rating="1"></span>
